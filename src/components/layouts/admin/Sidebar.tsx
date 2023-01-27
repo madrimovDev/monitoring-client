@@ -16,7 +16,7 @@ const menuItems: ItemType[] = [
 		key: 'admins',
 		icon: <TeamOutlined />,
 		label: <Link to='admins'>Admins</Link>
-	},
+	}
 ]
 
 const Sidebar = () => {
@@ -30,7 +30,10 @@ const Sidebar = () => {
 				type='secondary'>
 				Monitoring
 			</Typography.Title>
-			<Menu items={menuItems} selectedKeys={['statistics']}/>
+			<Menu
+				items={menuItems}
+				selectedKeys={['statistics']}
+			/>
 		</Layout.Sider>
 	)
 }

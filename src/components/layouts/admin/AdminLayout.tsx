@@ -1,11 +1,26 @@
-import React from 'react'
-import { Layout, Menu } from 'antd'
+import React, { useEffect } from 'react'
+import { Col, Layout, Menu, Row } from 'antd'
 import Sidebar from './Sidebar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { getStatistics, useActionCreator, useAppSelector } from '@store'
 
 const { Content } = Layout
 
 const AdminLayout = () => {
+	const actions = useActionCreator({ getStatistics })
+	const status = useAppSelector((state) => state.dashboard.status)
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		actions.getStatistics()
+	}, [])
+
+	useEffect(() => {
+		if (status === 'fulfilled') {
+			navigate('statistics')
+		}
+	}, [status])
+
 	return (
 		<Layout
 			style={{
@@ -13,7 +28,11 @@ const AdminLayout = () => {
 			}}>
 			<Sidebar />
 			<Content>
-				<Outlet />
+				<Row style={{marginTop: 30}}>
+					<Col xs='20' offset={2}>
+						<Outlet />
+					</Col>
+				</Row>
 			</Content>
 		</Layout>
 	)
