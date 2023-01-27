@@ -1,11 +1,30 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { Login } from '@pages'
+import { Login, RedirectRole } from '@pages'
+import { RequireAuth } from '@pages'
 
 const rootRouter = createBrowserRouter([
 	{
-		path: '/',
+		path: '/login',
 		element: <Login />
+	},
+	{
+		path: '/',
+		element: <RequireAuth />,
+		children: [
+			{
+				index: true,
+				element: <RedirectRole />
+			},
+			{
+				path: 'admin',
+				element: <>Admin</>
+			},
+			{
+				path: 'teacher',
+				element: <>Teacher</>
+			}
+		]
 	}
 ])
 

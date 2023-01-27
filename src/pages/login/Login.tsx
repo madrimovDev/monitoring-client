@@ -1,6 +1,7 @@
-import React, { CSSProperties } from 'react'
-import { login, useActionCreator } from '@store'
-import { Button, Card, Form, Input, Typography } from 'antd'
+import React, { CSSProperties, useEffect } from 'react'
+import { login, useActionCreator, useAppSelector } from '@store'
+import { Button, Card, Form, Input, Typography, notification } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 const style: CSSProperties = {
 	minHeight: '100dvh',
@@ -11,11 +12,29 @@ const style: CSSProperties = {
 const { Item } = Form
 
 const Login = () => {
+	const status = useAppSelector((state) => state.user.status)
+	const message = useAppSelector((state) => state.user.message)
 	const actions = useActionCreator({ login })
+	const navigate = useNavigate()
 
 	const onFinish = (data: { username: string; password: string }) => {
 		actions.login(data)
 	}
+
+	useEffect(() => {
+		if (status === 'fulfilled') {
+			notification.success({
+				message: 'Login successful'
+			})
+			navigate('/')
+		} else if (status === 'rejected') {
+			notification.error({
+				message: message
+			})
+		}
+	}, [status])
+
+	console.log('render')
 
 	return (
 		<div style={style}>
@@ -61,7 +80,8 @@ const Login = () => {
 					</Item>
 					<Button
 						htmlType='submit'
-						type='primary'>
+						type='primary'
+						loading={status === 'pending'}>
 						Submit
 					</Button>
 				</Form>

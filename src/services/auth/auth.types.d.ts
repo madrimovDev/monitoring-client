@@ -9,7 +9,11 @@ declare namespace Auth {
 		username: string
 		password: string
 	}
-	export type VerifyResponse = Omit<AuthResponse, 'token'>
+	export interface VerifyResponse {
+		userId: number
+		username: string
+		permissions: string[]
+	}
 
 	export interface Unauthorized {
 		message: string
