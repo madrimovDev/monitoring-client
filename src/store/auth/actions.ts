@@ -14,7 +14,13 @@ export const login = createAsyncThunk<
 	}
 })
 
-export const verify = createAsyncThunk('auth/login', async (_, thunkAPI) => {
+export const verify = createAsyncThunk<
+	Auth.VerifyResponse | undefined,
+	undefined,
+	{
+		rejectValue: Auth.Forbidden | Auth.Unauthorized
+	}
+>('auth/verify', async (_, thunkAPI) => {
 	try {
 		const result = await AuthService.verify()
 		return result

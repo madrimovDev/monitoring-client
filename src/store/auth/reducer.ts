@@ -1,4 +1,4 @@
-import { createReducer, isPending, isRejected } from '@reduxjs/toolkit'
+import { createReducer, isPending, isRejected, isFulfilled } from '@reduxjs/toolkit'
 import { userWithoutToken } from './../mapper/userWithoutToken'
 import { Status } from '../types'
 import { login, verify } from './actions'
@@ -15,29 +15,22 @@ const initialState: InitialState = {
 }
 
 const userReducer = createReducer(initialState, (builder) => {
-	builder.addCase(login.fulfilled, (state, action) => {
-		return {
-			...state,
-			status: 'fulfilled',
-			user: userWithoutToken(action.payload)
-		}
-	})
-	builder.addCase(verify.fulfilled, (state, action) => {
+	builder.addMatcher(isFulfilled(login, verify), (state, action) => {
 		if (action.payload) {
 			return {
 				...state,
 				status: 'fulfilled',
-				user: action.payload
+				user: userWithoutToken(action.payload)
 			}
 		}
 	})
-	builder.addMatcher(isPending(login), (state) => {
+	builder.addMatcher(isPending(login, verify), (state) => {
 		return {
 			...state,
 			status: 'pending'
 		}
 	})
-	builder.addMatcher(isRejected(login), (state, action) => {
+	builder.addMatcher(isRejected(login, verify), (state, action) => {
 		return {
 			...state,
 			status: 'rejected',
