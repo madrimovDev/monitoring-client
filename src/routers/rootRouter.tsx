@@ -2,6 +2,7 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { Login, RedirectRole } from '@pages'
 import { RequireAuth } from '@pages'
+import { AdminLayout } from '@components'
 
 const rootRouter = createBrowserRouter([
 	{
@@ -18,7 +19,7 @@ const rootRouter = createBrowserRouter([
 			},
 			{
 				path: 'admin',
-				element: <>Admin</>
+				element: <AdminLayout />
 			},
 			{
 				path: 'teacher',
