@@ -2,24 +2,15 @@ import React, { useEffect } from 'react'
 import { Col, Layout, Row } from 'antd'
 import Sidebar from './Sidebar'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { getStatistics, useActionCreator, useAppSelector } from '@store'
 
 const { Content } = Layout
 
 const AdminLayout = () => {
-	const actions = useActionCreator({ getStatistics })
-	const status = useAppSelector((state) => state.dashboard.status)
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		actions.getStatistics()
+		navigate('statistics')
 	}, [])
-
-	useEffect(() => {
-		if (status === 'fulfilled') {
-			navigate('statistics')
-		}
-	}, [status])
 
 	return (
 		<Layout

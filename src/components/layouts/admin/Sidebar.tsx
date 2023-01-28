@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button, Layout, Menu, Typography } from 'antd'
 import { ItemType } from 'antd/es/menu/hooks/useItems'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import DotChartOutlined from '@ant-design/icons/DotChartOutlined'
 import TeamOutlined from '@ant-design/icons/TeamOutlined'
 import LogoutOutline from '@ant-design/icons/LogoutOutlined'
 import { logout, useAppDispatch } from '@store'
+import { getFromToString } from '@utils'
 
 const menuItems: ItemType[] = [
 	{
@@ -23,9 +24,9 @@ const menuItems: ItemType[] = [
 
 const Sidebar = () => {
 	const dispatch = useAppDispatch()
-
+	const { pathname } = useLocation()
+	const selectedKey = getFromToString(pathname, '/')
 	const logoutHandler = () => dispatch(logout())
-
 	return (
 		<Layout.Sider
 			theme='light'
@@ -44,7 +45,7 @@ const Sidebar = () => {
 				</Typography.Title>
 				<Menu
 					items={menuItems}
-					selectedKeys={['statistics']}
+					selectedKeys={[selectedKey]}
 				/>
 				<div
 					style={{
