@@ -28,8 +28,11 @@ const AdminLayout = () => {
 			}}>
 			<Sidebar />
 			<Content>
-				<Row style={{marginTop: 30}}>
-					<Col xs='20' offset={2}>
+				<Row style={{ marginTop: 30 }}>
+					<Col
+						md={20}
+						offset={2}
+					>
 						<Outlet />
 					</Col>
 				</Row>

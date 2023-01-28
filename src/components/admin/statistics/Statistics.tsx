@@ -1,13 +1,15 @@
-import { useAppSelector } from '@store'
 import React from 'react'
+import StatisticsCards from './StatisticsCards'
+import { Divider } from 'antd'
+import StatisticsDirections from './StatisticsDirections'
 
 const Statistics = () => {
-	const statistics = useAppSelector(state => state.dashboard.statistics)
-	if(!statistics) return null
 	return (
-		<div>
-
-		</div>
+		<>
+			<StatisticsCards />
+			<Divider />
+			<StatisticsDirections />
+		</>
 	)
 }
 

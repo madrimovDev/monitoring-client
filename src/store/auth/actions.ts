@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 import { AuthService } from '@services'
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const login = createAsyncThunk<
 	Auth.LoginResponse | undefined,
@@ -31,3 +31,5 @@ export const verify = createAsyncThunk<
 		return thunkAPI.rejectWithValue(error.response?.data as Auth.Forbidden | Auth.Unauthorized)
 	}
 })
+
+export const logout = createAction('auth/logout')

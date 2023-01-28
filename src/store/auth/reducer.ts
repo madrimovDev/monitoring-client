@@ -1,7 +1,7 @@
 import { createReducer, isPending, isRejected, isFulfilled } from '@reduxjs/toolkit'
 import { userWithoutToken } from './../mapper/userWithoutToken'
 import { Status } from '../types'
-import { login, verify } from './actions'
+import { login, logout, verify } from './actions'
 
 interface InitialState {
 	status: Status
@@ -15,6 +15,14 @@ const initialState: InitialState = {
 }
 
 const userReducer = createReducer(initialState, (builder) => {
+	builder.addCase(logout, () => {
+		window.localStorage.clear()
+		return {
+			message: 'Logout',
+			user: null,
+			status: 'default'
+		}
+	})
 	builder.addMatcher(isFulfilled(login, verify), (state, action) => {
 		if (action.payload) {
 			return {
