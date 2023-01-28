@@ -1,8 +1,7 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { Login, RedirectRole } from '@pages'
-import { RequireAuth } from '@pages'
-import { AdminLayout, Statistics } from '@components'
+import { RequireAuth, Statistics, Login, RedirectRole } from '@pages'
+import { AdminLayout } from '@components'
 
 const rootRouter = createBrowserRouter([
 	{

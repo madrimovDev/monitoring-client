@@ -1,7 +1,6 @@
 import React from 'react'
-import StatisticsCards from './StatisticsCards'
 import { Divider } from 'antd'
-import StatisticsDirections from './StatisticsDirections'
+import { StatisticsCards, StatisticsDirections } from '@components'
 
 const Statistics = () => {
 	return (
