@@ -8,7 +8,9 @@ const StatisticsCards = () => {
 	if (!statistics) return null
 	return (
 		<Row gutter={16}>
-			<Col xs={24} md={8}>
+			<Col
+				xs={24}
+				md={8}>
 				<Card bordered>
 					<Statistic
 						title={'Teachers'}
@@ -16,7 +18,9 @@ const StatisticsCards = () => {
 					/>
 				</Card>
 			</Col>
-			<Col xs={24} md={8}>
+			<Col
+				xs={24}
+				md={8}>
 				<Card bordered>
 					<Statistic
 						title={'Students'}
@@ -24,7 +28,9 @@ const StatisticsCards = () => {
 					/>
 				</Card>
 			</Col>
-			<Col xs={24} md={8}>
+			<Col
+				xs={24}
+				md={8}>
 				<Card bordered>
 					<Statistic
 						title={'Groups'}

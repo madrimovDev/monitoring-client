@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Col, Layout, Menu, Row } from 'antd'
+import { Col, Layout, Row } from 'antd'
 import Sidebar from './Sidebar'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { getStatistics, useActionCreator, useAppSelector } from '@store'
@@ -31,8 +31,7 @@ const AdminLayout = () => {
 				<Row style={{ marginTop: 30 }}>
 					<Col
 						md={20}
-						offset={2}
-					>
+						offset={2}>
 						<Outlet />
 					</Col>
 				</Row>
