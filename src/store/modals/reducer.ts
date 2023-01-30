@@ -1,11 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { closeModal, createAdminModal } from './actions'
+import { closeModal, createAdminModal, updateAdminModal } from './actions'
 
 interface InitialState {
 	adminModal: {
 		open: boolean
 		type: 'create' | 'update'
-		data: { name: string; username: string } | null
+		data: Admin.Admin | null
 	}
 }
 
@@ -24,6 +24,15 @@ const modalsReducer = createReducer(initialState, (builder) => {
 				open: true,
 				data: null,
 				type: 'create'
+			}
+		}
+	})
+	builder.addCase(updateAdminModal, (state, action) => {
+		return {
+			adminModal: {
+				open: true,
+				data: action.payload,
+				type: 'update'
 			}
 		}
 	})

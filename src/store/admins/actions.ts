@@ -33,3 +33,38 @@ export const createAdmin = createAsyncThunk<
 		return thunkApi.rejectWithValue(error.response?.data as Auth.Forbidden)
 	}
 })
+
+export const deleteAdmin = createAsyncThunk<
+	Admin.NewAdminResponse,
+	number,
+	{
+		rejectValue: Auth.Forbidden
+	}
+>('admins/delete', async (id, thunkApi) => {
+	try {
+		const result = await AdminsService.deleteAdmin(id)
+		return result.data
+	} catch (e) {
+		const error = e as AxiosError
+		return thunkApi.rejectWithValue(error.response?.data as Auth.Forbidden)
+	}
+})
+
+export const updateAdmin = createAsyncThunk<
+	Admin.NewAdminResponse,
+	{
+		id: number
+		data: Admin.UpdateAdmin
+	},
+	{
+		rejectValue: Auth.Forbidden
+	}
+>('admins/update', async (data, thunkApi) => {
+	try {
+		const result = await AdminsService.updateAdmin(data.id, data.data)
+		return result.data
+	} catch (e) {
+		const error = e as AxiosError
+		return thunkApi.rejectWithValue(error.response?.data as Auth.Forbidden)
+	}
+})

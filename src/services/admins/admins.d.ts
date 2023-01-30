@@ -22,4 +22,10 @@ declare namespace Admin {
 		message: string
 		admin: Admin
 	}
+
+	export interface UpdateAdmin {
+		username?: string
+		password?: string
+		name?: string
+	}
 }

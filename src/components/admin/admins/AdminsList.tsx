@@ -1,10 +1,15 @@
 import React from 'react'
-import { useAppSelector } from '@store'
+import { deleteAdmin, updateAdminModal, useActionCreator, useAppSelector } from '@store'
 import { Button, List } from 'antd'
 
 const AdminsList = () => {
 	const admins = useAppSelector((state) => state.admins.admins)
 	const status = useAppSelector((state) => state.admins.status)
+
+	const actions = useActionCreator({
+		deleteAdmin,
+		updateAdminModal
+	})
 
 	if (!admins) return null
 
@@ -20,13 +25,15 @@ const AdminsList = () => {
 						actions={[
 							<Button
 								key='Edit'
-								type='primary'>
+								type='primary'
+								onClick={() => actions.updateAdminModal(item)}>
 								Edit
 							</Button>,
 							<Button
 								key='Delete'
 								danger
-								type='primary'>
+								type='primary'
+								onClick={() => actions.deleteAdmin(item.id)}>
 								Delete
 							</Button>
 						]}>

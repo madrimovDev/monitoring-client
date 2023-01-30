@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { closeModal, createAdmin, useActionCreator, useAppSelector } from '@store'
+import React, { useEffect, useLayoutEffect } from 'react'
+import { closeModal, createAdmin, updateAdmin, useActionCreator, useAppSelector } from '@store'
 import { Button, Form, Input, Modal, notification } from 'antd'
 
 const CreateAdminModal = () => {
@@ -11,26 +11,48 @@ const CreateAdminModal = () => {
 
 	const actions = useActionCreator({
 		closeModal,
-		createAdmin
+		createAdmin,
+		updateAdmin
 	})
 
 	const onSubmit = (e: Admin.NewAdmin) => {
-		actions.createAdmin(e)
+		if (adminModal.type === 'create') {
+			actions.createAdmin(e)
+		} else if (adminModal.type === 'update' && adminModal.data) {
+			actions.updateAdmin({
+				id: adminModal.data.id,
+				data: e
+			})
+		}
 	}
 
 	useEffect(() => {
-		if (status === 'fulfilled') {
+		if (status === 'fulfilled' && adminModal.open) {
 			notification.info({
 				message: 'Admin Created'
 			})
 			return form.resetFields()
 		}
-		if (status === 'rejected') {
+		if (status === 'rejected' && adminModal.open) {
 			return notification.error({
 				message: message
 			})
 		}
 	}, [status])
+
+	useLayoutEffect(() => {
+		if (adminModal.data) {
+			const data: any = adminModal.data
+			const fields = Object.keys(data).map((key) => {
+				return {
+					name: key,
+					value: data[key]
+				}
+			})
+			form.setFields(fields)
+			console.log(fields)
+		}
+	}, [adminModal.data])
 
 	return (
 		<Modal
@@ -55,7 +77,7 @@ const CreateAdminModal = () => {
 					]}
 					name='username'
 					label='Username'>
-					<Input />
+					<Input autoComplete='off'/>
 				</Form.Item>
 				<Form.Item
 					rules={[
@@ -65,7 +87,7 @@ const CreateAdminModal = () => {
 					]}
 					name='name'
 					label='Name'>
-					<Input />
+					<Input autoComplete='off'/>
 				</Form.Item>
 				<Form.Item
 					rules={[
@@ -75,12 +97,12 @@ const CreateAdminModal = () => {
 					]}
 					label='Password'
 					name='password'>
-					<Input.Password />
+					<Input.Password autoComplete='new-password' role="presentation"/>
 				</Form.Item>
 				<Button
 					type='primary'
 					htmlType='submit'>
-					Create
+					{adminModal.type.toUpperCase()}
 				</Button>
 			</Form>
 		</Modal>
