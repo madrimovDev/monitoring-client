@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Dropdown, MenuProps, Space } from 'antd'
 import DownOutlined from '@ant-design/icons/DownOutlined'
+import { createAdminModal, useActionCreator } from '@store'
 
 const items: MenuProps['items'] = [
 	{
@@ -14,12 +15,17 @@ const items: MenuProps['items'] = [
 ]
 
 const CreateDropDown = () => {
+	const actions = useActionCreator({
+		createAdminModal
+	})
 	return (
 		<Dropdown
 			menu={{
 				items: items,
 				onClick: (e) => {
-					console.log(e)
+					if (e.key === 'create-admin') {
+						actions.createAdminModal()
+					}
 				}
 			}}
 			dropdownRender={(menu) => {

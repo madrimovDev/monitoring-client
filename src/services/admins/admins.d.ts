@@ -11,4 +11,15 @@ declare namespace Admin {
 		message: string
 		admins: Admin[]
 	}
+
+	export interface NewAdmin {
+		username: string
+		name: string
+		password: string
+	}
+
+	export interface NewAdminResponse {
+		message: string
+		admin: Admin
+	}
 }

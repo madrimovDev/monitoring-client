@@ -1,6 +1,6 @@
 import { createReducer, isPending, isRejected } from '@reduxjs/toolkit'
 import { Status } from '../types'
-import { getAllAdmins } from './actions'
+import { createAdmin, getAllAdmins } from './actions'
 
 interface InitialState {
 	admins: Admin.Admin[] | null
@@ -14,20 +14,25 @@ const initialState: InitialState = {
 }
 
 const adminsReducer = createReducer(initialState, (builder) => {
-	builder.addCase(getAllAdmins.fulfilled, (state, action) => {
+	builder.addCase(getAllAdmins.fulfilled, (_, action) => {
 		return {
 			status: 'fulfilled',
 			message: undefined,
 			admins: action.payload
 		}
 	})
-	builder.addMatcher(isPending(getAllAdmins), (state) => {
+	builder.addCase(createAdmin.fulfilled, (state, action) => {
+		state.status = 'fulfilled'
+		state.message = action.payload.message
+		state.admins?.push(action.payload.admin)
+	})
+	builder.addMatcher(isPending(getAllAdmins, createAdmin), (state) => {
 		return {
 			...state,
 			status: 'pending'
 		}
 	})
-	builder.addMatcher(isRejected(getAllAdmins), (state, action) => {
+	builder.addMatcher(isRejected(getAllAdmins, createAdmin), (state, action) => {
 		return {
 			...state,
 			status: 'rejected',

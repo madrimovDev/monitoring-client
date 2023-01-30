@@ -1,6 +1,6 @@
-import { useAppSelector } from '@store'
-import { Card, Col, Collapse, List, Row } from 'antd'
 import React from 'react'
+import { useAppSelector } from '@store'
+import { Card, Col, List, Row } from 'antd'
 
 const StatisticsDirections = () => {
 	const directions = useAppSelector((state) => state.dashboard.statistics?.directions)
@@ -8,7 +8,7 @@ const StatisticsDirections = () => {
 	if (!directions) return null
 
 	return (
-		<Row gutter={16}>
+		<Row gutter={[16, 16]}>
 			{directions.map((direction) => {
 				return (
 					<Col
@@ -26,29 +26,10 @@ const StatisticsDirections = () => {
 									<List.Item.Meta title={'Students'} />
 									<div>{direction.students}</div>
 								</List.Item>
-								<Collapse
-									accordion
-									bordered={false}
-									collapsible='icon'
-									ghost
-									expandIconPosition='start'>
-									<Collapse.Panel
-										key='1'
-										header={
-											<div
-												style={{
-													display: 'flex',
-													justifyContent: 'space-between',
-													alignItems: 'center',
-													marginRight: 8
-												}}>
-												<span>Teachers</span>
-												<div>{direction.teachers.length}</div>
-											</div>
-										}>
-										{!direction.teachers.length && 'No Data'}
-									</Collapse.Panel>
-								</Collapse>
+								<List.Item>
+									<List.Item.Meta title={'Teachers'} />
+									<div>{direction.teachers}</div>
+								</List.Item>
 							</List>
 						</Card>
 					</Col>

@@ -55,12 +55,12 @@ const Sidebar = () => {
 						display: 'flex',
 						flexDirection: 'column',
 						justifyContent: 'flex-end',
+						alignItems: 'flex-start',
 						margin: 16
 					}}>
 					<Button
-						type='primary'
-						shape='round'
-						danger
+						type='ghost'
+						size='small'
 						onClick={logoutHandler}
 						icon={<LogoutOutline />}>
 						Logout
