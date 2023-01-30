@@ -4,13 +4,16 @@ import { Button, List } from 'antd'
 
 const AdminsList = () => {
 	const admins = useAppSelector((state) => state.admins.admins)
+	const status = useAppSelector((state) => state.admins.status)
 
 	if (!admins) return null
 
 	return (
 		<List
 			bordered
+			loading={status === 'pending'}
 			dataSource={admins}
+			style={{ background: 'white' }}
 			renderItem={(item) => {
 				return (
 					<List.Item

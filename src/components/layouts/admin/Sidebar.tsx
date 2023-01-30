@@ -25,8 +25,10 @@ const menuItems: ItemType[] = [
 const Sidebar = () => {
 	const dispatch = useAppDispatch()
 	const { pathname } = useLocation()
+
 	const selectedKey = getFromToString(pathname, '/')
 	const logoutHandler = () => dispatch(logout())
+
 	return (
 		<Layout.Sider
 			theme='light'

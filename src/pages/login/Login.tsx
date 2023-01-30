@@ -34,8 +34,6 @@ const Login = () => {
 		}
 	}, [status])
 
-	console.log('render')
-
 	return (
 		<div style={style}>
 			<Card>

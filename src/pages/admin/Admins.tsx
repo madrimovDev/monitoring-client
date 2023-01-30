@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
-import { Col, Row, Skeleton } from 'antd'
-import { getAllAdmins, useActionCreator, useAppSelector } from '@store'
+import { Col, Row } from 'antd'
+import { getAllAdmins, useActionCreator } from '@store'
 import { AdminsList } from '@components'
 
 const Admins = () => {
-	const status = useAppSelector((state) => state.admins.status)
 	const actions = useActionCreator({
 		getAllAdmins
 	})
@@ -12,14 +11,6 @@ const Admins = () => {
 	useEffect(() => {
 		actions.getAllAdmins()
 	}, [])
-
-	if (status === 'pending') {
-		return (
-			<>
-				<Skeleton />
-			</>
-		)
-	}
 
 	return (
 		<Row>
