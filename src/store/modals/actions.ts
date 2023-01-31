@@ -6,4 +6,12 @@ export const updateAdminModal = createAction('modal/updateAdmin', (data: Admin.A
 		payload: data
 	}
 })
+
+export const createDirectionModal = createAction('modal/createDirection')
+export const updateDirectionModal = createAction('modal/updateDirection', (data: Directions.Direction) => {
+	return {
+		payload: data
+	}
+})
+
 export const closeModal = createAction('modal/closeModal')

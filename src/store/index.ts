@@ -5,5 +5,11 @@ export { default as useActionCreator } from './hooks/useActionCreator'
 export { login, verify, logout } from './auth/actions'
 export { getStatistics } from './dashboard/actions'
 export { getAllAdmins, createAdmin, deleteAdmin, updateAdmin } from './admins/actions'
-export { createAdminModal, closeModal, updateAdminModal } from './modals/actions'
+export {
+	createAdminModal,
+	closeModal,
+	updateAdminModal,
+	createDirectionModal,
+	updateDirectionModal
+} from './modals/actions'
 export { createDirection, deleteDirection, getAllDirections, updateDirection } from './directions/actions'

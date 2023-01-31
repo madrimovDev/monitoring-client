@@ -43,7 +43,7 @@ export const deleteDirection = createAsyncThunk<
 	{
 		rejectValue: Auth.Forbidden
 	}
->('directions/update', async (id, thunkApi) => {
+>('directions/delete', async (id, thunkApi) => {
 	try {
 		const result = await DirectionService.deleteDirection(id)
 		return result.data

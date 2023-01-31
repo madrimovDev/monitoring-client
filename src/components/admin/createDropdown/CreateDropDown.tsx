@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Dropdown, MenuProps, Space } from 'antd'
 import DownOutlined from '@ant-design/icons/DownOutlined'
-import { createAdminModal, useActionCreator } from '@store'
+import { createAdminModal, createDirectionModal, useActionCreator } from '@store'
 
 const items: MenuProps['items'] = [
 	{
@@ -11,12 +11,17 @@ const items: MenuProps['items'] = [
 	{
 		key: 'create-teacher',
 		label: <Space>Create Teacher</Space>
+	},
+	{
+		key: 'create-direction',
+		label: <Space>Create Direction</Space>
 	}
 ]
 
 const CreateDropDown = () => {
 	const actions = useActionCreator({
-		createAdminModal
+		createAdminModal,
+		createDirectionModal
 	})
 	return (
 		<Dropdown
@@ -25,6 +30,8 @@ const CreateDropDown = () => {
 				onClick: (e) => {
 					if (e.key === 'create-admin') {
 						actions.createAdminModal()
+					} else if (e.key === 'create-direction') {
+						actions.createDirectionModal()
 					}
 				}
 			}}

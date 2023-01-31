@@ -5,6 +5,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BreadCrumb } from '@components'
 import CreateDropDown from '../../admin/createDropdown/CreateDropDown'
 import CreateAdminModal from '../../admin/modals/CreateAdminModal'
+import CreateDirectionModal from '../../admin/modals/CreateDirectionModal'
 
 const { Content, Header } = Layout
 
@@ -43,6 +44,7 @@ const AdminLayout = () => {
 					</Row>
 				</Content>
 				<CreateAdminModal />
+				<CreateDirectionModal />
 			</Layout>
 		</Layout>
 	)
