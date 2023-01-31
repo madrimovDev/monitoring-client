@@ -28,7 +28,7 @@ const StatisticsDirections = () => {
 								</List.Item>
 								<List.Item>
 									<List.Item.Meta title={'Teachers'} />
-									<div>{direction.teachers}</div>
+									<div>{direction.teachers.length}</div>
 								</List.Item>
 							</List>
 						</Card>

@@ -50,7 +50,6 @@ const CreateAdminModal = () => {
 				}
 			})
 			form.setFields(fields)
-			console.log(fields)
 		}
 	}, [adminModal.data])
 
@@ -77,7 +76,7 @@ const CreateAdminModal = () => {
 					]}
 					name='username'
 					label='Username'>
-					<Input autoComplete='off'/>
+					<Input autoComplete='off' />
 				</Form.Item>
 				<Form.Item
 					rules={[
@@ -87,17 +86,20 @@ const CreateAdminModal = () => {
 					]}
 					name='name'
 					label='Name'>
-					<Input autoComplete='off'/>
+					<Input autoComplete='off' />
 				</Form.Item>
 				<Form.Item
 					rules={[
 						{
-							required: true
+							required: adminModal.type === 'create'
 						}
 					]}
 					label='Password'
 					name='password'>
-					<Input.Password autoComplete='new-password' role="presentation"/>
+					<Input.Password
+						autoComplete='new-password'
+						role='presentation'
+					/>
 				</Form.Item>
 				<Button
 					type='primary'

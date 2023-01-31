@@ -9,9 +9,7 @@ const BreadCrumb = () => {
 
 	return (
 		<Breadcrumb>
-			<Breadcrumb.Item>
-				<Link to='/admin'>Home</Link>
-			</Breadcrumb.Item>
+			<Breadcrumb.Item>Home</Breadcrumb.Item>
 			{path.map((p) => {
 				return (
 					<Breadcrumb.Item key={p}>

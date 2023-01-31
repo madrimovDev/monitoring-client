@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 import DotChartOutlined from '@ant-design/icons/DotChartOutlined'
 import TeamOutlined from '@ant-design/icons/TeamOutlined'
 import LogoutOutline from '@ant-design/icons/LogoutOutlined'
+import ClusterOutlined from '@ant-design/icons/ClusterOutlined'
 import { logout, useAppDispatch } from '@store'
 import { getFromToString } from '@utils'
 
@@ -19,6 +20,11 @@ const menuItems: ItemType[] = [
 		key: 'admins',
 		icon: <TeamOutlined />,
 		label: <Link to='admins'>Admins</Link>
+	},
+	{
+		key: 'directions',
+		icon: <ClusterOutlined />,
+		label: <Link to={'directions'}>Directions</Link>
 	}
 ]
 

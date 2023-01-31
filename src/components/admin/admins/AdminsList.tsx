@@ -4,6 +4,7 @@ import { Button, List } from 'antd'
 
 const AdminsList = () => {
 	const admins = useAppSelector((state) => state.admins.admins)
+	const userId = useAppSelector((state) => state.user.user?.userId)
 	const status = useAppSelector((state) => state.admins.status)
 
 	const actions = useActionCreator({
@@ -33,6 +34,7 @@ const AdminsList = () => {
 								key='Delete'
 								danger
 								type='primary'
+								disabled={userId === item.userId}
 								onClick={() => actions.deleteAdmin(item.id)}>
 								Delete
 							</Button>

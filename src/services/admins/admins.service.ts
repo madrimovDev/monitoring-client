@@ -19,10 +19,7 @@ class AdminsService {
 		return response
 	}
 
-	static async updateAdmin(
-		id: number,
-		data: Admin.UpdateAdmin
-	) {
+	static async updateAdmin(id: number, data: Admin.UpdateAdmin) {
 		const response = await api.put<Admin.NewAdminResponse>(`${this.baseUrl}/${id}`, data)
 		return response
 	}
