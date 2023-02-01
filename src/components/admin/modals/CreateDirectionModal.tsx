@@ -42,6 +42,7 @@ const CreateDirectionModal = () => {
 
 	useLayoutEffect(() => {
 		if (directionModal.data) {
+			// eslint-disable-next-line
 			const data: any = directionModal.data
 			const fields = Object.keys(data).map((key) => {
 				return {
