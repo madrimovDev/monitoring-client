@@ -11,10 +11,6 @@ declare namespace Teachers {
 		permissions: string[]
 	}
 
-	// export interface TeacherRequest {
-		
-	// }
-
 	export interface TeachersResponse {
 		message: string
 		teachers: Teacher[]

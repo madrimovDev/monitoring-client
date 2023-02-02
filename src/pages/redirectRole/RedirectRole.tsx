@@ -3,7 +3,7 @@ import { useAppSelector } from '@store'
 import { Navigate, useLocation } from 'react-router-dom'
 
 const RedirectRole = () => {
-	const permission = useAppSelector((state) => state.user.user?.permissions[0])
+	const permission = useAppSelector((state) => state.user.data?.permissions[0])
 	const location = useLocation()
 
 	return permission === 'admin' ? (

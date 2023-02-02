@@ -1,15 +1,9 @@
 import { getStatistics } from './actions'
-import { Status } from './../types.d'
+import { InitialState } from './../types.d'
 import { createReducer } from '@reduxjs/toolkit'
 
-interface InitialState {
-	status: Status
-	statistics: Dashboard.Statistics | null
-	message?: string
-}
-
-const initialState: InitialState = {
-	statistics: null,
+const initialState: InitialState<Dashboard.Statistics> = {
+	data: null,
 	status: 'default'
 }
 
@@ -24,7 +18,7 @@ const dashboardReducer = createReducer(initialState, (builder) => {
 		return {
 			...state,
 			status: 'fulfilled',
-			statistics: action.payload
+			data: action.payload
 		}
 	})
 	builder.addCase(getStatistics.rejected, (state, action) => {

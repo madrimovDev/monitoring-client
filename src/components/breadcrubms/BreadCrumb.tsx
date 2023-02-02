@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 const BreadCrumb = () => {
 	const { pathname } = useLocation()
 
-	const path = pathname.split('/').slice(2)
+	const path = pathname.split('/').filter(Boolean).slice(1)
 
 	return (
 		<Breadcrumb>

@@ -1,31 +1,25 @@
 import { createReducer, isPending, isRejected } from '@reduxjs/toolkit'
-import { Status } from '../types'
 import { createDirection, deleteDirection, getAllDirections, updateDirection } from './actions'
+import { InitialState } from '../types'
 
-interface InitialState {
-	status: Status
-	message?: string
-	directions: Directions.Direction[] | null
-}
-
-const initialState: InitialState = {
+const initialState: InitialState<Directions.Direction[]> = {
 	status: 'default',
-	directions: null
+	data: null
 }
 
 const directionsReducer = createReducer(initialState, (builder) => {
 	builder.addCase(getAllDirections.fulfilled, (_, action) => {
 		return {
 			status: 'fulfilled',
-			directions: action.payload.directions
+			data: action.payload.directions
 		}
 	})
 	builder.addCase(updateDirection.fulfilled, (state, action) => {
 		return {
 			status: 'fulfilled',
 			message: action.payload.message,
-			directions:
-				state.directions?.map((direction) =>
+			data:
+				state.data?.map((direction) =>
 					direction.id === action.payload.direction.id ? action.payload.direction : direction
 				) || []
 		}
@@ -34,14 +28,14 @@ const directionsReducer = createReducer(initialState, (builder) => {
 		return {
 			status: 'fulfilled',
 			message: action.payload.message,
-			directions: state.directions ? [...state.directions, action.payload.direction] : [action.payload.direction]
+			data: state.data ? [...state.data, action.payload.direction] : [action.payload.direction]
 		}
 	})
 	builder.addCase(deleteDirection.fulfilled, (state, action) => {
 		return {
 			status: 'fulfilled',
 			message: action.payload.message,
-			directions: state.directions?.filter((direction) => direction.id !== action.payload.direction.id) || []
+			data: state.data?.filter((direction) => direction.id !== action.payload.direction.id) || []
 		}
 	})
 	builder.addMatcher(isPending(getAllDirections, createDirection, updateDirection, deleteDirection), (state) => {
