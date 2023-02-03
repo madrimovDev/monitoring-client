@@ -14,4 +14,11 @@ export const updateDirectionModal = createAction('modal/updateDirection', (data:
 	}
 })
 
+export const createTeacherModal = createAction('modal/createTeacher')
+export const updateTeacherModal = createAction('modal/updateTeacher', (data: Teachers.Teacher) => {
+	return {
+		payload: data
+	}
+})
+
 export const closeModal = createAction('modal/closeModal')

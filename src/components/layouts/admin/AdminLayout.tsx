@@ -6,11 +6,13 @@ import { BreadCrumb } from '@components'
 import CreateDropDown from '../../admin/createDropdown/CreateDropDown'
 import CreateAdminModal from '../../admin/modals/CreateAdminModal'
 import CreateDirectionModal from '../../admin/modals/CreateDirectionModal'
+import CreateTeacherModal from '../../admin/modals/CreateTeacherModal'
 
 const { Content, Header } = Layout
 
 const AdminLayout = () => {
 	const navigate = useNavigate()
+
 	const { pathname } = useLocation()
 	useEffect(() => {
 		navigate('statistics')
@@ -45,6 +47,7 @@ const AdminLayout = () => {
 				</Content>
 				<CreateAdminModal />
 				<CreateDirectionModal />
+				<CreateTeacherModal />
 			</Layout>
 		</Layout>
 	)

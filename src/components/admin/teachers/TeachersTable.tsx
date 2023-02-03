@@ -1,24 +1,37 @@
 import React from 'react'
-import { useAppSelector } from '@store'
-import { Table, Tag } from 'antd'
+import { deleteTeacher, updateTeacherModal, useActionCreator, useAppSelector } from '@store'
+import { Button, Space, Table, Tag } from 'antd'
 import { Link } from 'react-router-dom'
 
 const TeachersTable = () => {
 	const teachers = useAppSelector(state => state.teachers.data)
+	const status = useAppSelector(state => state.teachers.status)
+
+	const actions = useActionCreator({
+		deleteTeacher,
+		updateTeacherModal
+	})
+
+	const handleDelete = (id: number) => actions.deleteTeacher(id)
+	const handleEdit = (teacher: Teachers.Teacher) => actions.updateTeacherModal(teacher)
 
 	if (!teachers) return null
 
 	return (
 		<Table
+			loading={status === 'pending'}
 			dataSource={teachers}
 			rowKey={item => item.id}
+			bordered
 			expandable={{
 				expandedRowRender(record) {
 					return (
 						<Table
+							bordered
 							dataSource={record.groups}
 							pagination={false}
 							showHeader
+							rowKey={item => item.id}
 							title={() => 'Groups'}
 							columns={[
 								{
@@ -87,6 +100,29 @@ const TeachersTable = () => {
 					title: 'Groups Count',
 					render(_, record) {
 						return record.groups.length
+					}
+				},
+				{
+					key: 'actions',
+					title: 'Actions',
+					render(_, record) {
+						return (
+							<Space>
+								<Button
+									onClick={() => handleDelete(record.id)}
+									danger
+									size='small'
+									type='primary'>
+									Delete
+								</Button>
+								<Button
+									onClick={() => handleEdit(record)}
+									size='small'
+									type='primary'>
+									Edit
+								</Button>
+							</Space>
+						)
 					}
 				}
 			]}

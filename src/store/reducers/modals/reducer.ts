@@ -1,5 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { closeModal, createAdminModal, createDirectionModal, updateAdminModal, updateDirectionModal } from './actions'
+import {
+	closeModal,
+	createAdminModal,
+	createDirectionModal,
+	createTeacherModal,
+	updateAdminModal,
+	updateDirectionModal,
+	updateTeacherModal
+} from './actions'
 
 interface InitialState {
 	adminModal: {
@@ -12,9 +20,19 @@ interface InitialState {
 		type: 'create' | 'update'
 		data: Directions.Direction | null
 	}
+	teacherModal: {
+		open: boolean
+		type: 'create' | 'update'
+		data: Teachers.Teacher | null
+	}
 }
 
 const initialState: InitialState = {
+	teacherModal: {
+		open: false,
+		type: 'create',
+		data: null
+	},
 	adminModal: {
 		open: false,
 		type: 'create',
@@ -68,8 +86,33 @@ const modalsReducer = createReducer(initialState, builder => {
 			}
 		}
 	})
+	builder.addCase(createTeacherModal, state => {
+		return {
+			...state,
+			teacherModal: {
+				open: true,
+				data: null,
+				type: 'create'
+			}
+		}
+	})
+	builder.addCase(updateTeacherModal, (state, action) => {
+		return {
+			...state,
+			teacherModal: {
+				open: true,
+				data: action.payload,
+				type: 'update'
+			}
+		}
+	})
 	builder.addCase(closeModal, () => {
 		return {
+			teacherModal: {
+				data: null,
+				open: false,
+				type: 'create'
+			},
 			directionModal: {
 				data: null,
 				open: false,

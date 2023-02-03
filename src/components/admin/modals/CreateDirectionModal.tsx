@@ -42,12 +42,11 @@ const CreateDirectionModal = () => {
 
 	useLayoutEffect(() => {
 		if (directionModal.data) {
-			// eslint-disable-next-line
-			const data: any = directionModal.data
+			const data = directionModal.data
 			const fields = Object.keys(data).map(key => {
 				return {
 					name: key,
-					value: data[key]
+					value: data[key as keyof Directions.Direction]
 				}
 			})
 			form.setFields(fields)

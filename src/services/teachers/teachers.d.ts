@@ -11,6 +11,20 @@ declare namespace Teachers {
 		permissions: string[]
 	}
 
+	export interface NewTeacher {
+		username: string
+		name: string
+		password: string
+		surname: string
+		phone: string
+		directions: number[]
+	}
+
+	export interface TeacherResponse {
+		message: string
+		teacher: Teacher
+	}
+
 	export interface TeachersResponse {
 		message: string
 		teachers: Teacher[]

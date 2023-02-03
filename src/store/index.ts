@@ -10,7 +10,9 @@ export {
 	closeModal,
 	updateAdminModal,
 	createDirectionModal,
-	updateDirectionModal
+	updateDirectionModal,
+	createTeacherModal,
+	updateTeacherModal
 } from './reducers/modals/actions'
 export { createDirection, deleteDirection, getAllDirections, updateDirection } from './reducers/directions/actions'
-export { getAllTeachers } from './reducers/teachers/actions'
+export { getAllTeachers, createTeacher, deleteTeacher } from './reducers/teachers/actions'
