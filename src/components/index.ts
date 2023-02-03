@@ -4,3 +4,4 @@ export { default as StatisticsDirections } from './admin/statistics/StatisticsDi
 export { default as AdminsList } from './admin/admins/AdminsList'
 export { default as DirectionsList } from './admin/directions/DirectionsList'
 export { default as BreadCrumb } from './breadcrubms/BreadCrumb'
+export { default as TeachersTable } from './admin/teachers/TeachersTable'

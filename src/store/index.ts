@@ -13,3 +13,4 @@ export {
 	updateDirectionModal
 } from './reducers/modals/actions'
 export { createDirection, deleteDirection, getAllDirections, updateDirection } from './reducers/directions/actions'
+export { getAllTeachers } from './reducers/teachers/actions'

@@ -1,6 +1,6 @@
 const getFromToString = (str: string) => {
 	const strArray = str.split('/')
-	const key = strArray.filter(Boolean).join('')
+	const key = strArray.filter(Boolean)[1]
 	return key
 }
 
