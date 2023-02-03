@@ -10,5 +10,6 @@
 	"tabWidth": 2,
 	"bracketSameLine": true,
 	"bracketSpacing": true,
-	"proseWrap": "always"
+	"arrowParens": "avoid",
+	"proseWrap": "preserve"
 }

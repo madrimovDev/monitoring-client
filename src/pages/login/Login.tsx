@@ -12,8 +12,8 @@ const style: CSSProperties = {
 const { Item } = Form
 
 const Login = () => {
-	const status = useAppSelector((state) => state.user.status)
-	const message = useAppSelector((state) => state.user.message)
+	const status = useAppSelector(state => state.user.status)
+	const message = useAppSelector(state => state.user.message)
 	const actions = useActionCreator({ login })
 	const navigate = useNavigate()
 

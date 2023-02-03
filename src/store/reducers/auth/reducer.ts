@@ -1,15 +1,16 @@
 import { createReducer, isPending, isRejected, isFulfilled } from '@reduxjs/toolkit'
-import { userWithoutToken } from './../mapper/userWithoutToken'
+import { userWithoutToken } from '../../mapper/userWithoutToken'
 import { login, logout, verify } from './actions'
-import { InitialState } from '../types'
-import { makeRejectFactory } from '../admins/reducer'
+import { InitialState } from '../../types'
+import { makeRejectFactory } from '../../helpers/makeRejectFactory'
+import { makePendingFactory } from '../../helpers/makePendingFactory'
 
 const initialState: InitialState<Auth.VerifyResponse> = {
 	status: 'default',
 	data: null
 }
 
-const userReducer = createReducer(initialState, (builder) => {
+const userReducer = createReducer(initialState, builder => {
 	builder.addCase(logout, () => {
 		window.localStorage.clear()
 		return {
@@ -27,13 +28,8 @@ const userReducer = createReducer(initialState, (builder) => {
 			}
 		}
 	})
-	builder.addMatcher(isPending(login, verify), (state) => {
-		return {
-			...state,
-			status: 'pending'
-		}
-	})
-	builder.addMatcher(isRejected(login, verify), makeRejectFactory<Auth.VerifyResponse>())
+	builder.addMatcher(isPending(login, verify), makePendingFactory())
+	builder.addMatcher(isRejected(login, verify), makeRejectFactory())
 })
 
 export default userReducer

@@ -4,7 +4,7 @@ import { StatisticsCards, StatisticsDirections } from '@components'
 import { getStatistics, useActionCreator, useAppSelector } from '@store'
 
 const Statistics = () => {
-	const status = useAppSelector((state) => state.dashboard.status)
+	const status = useAppSelector(state => state.dashboard.status)
 
 	const actions = useActionCreator({
 		getStatistics

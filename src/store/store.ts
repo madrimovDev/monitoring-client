@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from './auth/reducer'
-import dashboardReducer from './dashboard/reducer'
-import adminsReducer from './admins/reducer'
-import modalsReducer from './modals/reducer'
-import directionsReducer from './directions/reducer'
-import teachersReducer from './teachers/reducer'
+import userReducer from './reducers/auth/reducer'
+import dashboardReducer from './reducers/dashboard/reducer'
+import adminsReducer from './reducers/admins/reducer'
+import modalsReducer from './reducers/modals/reducer'
+import directionsReducer from './reducers/directions/reducer'
+import teachersReducer from './reducers/teachers/reducer'
 
 const store = configureStore({
 	reducer: {

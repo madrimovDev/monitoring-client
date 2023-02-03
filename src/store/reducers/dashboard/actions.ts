@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios'
-import { statisticsWithoutMessage } from './../mapper/statisticsWithoutMessage'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { DashboardService } from '@services'
+import { statisticsWithoutMessage } from '../../mapper/statisticsWithoutMessage'
 
 export const getStatistics = createAsyncThunk<Dashboard.Statistics, undefined, { rejectValue: Auth.Forbidden }>(
 	'dashboard/get',

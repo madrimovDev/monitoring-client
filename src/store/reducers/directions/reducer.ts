@@ -1,13 +1,15 @@
 import { createReducer, isPending, isRejected } from '@reduxjs/toolkit'
 import { createDirection, deleteDirection, getAllDirections, updateDirection } from './actions'
-import { InitialState } from '../types'
+import { InitialState } from '../../types'
+import { makeRejectFactory } from '../../helpers/makeRejectFactory'
+import { makePendingFactory } from '../../helpers/makePendingFactory'
 
 const initialState: InitialState<Directions.Direction[]> = {
 	status: 'default',
 	data: null
 }
 
-const directionsReducer = createReducer(initialState, (builder) => {
+const directionsReducer = createReducer(initialState, builder => {
 	builder.addCase(getAllDirections.fulfilled, (_, action) => {
 		return {
 			status: 'fulfilled',
@@ -19,7 +21,7 @@ const directionsReducer = createReducer(initialState, (builder) => {
 			status: 'fulfilled',
 			message: action.payload.message,
 			data:
-				state.data?.map((direction) =>
+				state.data?.map(direction =>
 					direction.id === action.payload.direction.id ? action.payload.direction : direction
 				) || []
 		}
@@ -35,24 +37,16 @@ const directionsReducer = createReducer(initialState, (builder) => {
 		return {
 			status: 'fulfilled',
 			message: action.payload.message,
-			data: state.data?.filter((direction) => direction.id !== action.payload.direction.id) || []
-		}
-	})
-	builder.addMatcher(isPending(getAllDirections, createDirection, updateDirection, deleteDirection), (state) => {
-		return {
-			...state,
-			status: 'pending'
+			data: state.data?.filter(direction => direction.id !== action.payload.direction.id) || []
 		}
 	})
 	builder.addMatcher(
+		isPending(getAllDirections, createDirection, updateDirection, deleteDirection),
+		makePendingFactory()
+	)
+	builder.addMatcher(
 		isRejected(getAllDirections, createDirection, updateDirection, deleteDirection),
-		(state, action) => {
-			return {
-				...state,
-				status: 'rejected',
-				message: action.payload?.message
-			}
-		}
+		makeRejectFactory()
 	)
 })
 

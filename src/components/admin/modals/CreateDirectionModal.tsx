@@ -3,9 +3,9 @@ import { closeModal, createDirection, updateDirection, useActionCreator, useAppS
 import { Button, Form, Input, Modal, notification } from 'antd'
 
 const CreateDirectionModal = () => {
-	const directionModal = useAppSelector((state) => state.modals.directionModal)
+	const directionModal = useAppSelector(state => state.modals.directionModal)
 
-	const { message, status } = useAppSelector((state) => state.directions)
+	const { message, status } = useAppSelector(state => state.directions)
 
 	const [form] = Form.useForm()
 
@@ -44,7 +44,7 @@ const CreateDirectionModal = () => {
 		if (directionModal.data) {
 			// eslint-disable-next-line
 			const data: any = directionModal.data
-			const fields = Object.keys(data).map((key) => {
+			const fields = Object.keys(data).map(key => {
 				return {
 					name: key,
 					value: data[key]

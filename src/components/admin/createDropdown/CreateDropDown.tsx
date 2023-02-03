@@ -27,7 +27,7 @@ const CreateDropDown = () => {
 		<Dropdown
 			menu={{
 				items: items,
-				onClick: (e) => {
+				onClick: e => {
 					if (e.key === 'create-admin') {
 						actions.createAdminModal()
 					} else if (e.key === 'create-direction') {
@@ -35,7 +35,7 @@ const CreateDropDown = () => {
 					}
 				}
 			}}
-			dropdownRender={(menu) => {
+			dropdownRender={menu => {
 				return menu
 			}}
 			arrow>

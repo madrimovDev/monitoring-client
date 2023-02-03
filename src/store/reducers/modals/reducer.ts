@@ -27,8 +27,8 @@ const initialState: InitialState = {
 	}
 }
 
-const modalsReducer = createReducer(initialState, (builder) => {
-	builder.addCase(createAdminModal, (state) => {
+const modalsReducer = createReducer(initialState, builder => {
+	builder.addCase(createAdminModal, state => {
 		return {
 			...state,
 			adminModal: {
@@ -48,7 +48,7 @@ const modalsReducer = createReducer(initialState, (builder) => {
 			}
 		}
 	})
-	builder.addCase(createDirectionModal, (state) => {
+	builder.addCase(createDirectionModal, state => {
 		return {
 			...state,
 			directionModal: {

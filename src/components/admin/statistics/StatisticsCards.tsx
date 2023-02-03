@@ -3,7 +3,7 @@ import { useAppSelector } from '@store'
 import { Card, Col, Row, Statistic } from 'antd'
 
 const StatisticsCards = () => {
-	const statistics = useAppSelector((state) => state.dashboard.data)
+	const statistics = useAppSelector(state => state.dashboard.data)
 
 	if (!statistics) return null
 	return (

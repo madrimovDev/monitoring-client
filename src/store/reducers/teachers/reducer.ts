@@ -1,4 +1,5 @@
-import { InitialState } from './../types.d'
+import { makePendingFactory } from '../../helpers/makePendingFactory'
+import { InitialState } from '../../types'
 import { createReducer, isPending } from '@reduxjs/toolkit'
 import { getAllTeachers } from './actions'
 
@@ -7,12 +8,12 @@ const initialState: InitialState<Teachers.Teacher[]> = {
 	data: null
 }
 
-const teachersReducer = createReducer(initialState, (builder) => {
+const teachersReducer = createReducer(initialState, builder => {
 	builder.addCase(getAllTeachers.fulfilled, (_, action) => ({
 		status: 'fulfilled',
 		data: action.payload.teachers
 	}))
-	builder.addMatcher(isPending(getAllTeachers), (state, action) => ({ ...state, status: 'pending' }))
+	builder.addMatcher(isPending(getAllTeachers), makePendingFactory())
 })
 
 export default teachersReducer

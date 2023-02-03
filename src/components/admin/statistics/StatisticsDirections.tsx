@@ -3,13 +3,13 @@ import { useAppSelector } from '@store'
 import { Card, Col, List, Row } from 'antd'
 
 const StatisticsDirections = () => {
-	const directions = useAppSelector((state) => state.dashboard.data?.directions)
+	const directions = useAppSelector(state => state.dashboard.data?.directions)
 
 	if (!directions) return null
 
 	return (
 		<Row gutter={[16, 16]}>
-			{directions.map((direction) => {
+			{directions.map(direction => {
 				return (
 					<Col
 						key={direction.id}

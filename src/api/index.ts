@@ -5,7 +5,7 @@ const api = axios.create({
 })
 
 api.interceptors.request.use(
-	async (config) => {
+	async config => {
 		const token = window.localStorage.getItem('accessToken')
 		config.headers = config.headers ?? {}
 
@@ -17,7 +17,7 @@ api.interceptors.request.use(
 
 		return config
 	},
-	(error) => {
+	error => {
 		console.log(error)
 	}
 )

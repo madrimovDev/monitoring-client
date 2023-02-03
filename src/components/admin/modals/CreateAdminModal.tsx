@@ -3,9 +3,9 @@ import { closeModal, createAdmin, updateAdmin, useActionCreator, useAppSelector 
 import { Button, Form, Input, Modal, notification } from 'antd'
 
 const CreateAdminModal = () => {
-	const adminModal = useAppSelector((state) => state.modals.adminModal)
+	const adminModal = useAppSelector(state => state.modals.adminModal)
 
-	const { message, status } = useAppSelector((state) => state.admins)
+	const { message, status } = useAppSelector(state => state.admins)
 
 	const [form] = Form.useForm()
 
@@ -42,11 +42,11 @@ const CreateAdminModal = () => {
 
 	useLayoutEffect(() => {
 		if (adminModal.data) {
-			const data: any = adminModal.data
-			const fields = Object.keys(data).map((key) => {
+			const data = adminModal.data
+			const fields = Object.keys(data).map(key => {
 				return {
 					name: key,
-					value: data[key]
+					value: data[key as keyof Admin.Admin]
 				}
 			})
 			form.setFields(fields)
