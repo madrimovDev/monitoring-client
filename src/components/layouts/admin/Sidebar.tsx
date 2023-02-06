@@ -8,6 +8,8 @@ import TeamOutlined from '@ant-design/icons/TeamOutlined'
 import LogoutOutline from '@ant-design/icons/LogoutOutlined'
 import ClusterOutlined from '@ant-design/icons/ClusterOutlined'
 import UserOutlined from '@ant-design/icons/UserOutlined'
+import GroupOutlined from '@ant-design/icons/GroupOutlined'
+
 import { logout, useAppDispatch } from '@store'
 import { getFromToString } from '@utils'
 
@@ -31,6 +33,11 @@ const menuItems: ItemType[] = [
 		key: 'teachers',
 		icon: <UserOutlined />,
 		label: <Link to='teachers'>Teachers</Link>
+	},
+	{
+		key: 'groups',
+		icon: <GroupOutlined />,
+		label: <Link to='groups'>Groups</Link>
 	}
 ]
 

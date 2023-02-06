@@ -1,7 +1,8 @@
 import api from '@api'
+import { makeBaseUrl } from '@utils'
 
 class AdminsService {
-	static baseUrl = '/admins'
+	static baseUrl = makeBaseUrl('admins')
 	static async getAllAdmins() {
 		const response = await api.get<Admin.AdminResponse>(this.baseUrl)
 		return response

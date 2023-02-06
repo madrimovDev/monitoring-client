@@ -1,7 +1,8 @@
+import { makeBaseUrl } from '@utils'
 import api from '@api'
 
 class DirectionsService {
-	static baseUrl = '/directions'
+	static baseUrl = makeBaseUrl('directions')
 	static async getDirections() {
 		const response = await api.get<Directions.DirectionsResponse>(this.baseUrl)
 		return response

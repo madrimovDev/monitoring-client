@@ -1,7 +1,8 @@
+import { makeBaseUrl } from '@utils'
 import api from '@api'
 
 class TeachersService {
-	static baseUrl = '/teachers'
+	static baseUrl = makeBaseUrl('teachers')
 
 	static async getAllTeachers() {
 		const response = await api.get<Teachers.TeachersResponse>(this.baseUrl)
@@ -15,6 +16,10 @@ class TeachersService {
 
 	static async deleteTeacher(id: number) {
 		const response = await api.delete<Teachers.TeacherResponse>(`${this.baseUrl}/${id}`)
+		return response
+	}
+	static async updateTeacher(id: number, teacher: Teachers.NewTeacher) {
+		const response = await api.put<Teachers.TeacherResponse>(`${this.baseUrl}/${id}`, teacher)
 		return response
 	}
 }

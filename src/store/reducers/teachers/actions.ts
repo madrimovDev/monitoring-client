@@ -49,3 +49,19 @@ export const deleteTeacher = createAsyncThunk<
 		return thunkApi.rejectWithValue(error.response?.data as Auth.Forbidden)
 	}
 })
+
+export const updateTeacher = createAsyncThunk<
+	Teachers.TeacherResponse,
+	{ id: number; teacher: Teachers.NewTeacher },
+	{
+		rejectValue: Auth.Forbidden
+	}
+>('teachers/update', async ({ id, teacher }, thunkApi) => {
+	try {
+		const result = await TeachersService.updateTeacher(id, teacher)
+		return result.data
+	} catch (e) {
+		const error = e as AxiosError
+		return thunkApi.rejectWithValue(error.response?.data as Auth.Forbidden)
+	}
+})

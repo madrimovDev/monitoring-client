@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { AxiosError } from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { DashboardService } from '@services'

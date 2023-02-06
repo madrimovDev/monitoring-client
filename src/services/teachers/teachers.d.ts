@@ -14,7 +14,7 @@ declare namespace Teachers {
 	export interface NewTeacher {
 		username: string
 		name: string
-		password: string
+		password?: string
 		surname: string
 		phone: string
 		directions: number[]

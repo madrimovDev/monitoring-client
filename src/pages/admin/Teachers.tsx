@@ -1,6 +1,6 @@
+import React, { useEffect } from 'react'
 import { TeachersTable } from '@components'
 import { getAllTeachers, useActionCreator } from '@store'
-import React, { useEffect } from 'react'
 
 const Teachers = () => {
 	const actions = useActionCreator({

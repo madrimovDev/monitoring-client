@@ -3,6 +3,7 @@ declare namespace Auth {
 		userId: number
 		username: string
 		permissions: string[]
+		organizationId: number
 		token: string
 	}
 	export interface LoginRequest {

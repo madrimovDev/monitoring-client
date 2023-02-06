@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createReducer } from '@reduxjs/toolkit'
 import { getStatistics } from './actions'
 import { makePendingFactory } from '../../helpers/makePendingFactory'

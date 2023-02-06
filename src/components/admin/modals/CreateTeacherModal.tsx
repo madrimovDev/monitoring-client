@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect } from 'react'
-import { closeModal, createTeacher, useActionCreator, useAppSelector } from '@store'
+import { closeModal, createTeacher, useActionCreator, useAppSelector, getAllDirections, updateTeacher } from '@store'
 import { Button, Form, Input, Modal, Select, notification } from 'antd'
-import { Teachers } from '@pages'
 
 const CreateTeacherModal = () => {
 	const teacherModal = useAppSelector(state => state.modals.teacherModal)
@@ -13,7 +12,9 @@ const CreateTeacherModal = () => {
 
 	const actions = useActionCreator({
 		closeModal,
-		createTeacher
+		createTeacher,
+		updateTeacher,
+		getAllDirections
 	})
 
 	const onSubmit = (e: Teachers.NewTeacher) => {
@@ -22,14 +23,19 @@ const CreateTeacherModal = () => {
 				...e,
 				directions: e.directions.map(i => Number(i))
 			})
+		} else if (teacherModal.type === 'update' && teacherModal.data) {
+			actions.updateTeacher({
+				teacher: e,
+				id: teacherModal.data.id
+			})
 		}
-		// else if (teacherModal.type === 'update' && teacherModal.data) {
-		// 	actions.updateDirection({
-		// 		direction: e,
-		// 		id: teacherModal.data.id
-		// 	})
-		// }
 	}
+
+	useEffect(() => {
+		if (!directions && teacherModal.open) {
+			actions.getAllDirections()
+		}
+	}, [teacherModal.open])
 
 	useEffect(() => {
 		if (status === 'fulfilled' && teacherModal.open) {
@@ -49,6 +55,12 @@ const CreateTeacherModal = () => {
 		if (teacherModal.data) {
 			const data = teacherModal.data
 			const fields = Object.keys(data).map(key => {
+				if (key === 'directions') {
+					return {
+						name: key,
+						value: data.directions.map(dir => dir.id)
+					}
+				}
 				return {
 					name: key,
 					value: data[key as keyof Teachers.Teacher]
@@ -123,9 +135,9 @@ const CreateTeacherModal = () => {
 						mode='multiple'
 						allowClear
 						placeholder='Please select directions'
-						options={directions?.map(i => ({
-							label: i.name,
-							value: i.id
+						options={directions?.map(dir => ({
+							label: dir.name,
+							value: dir.id
 						}))}
 					/>
 				</Form.Item>
@@ -142,12 +154,12 @@ const CreateTeacherModal = () => {
 				<Form.Item
 					rules={[
 						{
-							required: true
+							required: teacherModal.type === 'create'
 						}
 					]}
 					name='password'
 					label='Password'>
-					<Input.Password autoComplete='off' />
+					<Input.Password autoComplete='new-password' />
 				</Form.Item>
 				<Button
 					type='primary'

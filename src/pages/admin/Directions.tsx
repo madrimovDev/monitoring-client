@@ -4,9 +4,7 @@ import { getAllDirections, useActionCreator } from '@store'
 import { DirectionsList } from '@components'
 
 const Directions = () => {
-	const actions = useActionCreator({
-		getAllDirections
-	})
+	const actions = useActionCreator({ getAllDirections })
 
 	useEffect(() => {
 		actions.getAllDirections()
