@@ -1,6 +1,6 @@
-export const userWithoutToken = (user: Auth.LoginResponse | Auth.VerifyResponse | undefined): Auth.VerifyResponse => {
+export const userWithoutToken = (user: Auth.LoginResponse | Auth.VerifyResponse): Auth.VerifyResponse => {
 	return {
-		userId: user?.userId,
+		userId: user.userId,
 		permissions: user?.permissions,
 		username: user?.username
 	}

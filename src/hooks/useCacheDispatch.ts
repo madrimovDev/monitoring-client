@@ -23,7 +23,7 @@ const useCacheDispatch = (action: BoundAsyncThunk<any>, time: Time /* millisecun
 					}
 				} else {
 					dispatch(action())
-					timeCache.time[key] = time[key]
+					timeCache.time[key] = Date.now() + time[key]
 				}
 			}
 		} else {
