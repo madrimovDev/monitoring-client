@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Col, Row } from 'antd'
-import { getAllAdmins, useActionCreator } from '@store'
+import { getAllAdmins } from '@store'
 import { AdminsList } from '@components'
+import { useCacheDispatch } from '@hooks'
 
 const Admins = () => {
-	const actions = useActionCreator({
-		getAllAdmins
+	useCacheDispatch(getAllAdmins, {
+		admins: 10_000
 	})
-
-	useEffect(() => {
-		actions.getAllAdmins()
-	}, [])
 
 	return (
 		<Row>

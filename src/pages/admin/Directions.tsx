@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Col, Row } from 'antd'
-import { getAllDirections, useActionCreator } from '@store'
 import { DirectionsList } from '@components'
+import { useCacheDispatch } from '@hooks'
+import { getAllDirections } from '@store'
 
 const Directions = () => {
-	const actions = useActionCreator({ getAllDirections })
-
-	useEffect(() => {
-		actions.getAllDirections()
-	}, [])
+	useCacheDispatch(getAllDirections, {
+		directions: 10_000
+	})
 
 	return (
 		<Row>

@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { TeachersTable } from '@components'
-import { getAllTeachers, useActionCreator } from '@store'
+import { getAllTeachers } from '@store'
+import { useCacheDispatch } from '@hooks'
 
 const Teachers = () => {
-	const actions = useActionCreator({
-		getAllTeachers
+	useCacheDispatch(getAllTeachers, {
+		teachers: 10_000
 	})
-
-	useEffect(() => {
-		actions.getAllTeachers()
-	}, [])
 
 	return (
 		<>

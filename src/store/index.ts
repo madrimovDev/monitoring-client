@@ -17,3 +17,4 @@ export {
 } from './reducers/modals/actions'
 export { createDirection, deleteDirection, getAllDirections, updateDirection } from './reducers/directions/actions'
 export { getAllTeachers, createTeacher, deleteTeacher, updateTeacher } from './reducers/teachers/actions'
+export { getAllGroups } from './reducers/groups/actions'

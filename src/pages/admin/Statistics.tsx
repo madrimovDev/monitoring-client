@@ -1,11 +1,13 @@
 import React from 'react'
 import { Divider } from 'antd'
 import { StatisticsCards, StatisticsDirections } from '@components'
-import { getStatistics, useActionCreator } from '@store'
+import { getStatistics } from '@store'
+import { useCacheDispatch } from '@hooks'
 
 const Statistics = () => {
-	const actions = useActionCreator({ getStatistics })
-	actions.getStatistics()
+	useCacheDispatch(getStatistics, {
+		statistics: 10_000
+	})
 
 	return (
 		<>
