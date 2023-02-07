@@ -1,6 +1,7 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
-import { Admins, Directions, Groups, Statistics, Teachers } from '@pages'
+import { Admins, Direction, Directions, Group, Groups, Statistics, Teacher, Teachers } from '@pages'
+import { DirectionsList, GroupsTable, TeachersTable } from '@components'
 
 const adminRouter: RouteObject[] = [
 	{
@@ -9,22 +10,49 @@ const adminRouter: RouteObject[] = [
 	},
 	{
 		path: 'admins',
-		element: <Admins />,
-		action: args => {
-			console.log(args)
-		}
+		element: <Admins />
 	},
 	{
 		path: 'directions',
-		element: <Directions />
+		element: <Directions />,
+		children: [
+			{
+				index: true,
+				element: <DirectionsList />
+			},
+			{
+				path: ':id',
+				element: <Direction />
+			}
+		]
 	},
 	{
 		path: 'teachers',
-		element: <Teachers />
+		element: <Teachers />,
+		children: [
+			{
+				index: true,
+				element: <TeachersTable />
+			},
+			{
+				path: ':id',
+				element: <Teacher />
+			}
+		]
 	},
 	{
 		path: 'groups',
-		element: <Groups />
+		element: <Groups />,
+		children: [
+			{
+				index: true,
+				element: <GroupsTable />
+			},
+			{
+				path: ':id',
+				element: <Group />
+			}
+		]
 	}
 ]
 

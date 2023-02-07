@@ -9,6 +9,14 @@ const timeCache: { time: Time } = {
 	time: {}
 }
 
+/**
+ *
+ * @param action BoundAsyncThunk
+ * @param time unique key and timeout
+ *
+ * @description cached dispatches
+ */
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useCacheDispatch = (action: BoundAsyncThunk<any>, time: Time /* millisecunds */) => {
 	const dispatch = useAppDispatch()
