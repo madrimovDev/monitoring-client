@@ -67,8 +67,8 @@ const Sidebar = () => {
 				<Typography.Title
 					level={5}
 					style={{ margin: 16 }}
-					type='secondary'>
-					Monitoring
+					type='danger'>
+					LMS
 				</Typography.Title>
 				<Menu
 					items={menuItems}
