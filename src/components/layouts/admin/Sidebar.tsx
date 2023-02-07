@@ -39,6 +39,11 @@ const menuItems: ItemType[] = [
 		key: 'groups',
 		icon: <GroupOutlined />,
 		label: <Link to='groups'>Groups</Link>
+	},
+	{
+		key: 'students',
+		icon: <UserOutlined />,
+		label: <Link to='students'>Students</Link>
 	}
 ]
 

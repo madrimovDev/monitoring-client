@@ -6,6 +6,7 @@ import modalsReducer from './reducers/modals/reducer'
 import directionsReducer from './reducers/directions/reducer'
 import teachersReducer from './reducers/teachers/reducer'
 import groupsReducer from './reducers/groups/reducer'
+import studentsReducer from './reducers/students/reducer'
 
 const store = configureStore({
 	reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
 		modals: modalsReducer,
 		directions: directionsReducer,
 		teachers: teachersReducer,
-		groups: groupsReducer
+		groups: groupsReducer,
+		students: studentsReducer
 	},
 	devTools: !import.meta.env.PROD
 })

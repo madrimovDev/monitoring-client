@@ -18,3 +18,4 @@ export {
 export { createDirection, deleteDirection, getAllDirections, updateDirection } from './reducers/directions/actions'
 export { getAllTeachers, createTeacher, deleteTeacher, updateTeacher } from './reducers/teachers/actions'
 export { getAllGroups, createGroup, deleteGroup, updateGroup } from './reducers/groups/actions'
+export { createStudent, deleteStudent, getAllStudents, updateStudent } from './reducers/students/actions'
