@@ -13,6 +13,17 @@ declare namespace Groups {
 		status: string
 	}
 
+	export interface NewGroup {
+		name: string
+		months: number
+		directionId: number
+	}
+
+	export interface GroupResponse {
+		message: string
+		group: Group
+	}
+
 	export interface GroupsResponse {
 		message: string
 		groups: Group[]
