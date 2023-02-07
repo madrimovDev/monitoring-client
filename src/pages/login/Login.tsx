@@ -24,7 +24,8 @@ const Login = () => {
 	useEffect(() => {
 		if (status === 'fulfilled') {
 			notification.success({
-				message: 'Login successful'
+				message: 'Login successful',
+				duration: 2
 			})
 			navigate('/')
 		} else if (status === 'rejected') {

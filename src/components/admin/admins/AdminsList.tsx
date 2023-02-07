@@ -26,12 +26,14 @@ const AdminsList = () => {
 						actions={[
 							<Button
 								key='Edit'
+								size='small'
 								type='primary'
 								onClick={() => actions.updateAdminModal(item)}>
 								Edit
 							</Button>,
 							<Button
 								key='Delete'
+								size='small'
 								danger
 								type='primary'
 								disabled={userId === item.userId}

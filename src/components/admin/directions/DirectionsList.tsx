@@ -15,7 +15,6 @@ const DirectionsList = () => {
 
 	return (
 		<List
-			bordered
 			loading={status === 'pending'}
 			dataSource={directions}
 			style={{ background: 'white' }}
@@ -25,12 +24,14 @@ const DirectionsList = () => {
 						actions={[
 							<Button
 								key='Edit'
+								size='small'
 								onClick={() => actions.updateDirectionModal(item)}
 								type='primary'>
 								Edit
 							</Button>,
 							<Button
 								key='Delete'
+								size='small'
 								danger
 								type='primary'
 								onClick={() => actions.deleteDirection(item.id)}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Tag } from 'antd'
+import { Button, Space, Table, Tag } from 'antd'
 import { useAppSelector } from '@store'
 import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
@@ -56,7 +56,35 @@ const GroupsTable = () => {
 					key: 'teacher',
 					title: 'Teacher',
 					render(_, record) {
-						return record.teacher?.name || <Tag color='red'>No Data</Tag>
+						if (record.teacher) {
+							return (
+								<CustomLink to={'teachers/' + record.teacher.id}>
+									{record.teacher.name} {record.teacher.surname}
+								</CustomLink>
+							)
+						}
+						return <Tag color='red'>No Data</Tag>
+					}
+				},
+				{
+					key: 'actions',
+					title: 'actions',
+					render() {
+						return (
+							<Space>
+								<Button
+									size='small'
+									type='primary'>
+									Edit
+								</Button>
+								<Button
+									size='small'
+									type='primary'
+									danger>
+									Delete
+								</Button>
+							</Space>
+						)
 					}
 				}
 			]}

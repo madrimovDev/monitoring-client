@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Layout, Menu, Typography } from 'antd'
+import { Button, Layout, Menu, Tooltip, Typography } from 'antd'
 import { ItemType } from 'antd/es/menu/hooks/useItems'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import LogoutOutline from '@ant-design/icons/LogoutOutlined'
 import ClusterOutlined from '@ant-design/icons/ClusterOutlined'
 import UserOutlined from '@ant-design/icons/UserOutlined'
 import GroupOutlined from '@ant-design/icons/GroupOutlined'
+import LockFilled from '@ant-design/icons/LockFilled'
 
 import { logout, useAppDispatch } from '@store'
 import { getFromToString } from '@utils'
@@ -84,6 +85,18 @@ const Sidebar = () => {
 						icon={<LogoutOutline />}>
 						Logout
 					</Button>
+					<Tooltip
+						title='Hudo Xoloso ishlidi. :)))'
+						placement='right'
+						color='gold'>
+						<Button
+							type='ghost'
+							size='small'
+							disabled
+							icon={<LockFilled />}>
+							Lock
+						</Button>
+					</Tooltip>
 				</div>
 			</div>
 		</Layout.Sider>

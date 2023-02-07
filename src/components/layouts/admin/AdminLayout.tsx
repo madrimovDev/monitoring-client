@@ -31,7 +31,8 @@ const AdminLayout = () => {
 			}}>
 			<Sidebar />
 			<Layout>
-				<Header style={{ background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+				<Header
+					style={{ background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 10 }}>
 					<GoBack />
 					<CreateDropDown />
 				</Header>
