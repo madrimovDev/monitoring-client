@@ -1,11 +1,12 @@
 import React from 'react'
 import { deleteTeacher, updateTeacherModal, useActionCreator, useAppSelector } from '@store'
 import { Button, Space, Table, Tag } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const TeachersTable = () => {
 	const teachers = useAppSelector(state => state.teachers.data)
 	const status = useAppSelector(state => state.teachers.status)
+	const navigate = useNavigate()
 
 	const actions = useActionCreator({
 		deleteTeacher,
@@ -13,7 +14,7 @@ const TeachersTable = () => {
 	})
 
 	const handleDelete = (id: number) => actions.deleteTeacher(id)
-	const handleEdit = (teacher: Teachers.Teacher) => actions.updateTeacherModal(teacher)
+	const handleEdit = (teacher: Teachers.Teacher) => navigate(teacher.id.toString())
 
 	if (!teachers) return null
 

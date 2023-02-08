@@ -9,6 +9,7 @@ declare namespace Groups {
 		name: string
 		months: number
 		direction: Direction
+		students: number
 		teacher?: Teachers.Teacher
 		status: string
 	}

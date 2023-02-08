@@ -4,6 +4,8 @@ import { useAppSelector } from '@store'
 import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
 import { formatDate, formatPhone } from '@utils'
+import AddGroup from '../customs/AddGroup'
+import RemoveGroup from '../customs/RemoveGroup'
 
 const StudentsTable = () => {
 	const data = useAppSelector(state => state.students.data)
@@ -67,19 +69,27 @@ const StudentsTable = () => {
 				{
 					key: 'groups',
 					title: 'Groups',
+					width: 300,
 					render(_, record) {
 						return (
-							<Space>
-								{record.groups.map(group => {
-									return (
-										<CustomLink
-											key={group.id}
-											to={'groups/' + group.id}>
-											{group.name}
-										</CustomLink>
-									)
-								})}
-							</Space>
+							<>
+								<Space
+									split=','
+									style={{ marginRight: 20 }}>
+									{record.groups.map(group => (
+										<>
+											<RemoveGroup>
+												<CustomLink
+													key={group.id}
+													to={'groups/' + group.id}>
+													{group.name}
+												</CustomLink>
+											</RemoveGroup>
+										</>
+									))}
+								</Space>
+								<AddGroup student={record} />
+							</>
 						)
 					}
 				},

@@ -7,6 +7,7 @@ declare namespace Teachers {
 		surname: string
 		phone: string
 		groups: Groups.Group[]
+		students: number
 		directions: Directions.Direction[]
 		permissions: string[]
 	}
