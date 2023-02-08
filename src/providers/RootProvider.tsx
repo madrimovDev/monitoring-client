@@ -4,12 +4,17 @@ import { RouterProvider } from 'react-router-dom'
 
 import { rootRouter } from '@routers'
 import { store } from '@store'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const query = new QueryClient()
 
 const RootProvider: FC = () => {
 	return (
 		<>
 			<Provider store={store}>
-				<RouterProvider router={rootRouter} />
+				<QueryClientProvider client={query}>
+					<RouterProvider router={rootRouter} />
+				</QueryClientProvider>
 			</Provider>
 		</>
 	)

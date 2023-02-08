@@ -74,9 +74,9 @@ const AddGroup: FC<AddGroupProps> = ({ student }) => {
 		getAllStudents
 	})
 
-	const onConfigm = () => {
+	const onConfigm = async () => {
 		setOpen(false)
-		GroupsService.addStudentToGroup(form.getFieldValue('group'), student.id)
+		await GroupsService.addStudentToGroup(form.getFieldValue('group'), student.id)
 		actions.getAllStudents()
 		form.resetFields()
 	}

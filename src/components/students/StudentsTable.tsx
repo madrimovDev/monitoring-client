@@ -1,15 +1,24 @@
 import React from 'react'
-import { Button, Space, Table } from 'antd'
-import { useAppSelector } from '@store'
+import { Button, Space, Table, Tooltip } from 'antd'
+import { getAllStudents, useActionCreator, useAppSelector } from '@store'
 import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
 import { formatDate, formatPhone } from '@utils'
 import AddGroup from '../customs/AddGroup'
-import RemoveGroup from '../customs/RemoveGroup'
+import { GroupsService } from '@services'
 
 const StudentsTable = () => {
 	const data = useAppSelector(state => state.students.data)
 	const status = useAppSelector(state => state.students.status)
+
+	const actions = useActionCreator({
+		getAllStudents
+	})
+
+	const onRemove = async (groupId: number, studentId: number) => {
+		await GroupsService.removeStudentToGroup(groupId, studentId)
+		actions.getAllStudents()
+	}
 
 	if (!data) return null
 
@@ -77,15 +86,27 @@ const StudentsTable = () => {
 									split=','
 									style={{ marginRight: 20 }}>
 									{record.groups.map(group => (
-										<>
-											<RemoveGroup>
+										<Tooltip
+											title={
+												<>
+													<Button
+														type='primary'
+														onClick={() => onRemove(group.id, record.id)}
+														size='small'
+														danger>
+														Remove Group
+													</Button>
+												</>
+											}
+											key={group.id}>
+											<span>
 												<CustomLink
 													key={group.id}
 													to={'groups/' + group.id}>
 													{group.name}
 												</CustomLink>
-											</RemoveGroup>
-										</>
+											</span>
+										</Tooltip>
 									))}
 								</Space>
 								<AddGroup student={record} />

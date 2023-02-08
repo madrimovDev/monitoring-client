@@ -25,7 +25,7 @@ class GroupsService {
 		return response
 	}
 	static async removeStudentToGroup(groupId: number, studentId: number) {
-		const response = await api.delete<{ message: string }>(`${this.baseUrl}/${groupId}/students`)
+		const response = await api.delete<{ message: string }>(`${this.baseUrl}/${groupId}/students/${studentId}`)
 		return response
 	}
 }

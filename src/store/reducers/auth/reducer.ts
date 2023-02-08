@@ -13,10 +13,11 @@ const initialState: InitialState<Auth.VerifyResponse> = {
 const userReducer = createReducer(initialState, builder => {
 	builder.addCase(logout, () => {
 		window.localStorage.clear()
+
 		return {
 			message: 'Logout',
-			data: null,
-			status: 'default'
+			status: 'default',
+			data: null
 		}
 	})
 	builder.addMatcher(isFulfilled(login, verify), (state, action) => {
