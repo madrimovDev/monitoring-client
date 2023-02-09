@@ -3,12 +3,15 @@ import { Button, Space, Table, Tag } from 'antd'
 import { useAppSelector } from '@store'
 import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
+import CustomSkeleton from '../customs/CustomSkeleton'
 
 const GroupsTable = () => {
 	const data = useAppSelector(state => state.groups.data)
 	const status = useAppSelector(state => state.groups.status)
 
-	if (!data) return null
+	if (!data || (status === 'pending' && !data)) {
+		return <CustomSkeleton />
+	}
 
 	return (
 		<Table
