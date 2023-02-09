@@ -19,5 +19,7 @@ export {
 	createTeacherModal,
 	updateTeacherModal,
 	createGroupModal,
-	updateGroupModal
+	updateGroupModal,
+	createStudentModal,
+	updateStudentModal
 } from './reducers/modals/actions'

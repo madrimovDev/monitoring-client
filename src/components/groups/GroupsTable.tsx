@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Space, Table, Tag } from 'antd'
-import { useAppSelector } from '@store'
+import { deleteGroup, useActionCreator, useAppSelector } from '@store'
 import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
 import CustomSkeleton from '../customs/CustomSkeleton'
@@ -9,9 +9,16 @@ import AddTeacher from '../customs/AddTeacher'
 const GroupsTable = () => {
 	const data = useAppSelector(state => state.groups.data)
 	const status = useAppSelector(state => state.groups.status)
+	const actions = useActionCreator({
+		deleteGroup
+	})
 
 	if (!data || (status === 'pending' && !data)) {
 		return <CustomSkeleton />
+	}
+
+	const onDelete = (id: number) => {
+		actions.deleteGroup(id)
 	}
 
 	return (
@@ -78,7 +85,7 @@ const GroupsTable = () => {
 				{
 					key: 'actions',
 					title: 'actions',
-					render() {
+					render(_, record) {
 						return (
 							<Space>
 								<Button
@@ -89,6 +96,7 @@ const GroupsTable = () => {
 								<Button
 									size='small'
 									type='primary'
+									onClick={() => onDelete(record.id)}
 									danger>
 									Delete
 								</Button>

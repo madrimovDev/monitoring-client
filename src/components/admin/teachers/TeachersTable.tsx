@@ -2,6 +2,7 @@ import React from 'react'
 import { deleteTeacher, updateTeacherModal, useActionCreator, useAppSelector } from '@store'
 import { Button, Space, Table, Tag } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
+import { formatPhone } from '@utils'
 
 const TeachersTable = () => {
 	const teachers = useAppSelector(state => state.teachers.data)
@@ -93,7 +94,7 @@ const TeachersTable = () => {
 					key: 'phone',
 					title: 'Phone',
 					render(_, record) {
-						return record.phone
+						return formatPhone(record.phone)
 					}
 				},
 				{

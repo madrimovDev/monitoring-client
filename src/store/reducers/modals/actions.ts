@@ -28,4 +28,11 @@ export const updateGroupModal = createAction('modal/updateGroup', (data: Groups.
 	}
 })
 
+export const createStudentModal = createAction('modal/createStudent')
+export const updateStudentModal = createAction('modal/updateStudent', (data: Students.Student) => {
+	return {
+		payload: data
+	}
+})
+
 export const closeModal = createAction('modal/closeModal')
