@@ -4,6 +4,7 @@ import { useAppSelector } from '@store'
 import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
 import CustomSkeleton from '../customs/CustomSkeleton'
+import AddTeacher from '../customs/AddTeacher'
 
 const GroupsTable = () => {
 	const data = useAppSelector(state => state.groups.data)
@@ -66,7 +67,12 @@ const GroupsTable = () => {
 								</CustomLink>
 							)
 						}
-						return <Tag color='red'>No Data</Tag>
+						return (
+							<Space>
+								<Tag color='red'>No Data</Tag>
+								<AddTeacher group={record} />
+							</Space>
+						)
 					}
 				},
 				{

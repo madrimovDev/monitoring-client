@@ -46,10 +46,10 @@ const AddGroupForm = forwardRef(({ form, groups }: AddGroupFormType, ref) => {
 			<Form.Item name='group'>
 				<Select
 					value={value}
-					showSearch
-					filterOption={false}
 					onChange={handleChange}
 					onFocus={onfocus}
+					showSearch
+					filterOption={false}
 					notFoundContent={null}
 					onSearch={onSearch}
 					options={options}

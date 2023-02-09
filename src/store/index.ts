@@ -6,6 +6,10 @@ export type { BoundAsyncThunk } from './hooks/useActionCreator'
 export { login, verify, logout } from './reducers/auth/actions'
 export { getStatistics } from './reducers/dashboard/actions'
 export { getAllAdmins, createAdmin, deleteAdmin, updateAdmin } from './reducers/admins/actions'
+export { createDirection, deleteDirection, getAllDirections, updateDirection } from './reducers/directions/actions'
+export { getAllTeachers, createTeacher, deleteTeacher, updateTeacher } from './reducers/teachers/actions'
+export { getAllGroups, createGroup, deleteGroup, updateGroup } from './reducers/groups/actions'
+export { createStudent, deleteStudent, getAllStudents, updateStudent } from './reducers/students/actions'
 export {
 	createAdminModal,
 	closeModal,
@@ -13,9 +17,7 @@ export {
 	createDirectionModal,
 	updateDirectionModal,
 	createTeacherModal,
-	updateTeacherModal
+	updateTeacherModal,
+	createGroupModal,
+	updateGroupModal
 } from './reducers/modals/actions'
-export { createDirection, deleteDirection, getAllDirections, updateDirection } from './reducers/directions/actions'
-export { getAllTeachers, createTeacher, deleteTeacher, updateTeacher } from './reducers/teachers/actions'
-export { getAllGroups, createGroup, deleteGroup, updateGroup } from './reducers/groups/actions'
-export { createStudent, deleteStudent, getAllStudents, updateStudent } from './reducers/students/actions'

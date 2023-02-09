@@ -21,4 +21,11 @@ export const updateTeacherModal = createAction('modal/updateTeacher', (data: Tea
 	}
 })
 
+export const createGroupModal = createAction('modal/createGroup')
+export const updateGroupModal = createAction('modal/updateGroup', (data: Groups.Group) => {
+	return {
+		payload: data
+	}
+})
+
 export const closeModal = createAction('modal/closeModal')

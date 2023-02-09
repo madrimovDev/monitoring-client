@@ -6,6 +6,7 @@ import CreateDropDown from '../../admin/createDropdown/CreateDropDown'
 import CreateAdminModal from '../../admin/modals/CreateAdminModal'
 import CreateDirectionModal from '../../admin/modals/CreateDirectionModal'
 import CreateTeacherModal from '../../admin/modals/CreateTeacherModal'
+import CreateGroupModal from '../../admin/modals/CreateGroupModal'
 import GoBack from '../../customs/GoBack'
 
 const { Content, Header } = Layout
@@ -49,6 +50,7 @@ const AdminLayout = () => {
 				<CreateAdminModal />
 				<CreateDirectionModal />
 				<CreateTeacherModal />
+				<CreateGroupModal />
 			</Layout>
 		</Layout>
 	)

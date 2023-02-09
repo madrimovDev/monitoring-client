@@ -24,6 +24,12 @@ class GroupsService {
 		})
 		return response
 	}
+	static async addTeacherToGroup(groupId: number, teacherId: number) {
+		const response = await api.put<{ message: string }>(`${this.baseUrl}/${groupId}/teacher`, {
+			teacherId
+		})
+		return response
+	}
 	static async removeStudentToGroup(groupId: number, studentId: number) {
 		const response = await api.delete<{ message: string }>(`${this.baseUrl}/${groupId}/students/${studentId}`)
 		return response

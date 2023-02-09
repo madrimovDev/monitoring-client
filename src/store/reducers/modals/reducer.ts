@@ -3,9 +3,11 @@ import {
 	closeModal,
 	createAdminModal,
 	createDirectionModal,
+	createGroupModal,
 	createTeacherModal,
 	updateAdminModal,
 	updateDirectionModal,
+	updateGroupModal,
 	updateTeacherModal
 } from './actions'
 
@@ -25,6 +27,11 @@ interface InitialState {
 		type: 'create' | 'update'
 		data: Teachers.Teacher | null
 	}
+	groupModal: {
+		open: boolean
+		type: 'create' | 'update'
+		data: Groups.Group | null
+	}
 }
 
 const initialState: InitialState = {
@@ -39,6 +46,11 @@ const initialState: InitialState = {
 		data: null
 	},
 	directionModal: {
+		open: false,
+		type: 'create',
+		data: null
+	},
+	groupModal: {
 		open: false,
 		type: 'create',
 		data: null
@@ -106,6 +118,27 @@ const modalsReducer = createReducer(initialState, builder => {
 			}
 		}
 	})
+	builder.addCase(createGroupModal, state => {
+		return {
+			...state,
+			groupModal: {
+				open: true,
+				data: null,
+				type: 'create'
+			}
+		}
+	})
+	builder.addCase(updateGroupModal, (state, action) => {
+		return {
+			...state,
+			groupModal: {
+				open: true,
+				data: action.payload,
+				type: 'update'
+			}
+		}
+	})
+
 	builder.addCase(closeModal, () => {
 		return {
 			teacherModal: {
@@ -119,6 +152,11 @@ const modalsReducer = createReducer(initialState, builder => {
 				type: 'create'
 			},
 			adminModal: {
+				open: false,
+				data: null,
+				type: 'create'
+			},
+			groupModal: {
 				open: false,
 				data: null,
 				type: 'create'
