@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button, Space, Table, Tooltip } from 'antd'
 import { getAllStudents, useActionCreator, useAppSelector } from '@store'
+import { GroupsService } from '@services'
+import { formatDate, formatPhone } from '@utils'
 import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
-import { formatDate, formatPhone } from '@utils'
 import AddGroup from '../customs/AddGroup'
-import { GroupsService } from '@services'
+import DeleteFilled from '@ant-design/icons/DeleteFilled'
 
 const StudentsTable = () => {
 	const data = useAppSelector(state => state.students.data)
@@ -121,16 +122,12 @@ const StudentsTable = () => {
 						return (
 							<Space>
 								<Button
-									size='small'
-									type='primary'>
-									Edit
-								</Button>
-								<Button
-									size='small'
+									size='middle'
 									type='primary'
-									danger>
-									Delete
-								</Button>
+									danger
+									shape='circle'
+									icon={<DeleteFilled />}
+								/>
 							</Space>
 						)
 					}

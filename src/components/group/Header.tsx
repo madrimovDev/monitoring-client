@@ -3,6 +3,8 @@ import { GroupService } from '@services'
 import { Button, Skeleton, Space, Typography } from 'antd'
 import { useQuery } from 'react-query'
 import CustomLink from '../customs/CustomLink'
+import DeleteFilled from '@ant-design/icons/DeleteFilled'
+import EditFilled from '@ant-design/icons/EditFilled'
 
 const { Title, Paragraph } = Typography
 
@@ -35,12 +37,21 @@ const Header: FC<Props> = ({ id }) => {
 		<>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 				<Title level={3}>Name: {data.data?.group.name}</Title>
-				<Button
-					type='primary'
-					size='small'
-					danger>
-					Delete Group
-				</Button>
+				<Space>
+					<Button
+						type='primary'
+						size='small'
+						icon={<EditFilled />}>
+						Edit
+					</Button>
+					<Button
+						type='default'
+						size='small'
+						danger
+						icon={<DeleteFilled />}>
+						Delete
+					</Button>
+				</Space>
 			</div>
 			<Space.Compact
 				direction='vertical'

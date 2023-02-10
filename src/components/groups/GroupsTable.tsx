@@ -5,6 +5,7 @@ import CustomLink from '../customs/CustomLink'
 import { Link } from 'react-router-dom'
 import CustomSkeleton from '../customs/CustomSkeleton'
 import AddTeacher from '../customs/AddTeacher'
+import DeleteFilled from '@ant-design/icons/DeleteFilled'
 
 const GroupsTable = () => {
 	const data = useAppSelector(state => state.groups.data)
@@ -89,17 +90,13 @@ const GroupsTable = () => {
 						return (
 							<Space>
 								<Button
-									size='small'
-									type='primary'>
-									Edit
-								</Button>
-								<Button
-									size='small'
+									size='middle'
 									type='primary'
 									onClick={() => onDelete(record.id)}
-									danger>
-									Delete
-								</Button>
+									danger
+									shape='circle'
+									icon={<DeleteFilled />}
+								/>
 							</Space>
 						)
 					}

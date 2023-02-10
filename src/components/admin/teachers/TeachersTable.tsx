@@ -1,13 +1,13 @@
 import React from 'react'
 import { deleteTeacher, updateTeacherModal, useActionCreator, useAppSelector } from '@store'
 import { Button, Space, Table, Tag } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
 import { formatPhone } from '@utils'
+import DeleteFilled from '@ant-design/icons/DeleteFilled'
+import CustomLink from '../../customs/CustomLink'
 
 const TeachersTable = () => {
 	const teachers = useAppSelector(state => state.teachers.data)
 	const status = useAppSelector(state => state.teachers.status)
-	const navigate = useNavigate()
 
 	const actions = useActionCreator({
 		deleteTeacher,
@@ -15,7 +15,6 @@ const TeachersTable = () => {
 	})
 
 	const handleDelete = (id: number) => actions.deleteTeacher(id)
-	const handleEdit = (teacher: Teachers.Teacher) => navigate(teacher.id.toString())
 
 	if (!teachers) return null
 
@@ -25,56 +24,23 @@ const TeachersTable = () => {
 			dataSource={teachers}
 			rowKey={item => item.id}
 			bordered
-			expandable={{
-				expandedRowRender(record) {
-					return (
-						<Table
-							bordered
-							dataSource={record.groups}
-							pagination={false}
-							showHeader
-							rowKey={item => item.id}
-							title={() => 'Groups'}
-							columns={[
-								{
-									key: 'name',
-									title: 'Name',
-									render(_, record) {
-										return <Link to={'#'}>{record.name}</Link>
-									}
-								},
-								{
-									key: 'direction',
-									title: 'Direction',
-									render(_, record) {
-										return <Link to={'#'}>{record.direction.name}</Link>
-									}
-								},
-								{
-									key: 'students',
-									title: 'Students count',
-									render(_, record) {
-										return record.students
-									}
-								}
-							]}
-						/>
-					)
-				}
-			}}
 			columns={[
+				{
+					key: '#',
+					title: '#',
+					render(_, record, index) {
+						return index + 1
+					}
+				},
 				{
 					key: 'name',
 					title: 'Name',
 					render(_, record) {
-						return record.name
-					}
-				},
-				{
-					key: 'surname',
-					title: 'Surname',
-					render(_, record) {
-						return record.surname
+						return (
+							<CustomLink to={'teachers/' + record.id}>
+								{record.name} {record.surname}
+							</CustomLink>
+						)
 					}
 				},
 				{
@@ -113,16 +79,11 @@ const TeachersTable = () => {
 								<Button
 									onClick={() => handleDelete(record.id)}
 									danger
-									size='small'
-									type='primary'>
-									Delete
-								</Button>
-								<Button
-									onClick={() => handleEdit(record)}
-									size='small'
-									type='primary'>
-									Edit
-								</Button>
+									size='middle'
+									type='primary'
+									shape='circle'
+									icon={<DeleteFilled />}
+								/>
 							</Space>
 						)
 					}

@@ -72,7 +72,7 @@ const CreateStudentModal = () => {
 				form.resetFields()
 			}}
 			footer={null}
-			title={studentModal.type.toUpperCase() + ' TEACHER'}>
+			title={studentModal.type.toUpperCase() + ' STUDENT'}>
 			<Form
 				form={form}
 				onFinish={onSubmit}
@@ -125,7 +125,7 @@ const CreateStudentModal = () => {
 							type: 'date'
 						}
 					]}>
-					<Input type='date' />{' '}
+					<Input type='date' />
 				</Form.Item>
 				<Form.Item
 					rules={[
