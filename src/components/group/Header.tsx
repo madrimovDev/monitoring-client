@@ -15,12 +15,7 @@ interface Props {
 const Header: FC<Props> = ({ id }) => {
 	const data = useQuery('group', {
 		queryFn: async () => {
-			return await Promise.all([GroupService.getGroup(id), GroupService.getGroupTeacher(id)]).then(res => {
-				return {
-					group: res[0].group,
-					teacher: res[1].teacher
-				}
-			})
+			return await GroupService.getGroup(id)
 		}
 	})
 
@@ -57,12 +52,12 @@ const Header: FC<Props> = ({ id }) => {
 				direction='vertical'
 				size='small'>
 				<Paragraph>Months: {data.data?.group.months}</Paragraph>
-				<Paragraph>Direction: {data.data?.group.directionId}</Paragraph>
+				<Paragraph>Direction: {data.data?.group.direction.name}</Paragraph>
 				<Paragraph>
 					Teacher:{' '}
-					{data.data?.teacher ? (
-						<CustomLink to={'teachers/' + data.data?.teacher.id}>
-							{data.data?.teacher.name} {data.data?.teacher.surname}
+					{data.data?.group.teacher ? (
+						<CustomLink to={'teachers/' + data.data?.group.teacher.id}>
+							{data.data?.group.teacher.name} {data.data?.group.teacher.surname}
 						</CustomLink>
 					) : (
 						'No Teacher'

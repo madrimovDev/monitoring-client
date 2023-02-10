@@ -2,6 +2,7 @@ declare namespace Students {
 	export interface Group {
 		id: number
 		name: string
+		status: 'deleted' | 'active'
 	}
 
 	export interface Student {

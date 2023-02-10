@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Space, Table, Tag, Tooltip } from 'antd'
+import { Badge, Button, Space, Table,  Tooltip } from 'antd'
 import { getAllStudents, useActionCreator, useAppSelector } from '@store'
 import { GroupsService } from '@services'
 import { formatDate, formatPhone } from '@utils'
@@ -104,7 +104,10 @@ const StudentsTable = () => {
 												<CustomLink
 													key={group.id}
 													to={'groups/' + group.id}>
-													<Tag>{group.name}</Tag>
+													<Badge
+														status={group.status === 'deleted' ? 'warning' : 'success'}
+														text={group.name}
+													/>
 												</CustomLink>
 											</span>
 										</Tooltip>

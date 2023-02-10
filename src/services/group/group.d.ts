@@ -2,10 +2,19 @@ declare namespace Group {
 	export interface Group {
 		id: number
 		name: string
-		directionId: number
+		direction: {
+			id: number
+			name: string
+			status: string
+		}
 		organizationId: number
 		months: number
-		teacherId?: unknown
+		teacher: {
+			id: number
+			name: string
+			surname: string
+			status: string
+		}
 		status: string
 	}
 
