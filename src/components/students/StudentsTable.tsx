@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Space, Table, Tooltip } from 'antd'
+import { Button, Space, Table, Tag, Tooltip } from 'antd'
 import { getAllStudents, useActionCreator, useAppSelector } from '@store'
 import { GroupsService } from '@services'
 import { formatDate, formatPhone } from '@utils'
@@ -104,7 +104,7 @@ const StudentsTable = () => {
 												<CustomLink
 													key={group.id}
 													to={'groups/' + group.id}>
-													{group.name}
+													<Tag>{group.name}</Tag>
 												</CustomLink>
 											</span>
 										</Tooltip>

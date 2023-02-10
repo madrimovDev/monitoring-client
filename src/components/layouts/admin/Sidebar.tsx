@@ -10,6 +10,7 @@ import ClusterOutlined from '@ant-design/icons/ClusterOutlined'
 import UserOutlined from '@ant-design/icons/UserOutlined'
 import GroupOutlined from '@ant-design/icons/GroupOutlined'
 import LockFilled from '@ant-design/icons/LockFilled'
+import FileZipFilled from '@ant-design/icons/FileZipFilled'
 
 import { logout, useAppDispatch } from '@store'
 import { getFromToString } from '@utils'
@@ -44,6 +45,32 @@ const menuItems: ItemType[] = [
 		key: 'students',
 		icon: <UserOutlined />,
 		label: <Link to='students'>Students</Link>
+	},
+	{
+		key: 'archive',
+		icon: <FileZipFilled />,
+		label: 'Archive',
+		children: [
+			{
+				key: 'all',
+				label: <Link to='archive'>All</Link>
+			},
+			{
+				key: 'Groups',
+				icon: <GroupOutlined />,
+				label: <Link to='archive/groups'>Groups</Link>
+			},
+			{
+				key: 'Students',
+				icon: <TeamOutlined />,
+				label: <Link to='archive/students'>Students</Link>
+			},
+			{
+				key: 'Teachers',
+				icon: <UserOutlined />,
+				label: <Link to='archive/teachers'>Teachers</Link>
+			}
+		]
 	}
 ]
 
@@ -71,6 +98,7 @@ const Sidebar = () => {
 					LMS
 				</Typography.Title>
 				<Menu
+					mode='inline'
 					items={menuItems}
 					selectedKeys={[selectedKey]}
 				/>

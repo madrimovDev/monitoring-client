@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Col, Divider, Layout, Row } from 'antd'
+import { Col, Divider, Layout, Row, Typography } from 'antd'
 import Sidebar from './Sidebar'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import CreateDropDown from '../../admin/createDropdown/CreateDropDown'
@@ -9,6 +9,7 @@ import CreateTeacherModal from '../../admin/modals/CreateTeacherModal'
 import CreateGroupModal from '../../admin/modals/CreateGroupModal'
 import CreateStudentModal from '../../admin/modals/CreateStudentModal'
 import GoBack from '../../customs/GoBack'
+import { getFromToString } from '@utils'
 
 const { Content, Header } = Layout
 
@@ -43,6 +44,12 @@ const AdminLayout = () => {
 						<Col
 							md={20}
 							offset={2}>
+							<Typography.Title
+								style={{ textTransform: 'capitalize' }}
+								level={3}
+								autoCapitalize='A-Z'>
+								{getFromToString(pathname)}
+							</Typography.Title>
 							<Divider />
 							<Outlet />
 						</Col>

@@ -118,6 +118,7 @@ const CreateTeacherModal = () => {
 					name='phone'
 					label='Phone'>
 					<Input
+						addonBefore={'+998'}
 						type='text'
 						style={{ width: '100%' }}
 					/>

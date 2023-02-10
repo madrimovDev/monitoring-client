@@ -1,21 +1,6 @@
-const formatPhone = (phone: string) => {
-	const phoneNumber = phone
-	const isSeven = phoneNumber.length <= 7
-
-	if (isSeven) {
-		return phoneNumber.substring(0, 3) + ' ' + phoneNumber.substring(3, 5) + ' ' + phoneNumber.substring(5, 7)
-	}
-	return (
-		phoneNumber.substring(0, 2) +
-		' ' +
-		phoneNumber.substring(2, 5) +
-		' ' +
-		phoneNumber.substring(5, 8) +
-		' ' +
-		phoneNumber.substring(8, 10) +
-		' ' +
-		phoneNumber.substring(10)
-	)
+function formatPhoneNumber(phoneNumber: string) {
+	const number = '+998' + phoneNumber
+	return number.replace(/^(\+998)(\d{2})(\d{3})(\d{4})$/, '$1 ($2) $3-$4')
 }
 
-export default formatPhone
+export default formatPhoneNumber
