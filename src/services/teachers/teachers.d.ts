@@ -12,6 +12,19 @@ declare namespace Teachers {
 		permissions: string[]
 	}
 
+	export interface Group {
+		id: number
+		name: string
+		months: number
+		direction: string
+		students: number
+	}
+
+	export interface TeacherGroupsResponse {
+		message: string
+		groups: Group[]
+	}
+
 	export interface NewTeacher {
 		username: string
 		name: string

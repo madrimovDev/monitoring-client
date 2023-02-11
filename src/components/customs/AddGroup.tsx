@@ -67,7 +67,7 @@ interface AddGroupProps {
 const AddGroup: FC<AddGroupProps> = ({ student }) => {
 	const [form] = Form.useForm<{ groups: number }>()
 	const [open, setOpen] = useState(false)
-	const groups = useAppSelector(state => state.groups.data)
+	const groups = useAppSelector(state => state.admin.groups.data)
 
 	const actions = useActionCreator({
 		getAllGroups,

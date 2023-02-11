@@ -3,10 +3,10 @@ import { closeModal, useActionCreator, useAppSelector, getAllDirections, createS
 import { Button, Form, Input, Modal, notification } from 'antd'
 
 const CreateStudentModal = () => {
-	const studentModal = useAppSelector(state => state.modals.studentModal)
-	const directions = useAppSelector(state => state.directions.data)
+	const studentModal = useAppSelector(state => state.admin.modals.studentModal)
+	const directions = useAppSelector(state => state.admin.directions.data)
 
-	const { message, status } = useAppSelector(state => state.teachers)
+	const { message, status } = useAppSelector(state => state.admin.teachers)
 
 	const [form] = Form.useForm()
 

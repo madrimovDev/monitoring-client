@@ -8,8 +8,8 @@ import AddTeacher from '../customs/AddTeacher'
 import DeleteFilled from '@ant-design/icons/DeleteFilled'
 
 const GroupsTable = () => {
-	const data = useAppSelector(state => state.groups.data)
-	const status = useAppSelector(state => state.groups.status)
+	const data = useAppSelector(state => state.admin.groups.data)
+	const status = useAppSelector(state => state.admin.groups.status)
 	const actions = useActionCreator({
 		deleteGroup
 	})

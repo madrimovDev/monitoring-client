@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge, Button, Space, Table,  Tooltip } from 'antd'
+import { Badge, Button, Space, Table, Tooltip } from 'antd'
 import { getAllStudents, useActionCreator, useAppSelector } from '@store'
 import { GroupsService } from '@services'
 import { formatDate, formatPhone } from '@utils'
@@ -9,8 +9,8 @@ import AddGroup from '../customs/AddGroup'
 import DeleteFilled from '@ant-design/icons/DeleteFilled'
 
 const StudentsTable = () => {
-	const data = useAppSelector(state => state.students.data)
-	const status = useAppSelector(state => state.students.status)
+	const data = useAppSelector(state => state.admin.students.data)
+	const status = useAppSelector(state => state.admin.students.status)
 
 	const actions = useActionCreator({
 		getAllStudents

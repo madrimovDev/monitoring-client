@@ -3,8 +3,8 @@ import { deleteDirection, updateDirectionModal, useActionCreator, useAppSelector
 import { Button, List } from 'antd'
 
 const DirectionsList = () => {
-	const directions = useAppSelector(state => state.directions.data)
-	const status = useAppSelector(state => state.directions.status)
+	const directions = useAppSelector(state => state.admin.directions.data)
+	const status = useAppSelector(state => state.admin.directions.status)
 
 	const actions = useActionCreator({
 		deleteDirection,

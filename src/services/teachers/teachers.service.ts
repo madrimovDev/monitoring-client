@@ -18,8 +18,14 @@ class TeachersService {
 		const response = await api.delete<Teachers.TeacherResponse>(`${this.baseUrl}/${id}`)
 		return response
 	}
+
 	static async updateTeacher(id: number, teacher: Teachers.NewTeacher) {
 		const response = await api.put<Teachers.TeacherResponse>(`${this.baseUrl}/${id}`, teacher)
+		return response
+	}
+
+	static async getTeacherGroup(teacherId: number) {
+		const response = await api.get<Teachers.TeacherGroupsResponse>(`${this.baseUrl}/${teacherId}/groups`)
 		return response
 	}
 }

@@ -66,7 +66,7 @@ interface Props {
 }
 
 const AddTeacher: FC<Props> = ({ group }) => {
-	const teachers = useAppSelector(state => state.teachers.data)
+	const teachers = useAppSelector(state => state.admin.teachers.data)
 	const [open, setOpen] = useState(false)
 	const [form] = Form.useForm()
 	const actions = useActionCreator({

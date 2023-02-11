@@ -3,9 +3,9 @@ import { deleteAdmin, updateAdminModal, useActionCreator, useAppSelector } from 
 import { Button, List } from 'antd'
 
 const AdminsList = () => {
-	const admins = useAppSelector(state => state.admins.data)
+	const admins = useAppSelector(state => state.admin.admins.data)
 	const userId = useAppSelector(state => state.user.data?.userId)
-	const status = useAppSelector(state => state.admins.status)
+	const status = useAppSelector(state => state.admin.admins.status)
 
 	const actions = useActionCreator({
 		deleteAdmin,

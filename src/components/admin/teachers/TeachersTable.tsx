@@ -6,8 +6,8 @@ import DeleteFilled from '@ant-design/icons/DeleteFilled'
 import CustomLink from '../../customs/CustomLink'
 
 const TeachersTable = () => {
-	const teachers = useAppSelector(state => state.teachers.data)
-	const status = useAppSelector(state => state.teachers.status)
+	const teachers = useAppSelector(state => state.admin.teachers.data)
+	const status = useAppSelector(state => state.admin.teachers.status)
 
 	const actions = useActionCreator({
 		deleteTeacher,

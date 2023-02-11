@@ -3,9 +3,9 @@ import { closeModal, createDirection, updateDirection, useActionCreator, useAppS
 import { Button, Form, Input, Modal, notification } from 'antd'
 
 const CreateDirectionModal = () => {
-	const directionModal = useAppSelector(state => state.modals.directionModal)
+	const directionModal = useAppSelector(state => state.admin.modals.directionModal)
 
-	const { message, status } = useAppSelector(state => state.directions)
+	const { message, status } = useAppSelector(state => state.admin.directions)
 
 	const [form] = Form.useForm()
 

@@ -3,10 +3,10 @@ import { closeModal, createGroup, getAllDirections, updateGroup, useActionCreato
 import { Button, Form, Input, InputNumber, Modal, Select, notification } from 'antd'
 
 const CreateGroupModal = () => {
-	const groupModal = useAppSelector(state => state.modals.groupModal)
-	const directions = useAppSelector(state => state.directions.data)
+	const groupModal = useAppSelector(state => state.admin.modals.groupModal)
+	const directions = useAppSelector(state => state.admin.directions.data)
 
-	const { message, status } = useAppSelector(state => state.groups)
+	const { message, status } = useAppSelector(state => state.admin.groups)
 
 	const [form] = Form.useForm()
 
