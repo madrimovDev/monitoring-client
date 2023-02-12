@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { RequireAuth, Login, RedirectRole } from '@pages'
 import { AdminLayout, TeacherLayout } from '@components'
 import adminRouter from './adminRouter'
+import teacherRouter from './teacherTouter'
 
 const rootRouter = createBrowserRouter([
 	{
@@ -25,7 +26,7 @@ const rootRouter = createBrowserRouter([
 			{
 				path: 'teacher',
 				element: <TeacherLayout />,
-				children: []
+				children: teacherRouter
 			}
 		]
 	}

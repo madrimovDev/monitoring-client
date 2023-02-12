@@ -37,6 +37,26 @@ declare namespace Group {
 		status: string
 	}
 
+	export interface Criteria {
+		id: number
+		maximum: number
+		organizationId: number
+		status: string
+	}
+
+	export interface Lesson {
+		id: number
+		date: Date
+		title: string
+		type: string
+		criteria: Criteria
+	}
+
+	export interface LessonsResponse {
+		message: string
+		lessons: Lesson[]
+	}
+
 	export interface TeacherResponse {
 		message: string
 		teacher: Teacher

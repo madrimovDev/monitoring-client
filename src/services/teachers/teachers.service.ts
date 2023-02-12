@@ -25,7 +25,7 @@ class TeachersService {
 	}
 
 	static async getTeacherGroup(teacherId: number) {
-		const response = await api.get<Teachers.TeacherGroupsResponse>(`${this.baseUrl}/${teacherId}/groups`)
+		const response = await api.get<Teachers.TeacherGroupsResponse>(`${this.baseUrl}/${1}/groups`)
 		return response
 	}
 }
