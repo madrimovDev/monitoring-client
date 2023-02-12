@@ -52,6 +52,23 @@ declare namespace Group {
 		criteria: Criteria
 	}
 
+	export interface Assessment {
+		score: number
+		comment: string
+		studentId: number
+	}
+
+	export interface AssessmentStudent {
+		id: number
+		name: string
+		assessment: Assessment
+	}
+
+	export interface AssessmentsResponse {
+		message: string
+		assessments: AssessmentStudent[]
+	}
+
 	export interface LessonsResponse {
 		message: string
 		lessons: Lesson[]

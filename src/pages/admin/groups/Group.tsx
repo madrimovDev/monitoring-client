@@ -6,19 +6,19 @@ import { Header, Lessons, Students } from '@components'
 const { Title } = Typography
 
 const Group = () => {
-	const { id } = useParams<{ id: string }>()
+	const { groupId } = useParams<{ groupId: string }>()
 
-	if (!id) return null
+	if (!groupId) return null
 
 	return (
 		<Card>
-			<Header id={id} />
+			<Header id={groupId} />
 			<Divider />
 			<Title level={4}>Students</Title>
-			<Students id={id} />
+			<Students id={groupId} />
 			<Divider />
 			<Title level={4}>Lessons</Title>
-			<Lessons id={id} />
+			<Lessons id={groupId} />
 		</Card>
 	)
 }

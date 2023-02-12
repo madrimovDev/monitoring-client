@@ -1,7 +1,8 @@
 import React from 'react'
-import { RouteObject } from 'react-router-dom'
+import { LoaderFunctionArgs, RouteObject } from 'react-router-dom'
 import { Dashboard, Group, TeacherGroup } from '@pages'
 import { Lesson } from '@components'
+import { GroupService } from '@services'
 
 const teacherRouter: RouteObject[] = [
 	{
@@ -9,7 +10,7 @@ const teacherRouter: RouteObject[] = [
 		element: <Dashboard />
 	},
 	{
-		path: 'groups/:id',
+		path: 'groups/:groupId',
 		element: <TeacherGroup />,
 		children: [
 			{
@@ -17,8 +18,11 @@ const teacherRouter: RouteObject[] = [
 				element: <Group />
 			},
 			{
-				path: 'lesson/:id',
-				element: <Lesson />
+				path: 'lesson/:lessonId',
+				element: <Lesson />,
+				loader: async ({ params }) => {
+					return await GroupService.getLessonAssessments(params.groupId, params.lessonId)
+				}
 			}
 		]
 	}

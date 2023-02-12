@@ -20,6 +20,13 @@ class GroupService {
 		const response = await api.get<Group.LessonsResponse>(this.baseUrl + '/' + id + '/lessons')
 		return response.data
 	}
+
+	static async getLessonAssessments(groupId: string | undefined, lessonId: string | undefined) {
+		const response = await api.get<Group.AssessmentsResponse>(
+			this.baseUrl + '/' + groupId + '/lessons/' + lessonId + '/assessments'
+		)
+		return response
+	}
 }
 
 export default GroupService
