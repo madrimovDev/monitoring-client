@@ -3,8 +3,7 @@ import { formatDate } from '@utils'
 import { Table } from 'antd'
 import React, { FC } from 'react'
 import { useQuery } from 'react-query'
-import { Link, useNavigate } from 'react-router-dom'
-import CustomLink from '../customs/CustomLink'
+import { Link } from 'react-router-dom'
 
 interface Props {
 	id: string | undefined
@@ -12,6 +11,7 @@ interface Props {
 
 const Lessons: FC<Props> = ({ id }) => {
 	const { data, isFetching } = useQuery('group/lessons', async () => await GroupService.getGroupLessons(id))
+	
 	if (!data) return null
 
 	return (

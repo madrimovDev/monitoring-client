@@ -20,7 +20,7 @@ class GroupsService {
 	}
 	static async addStudentToGroup(groupId: number, studentId: number) {
 		const response = await api.post<{ message: string }>(`${this.baseUrl}/${groupId}/students`, {
-			studentId
+			studentId: [studentId]
 		})
 		return response
 	}

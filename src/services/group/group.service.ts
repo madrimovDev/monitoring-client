@@ -31,17 +31,24 @@ class GroupService {
 		groupId: string | undefined,
 		lessonId: string | undefined,
 		data: {
-			studentId: number
+			id: number
 			score: number | string
 			comment: string
 		}
 	) {
 		const response = await api.patch<Group.AssessmentsResponse>(
-			this.baseUrl + '/' + groupId + '/lessons/' + lessonId + '/assessments/' + data.studentId,
+			this.baseUrl + '/' + groupId + '/lessons/' + lessonId + '/assessments/' + data.id,
 			{
-				score: data.score,
+				score: +data.score,
 				comment: data.comment
 			}
+		)
+		return response
+	}
+
+	static async getLessonAttechments(groupId: string | undefined, lessonId: string | undefined) {
+		const response = await api.get<Group.AttechmentsResponse>(
+			this.baseUrl + '/' + groupId + '/lessons/' + lessonId + '/attachments'
 		)
 		return response
 	}

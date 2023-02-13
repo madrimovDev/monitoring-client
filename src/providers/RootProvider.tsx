@@ -6,7 +6,14 @@ import { rootRouter } from '@routers'
 import { store } from '@store'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-const query = new QueryClient()
+const query = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+			refetchOnReconnect: false
+		}
+	}
+})
 
 const RootProvider: FC = () => {
 	return (

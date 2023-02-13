@@ -1,22 +1,59 @@
-import { GroupService } from '@services'
-import { Input, InputRef, Table } from 'antd'
-import React, { useRef, useState } from 'react'
-import { useMutation, useQuery } from 'react-query'
+import React, { useRef } from 'react'
+import { Button, Card, Input, InputRef, Table } from 'antd'
+import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
+import { GroupService } from '@services'
 
 const Lesson = () => {
 	const { groupId, lessonId } = useParams<{ groupId: string; lessonId: string }>()
 	const scoreRef = useRef<InputRef>(null)
 	const commentRef = useRef<InputRef>(null)
-	const [debounce, setDebounce] = useState(false)
-	const { data, isFetching } = useQuery('lesson/assets', {
+
+	const { data, isFetching, refetch } = useQuery('lesson/assets', {
 		queryFn: async () => {
 			return await GroupService.getLessonAssessments(groupId, lessonId)
 		}
 	})
 
+	const attetchments = useQuery('lesson/attech', {
+		queryFn: async () => {
+			return await GroupService.getLessonAttechments(groupId, lessonId)
+		}
+	})
+
+	const save = async (studentId: number) => {
+		if (scoreRef.current?.input && commentRef.current?.input) {
+			await GroupService.setLessonAssessments(groupId, lessonId, {
+				id: studentId,
+				comment: commentRef.current?.input?.value,
+				score: scoreRef.current?.input?.value
+			})
+			refetch()
+		}
+	}
+
 	return (
 		<div>
+			<Card
+				loading={attetchments.isFetching}
+				title='attachments'>
+				{attetchments.data?.data && (
+					<>
+						{attetchments.data.data.attachments.map(item => {
+							return (
+								<Card.Grid key={item}>
+									<Card.Meta title={item} />
+									<a
+										href={item}
+										download>
+										Download
+									</a>
+								</Card.Grid>
+							)
+						})}
+					</>
+				)}
+			</Card>
 			<Table
 				loading={isFetching}
 				dataSource={data?.data.assessments}
@@ -40,24 +77,41 @@ const Lesson = () => {
 						key: 'score',
 						title: 'Score',
 						render(_, { assessment }) {
-							return (
-								<Input
-									ref={scoreRef}
-									type='number'
-									defaultValue={assessment.score}
-								/>
-							)
+							if (assessment) {
+								return (
+									<Input
+										ref={scoreRef}
+										type='number'
+										defaultValue={assessment.score}
+									/>
+								)
+							}
 						}
 					},
 					{
 						key: 'comment',
 						title: 'Description',
 						render(_, { assessment }) {
+							if (assessment) {
+								return (
+									<Input
+										ref={commentRef}
+										defaultValue={assessment.comment}
+									/>
+								)
+							}
+						}
+					},
+					{
+						key: 'save',
+						title: 'Action',
+						render(_, { assessment }) {
 							return (
-								<Input
-									ref={commentRef}
-									defaultValue={assessment.comment}
-								/>
+								<Button
+									onClick={() => save(assessment.id)}
+									type='primary'>
+									Save
+								</Button>
 							)
 						}
 					}

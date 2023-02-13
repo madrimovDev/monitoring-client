@@ -53,9 +53,12 @@ declare namespace Group {
 	}
 
 	export interface Assessment {
+		id: number
 		score: number
 		comment: string
 		studentId: number
+		lessonId: number
+		groupId: number
 	}
 
 	export interface AssessmentStudent {
@@ -63,6 +66,11 @@ declare namespace Group {
 		name: string
 		assessment: Assessment
 	}
+
+	export interface AttechmentsResponse {
+		message: string;
+		attachments: string[];
+}
 
 	export interface AssessmentsResponse {
 		message: string
