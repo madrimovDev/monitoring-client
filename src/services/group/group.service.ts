@@ -27,6 +27,24 @@ class GroupService {
 		)
 		return response
 	}
+	static async setLessonAssessments(
+		groupId: string | undefined,
+		lessonId: string | undefined,
+		data: {
+			studentId: number
+			score: number | string
+			comment: string
+		}
+	) {
+		const response = await api.patch<Group.AssessmentsResponse>(
+			this.baseUrl + '/' + groupId + '/lessons/' + lessonId + '/assessments/' + data.studentId,
+			{
+				score: data.score,
+				comment: data.comment
+			}
+		)
+		return response
+	}
 }
 
 export default GroupService

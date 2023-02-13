@@ -1,12 +1,14 @@
 import { GroupService } from '@services'
-import { Table } from 'antd'
-import React from 'react'
+import { Input, InputRef, Table } from 'antd'
+import React, { useRef, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 
 const Lesson = () => {
 	const { groupId, lessonId } = useParams<{ groupId: string; lessonId: string }>()
-
+	const scoreRef = useRef<InputRef>(null)
+	const commentRef = useRef<InputRef>(null)
+	const [debounce, setDebounce] = useState(false)
 	const { data, isFetching } = useQuery('lesson/assets', {
 		queryFn: async () => {
 			return await GroupService.getLessonAssessments(groupId, lessonId)
@@ -38,7 +40,25 @@ const Lesson = () => {
 						key: 'score',
 						title: 'Score',
 						render(_, { assessment }) {
-							return assessment.score + 1
+							return (
+								<Input
+									ref={scoreRef}
+									type='number'
+									defaultValue={assessment.score}
+								/>
+							)
+						}
+					},
+					{
+						key: 'comment',
+						title: 'Description',
+						render(_, { assessment }) {
+							return (
+								<Input
+									ref={commentRef}
+									defaultValue={assessment.comment}
+								/>
+							)
 						}
 					}
 				]}
