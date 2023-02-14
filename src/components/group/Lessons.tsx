@@ -32,7 +32,7 @@ const Lessons: FC<Props> = ({ id }) => {
 					key: 'name',
 					title: 'Name',
 					render(_, record) {
-						return <Link to={'lesson/' + record.id}>{record.title}</Link>
+						return <Link to={'lesson/' + record.id + '/?title=' + record.title}>{record.title}</Link>
 					}
 				},
 				{

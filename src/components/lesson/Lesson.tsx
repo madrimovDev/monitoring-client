@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
-import { Button, Card, Input, InputRef, Table } from 'antd'
+import { Button, Card, Divider, Input, InputRef, Table } from 'antd'
 import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { GroupService } from '@services'
 
 const Lesson = () => {
@@ -9,6 +9,7 @@ const Lesson = () => {
 	const scoreRef = useRef<InputRef>(null)
 	const commentRef = useRef<InputRef>(null)
 
+	const [searchParams] = useSearchParams()
 	const { data, isFetching, refetch } = useQuery('lesson/assets', {
 		queryFn: async () => {
 			return await GroupService.getLessonAssessments(groupId, lessonId)
@@ -33,10 +34,10 @@ const Lesson = () => {
 	}
 
 	return (
-		<div>
+		<Card title={searchParams.get('title')}>
 			<Card
 				loading={attetchments.isFetching}
-				title='attachments'>
+				title='Attachments'>
 				{attetchments.data?.data && (
 					<>
 						{attetchments.data.data.attachments.map(item => {
@@ -54,6 +55,7 @@ const Lesson = () => {
 					</>
 				)}
 			</Card>
+			<Divider />
 			<Table
 				loading={isFetching}
 				dataSource={data?.data.assessments}
@@ -117,7 +119,7 @@ const Lesson = () => {
 					}
 				]}
 			/>
-		</div>
+		</Card>
 	)
 }
 
