@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
 import { Admins, Direction, Directions, Group, Groups, Statistics, Student, Students, Teacher, Teachers } from '@pages'
-import { DirectionsList, GroupsTable, StudentsTable, TeachersTable } from '@components'
+import { DirectionsList, GroupsTable, Lesson, StudentsTable, TeachersTable } from '@components'
 
 const adminRouter: RouteObject[] = [
 	{
@@ -49,8 +49,12 @@ const adminRouter: RouteObject[] = [
 				element: <GroupsTable />
 			},
 			{
-				path: ':id',
+				path: ':groupId',
 				element: <Group />
+			},
+			{
+				path: ':groupId/lesson/:lessonId',
+				element: <Lesson />
 			}
 		]
 	},

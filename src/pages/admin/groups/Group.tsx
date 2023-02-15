@@ -17,7 +17,6 @@ const Group = () => {
 			<Title level={4}>Students</Title>
 			<Students id={groupId} />
 			<Divider />
-			<Title level={4}>Lessons</Title>
 			<Lessons id={groupId} />
 		</Card>
 	)

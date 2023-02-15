@@ -3,9 +3,11 @@ import { Button, Card, Divider, Input, InputRef, Table } from 'antd'
 import { useQuery } from 'react-query'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { GroupService } from '@services'
+import { useAppSelector } from '@store'
 
 const Lesson = () => {
 	const { groupId, lessonId } = useParams<{ groupId: string; lessonId: string }>()
+	const permission = useAppSelector(state => state.user.data?.permissions[0])
 	const scoreRef = useRef<InputRef>(null)
 	const commentRef = useRef<InputRef>(null)
 
@@ -82,6 +84,7 @@ const Lesson = () => {
 							if (assessment) {
 								return (
 									<Input
+										readOnly={permission === 'admin'}
 										ref={scoreRef}
 										type='number'
 										defaultValue={assessment.score}
@@ -97,6 +100,7 @@ const Lesson = () => {
 							if (assessment) {
 								return (
 									<Input
+										readOnly={permission === 'admin'}
 										ref={commentRef}
 										defaultValue={assessment.comment}
 									/>
@@ -110,6 +114,7 @@ const Lesson = () => {
 						render(_, { assessment }) {
 							return (
 								<Button
+									disabled={permission === 'admin'}
 									onClick={() => save(assessment.id)}
 									type='primary'>
 									Save
