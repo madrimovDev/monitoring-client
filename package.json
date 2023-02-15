@@ -1,7 +1,7 @@
 {
   "name": "app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,13 +13,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.1",
-    "antd": "^5.1.6",
     "axios": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
-    "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0"
   },
   "devDependencies": {
