@@ -3,6 +3,7 @@
 	"endOfLine": "crlf",
 	"trailingComma": "none",
 	"singleQuote": true,
+	"quoteProps": "consistent",
 	"jsxSingleQuote": true,
 	"singleAttributePerLine": true,
 	"printWidth": 120,

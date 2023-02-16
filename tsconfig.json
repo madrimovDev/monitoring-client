@@ -27,7 +27,9 @@
 			"@store": ["./src/store"],
 			"@hooks": ["./src/hooks"],
 			"@utils": ["./src/utils"],
-			"@assets/*": ["./src/assets/*"]
+			"@assets/*": ["./src/assets/*"],
+			"@lib/*": ["./src/lib/*"],
+			"@config/*": ["./src/config/*"]
 		}
 	},
 	"include": ["src"],

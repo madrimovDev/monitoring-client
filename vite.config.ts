@@ -19,7 +19,9 @@ export default defineConfig({
 			'@store': pathResolver('store'),
 			'@hooks': pathResolver('hooks'),
 			'@utils': pathResolver('utils'),
-			'@assets': pathResolver('assets')
+			'@assets': pathResolver('assets'),
+			'@lib': pathResolver('lib'),
+			'@config': pathResolver('config')
 		}
 	}
 })
