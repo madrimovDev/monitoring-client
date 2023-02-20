@@ -22,7 +22,7 @@
 			"@providers": ["./src/providers"],
 			"@services": ["./src/services"],
 			"@routers": ["./src/routers"],
-			"@pages": ["./src/pages"],
+			"@pages/*": ["./src/pages/*"],
 			"@api": ["./src/api"],
 			"@store": ["./src/store"],
 			"@hooks": ["./src/hooks"],

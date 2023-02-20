@@ -10,5 +10,6 @@
     ".gitignore": false,
     "*.node.json": true,
     "**/*.lock": true
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
