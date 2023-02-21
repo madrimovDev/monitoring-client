@@ -1,2 +1,2 @@
-export * as theme from './config/theme.config'
-export * as api from './api'
+export { default as theme } from './config/theme.config'
+export { default as api } from './api'
