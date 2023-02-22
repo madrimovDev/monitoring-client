@@ -1,24 +1,24 @@
 import React from 'react'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, useColorModeValue,  } from '@chakra-ui/react'
 import Menu from './Menu'
 import menuItems from './module/menuItems'
 
 const Sidebar = () => {
+	const color = useColorModeValue('cyan.900', 'chakra-subtle-bg')
 	return (
 		<Flex
 			flexDir='column'
-			gap={3}
 			h='full'
-			bg='cyan.900'
-			shadow='xl'
-			p={4}>
+			bg={color}
+			shadow='xl'>
 			<Text
+				p={4}
 				color='white'
 				fontWeight='bold'
 				fontSize='xl'>
 				LMS
 			</Text>
-			<Menu dataSource={menuItems}/>
+			<Menu dataSource={menuItems} />
 		</Flex>
 	)
 }

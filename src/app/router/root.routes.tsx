@@ -13,7 +13,17 @@ const rootRouter = createBrowserRouter([
 			},
 			{
 				path: 'admin',
-				element: <RootPage />
+				element: <RootPage />,
+				children: [
+					{
+						index: true,
+						element: 'Index'
+					},
+					{
+						path: 'admins',
+						element: <>Children</>
+					}
+				]
 			}
 		]
 	},

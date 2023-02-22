@@ -9,7 +9,9 @@ interface Props {
 
 const Layout: React.FC<Props> = props => {
 	return (
-		<Flex h='100vh'>
+		<Flex
+			h='100vh'
+			overflow='hidden'>
 			<Box
 				h='full'
 				minW={200}>
@@ -17,9 +19,10 @@ const Layout: React.FC<Props> = props => {
 			</Box>
 			<Box
 				h='full'
-				w='full'>
+				w='full'
+				overflow={'auto'}>
 				{props.header}
-				{props.content}
+				<Box p={4}>{props.content}</Box>
 			</Box>
 		</Flex>
 	)

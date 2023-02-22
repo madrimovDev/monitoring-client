@@ -1,13 +1,14 @@
 import React from 'react'
-import { Header, Layout, Sidebar } from '@/widgets'
+import { Header, Layout, Profile, Sidebar } from '@/widgets'
+import { Outlet } from 'react-router-dom'
 
 const RootPage = () => {
 	return (
 		<>
 			<Layout
-				header={<Header />}
+				header={<Header profile={<Profile />} theme />}
 				sidebar={<Sidebar />}
-				content={'Content'}
+				content={<Outlet />}
 			/>
 		</>
 	)
