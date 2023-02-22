@@ -37,7 +37,7 @@ const MenuItem: FC<{ data: DataSource }> = ({ data }) => {
 				bg: 'whiteAlpha.100'
 			}}
 			as={RouterLink}
-			to={data.href}>
+			to={data.href ? '?page=' + data.href : ''}>
 			{data.icon}
 			{data.title}
 		</Link>

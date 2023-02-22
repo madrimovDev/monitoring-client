@@ -1,21 +1,17 @@
 import React from 'react'
 import { DataSource } from '../Menu'
-import HomeOutlined from '@ant-design/icons/HomeFilled'
-import DashboardFilled from '@ant-design/icons/DashboardFilled'
+import adminMenuItems from './adminMenuItems'
 
-const menuItems: DataSource[] = [
-	{
-		href: '',
-		title: 'Dashboard',
-		icon: <HomeOutlined style={{ fontSize: 'inherit' }} />,
-		key: '1'
-	},
-	{
-		href: 'admins',
-		title: 'Admins',
-		icon: <DashboardFilled style={{ fontSize: 'inherit' }} />,
-		key: '2'
+
+
+const useMenuItems = (): DataSource[] => {
+	const permissions = window.localStorage.getItem('permissions')
+	const permission = permissions ? JSON.parse(permissions)[0] : null
+
+	if (permission === 'admin') {
+		return adminMenuItems
 	}
-]
+	return []
+}
 
-export default menuItems
+export default useMenuItems

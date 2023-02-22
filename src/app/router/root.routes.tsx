@@ -20,7 +20,7 @@ const rootRouter = createBrowserRouter([
 						element: 'Index'
 					},
 					{
-						path: 'admins',
+						path: '?page',
 						element: <>Children</>
 					}
 				]
