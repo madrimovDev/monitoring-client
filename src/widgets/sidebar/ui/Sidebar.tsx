@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Menu from './Menu'
-import useMenuItems from './module/menuItems'
+import useMenuItems from '../module/menuItems'
 
 const Sidebar = () => {
 	const color = useColorModeValue('cyan.900', 'chakra-subtle-bg')
@@ -11,7 +11,8 @@ const Sidebar = () => {
 			flexDir='column'
 			h='full'
 			bg={color}
-			shadow='xl'>
+			shadow='2xl'
+		>
 			<Text
 				p={4}
 				color='white'

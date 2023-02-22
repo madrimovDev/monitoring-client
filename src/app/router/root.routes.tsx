@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { Login, RequiredAuth, RequiredPermission, RootPage } from '@/pages'
+import { Dashboard, Login, RequiredAuth, RequiredPermission, RootPage } from '@/pages'
 
 const rootRouter = createBrowserRouter([
 	{
@@ -17,10 +17,10 @@ const rootRouter = createBrowserRouter([
 				children: [
 					{
 						index: true,
-						element: 'Index'
+						element: <Dashboard />
 					},
 					{
-						path: '?page',
+						path: ':page',
 						element: <>Children</>
 					}
 				]

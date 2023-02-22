@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataSource } from '../Menu'
+import { DataSource } from '../ui/Menu'
 import adminMenuItems from './adminMenuItems'
 
 

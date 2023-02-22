@@ -17,7 +17,6 @@ interface Props {
 const MenuItem: FC<{ data: DataSource }> = ({ data }) => {
 	const path = useCurrentPage()
 	const color = useColorModeValue('cyan.800', 'whiteAlpha.200')
-	// const borderColor = useColorModeValue('cyan.400', 'blackAlpha.400')
 	return (
 		<Link
 			px={4}
@@ -37,7 +36,7 @@ const MenuItem: FC<{ data: DataSource }> = ({ data }) => {
 				bg: 'whiteAlpha.100'
 			}}
 			as={RouterLink}
-			to={data.href ? '?page=' + data.href : ''}>
+			to={data.href}>
 			{data.icon}
 			{data.title}
 		</Link>

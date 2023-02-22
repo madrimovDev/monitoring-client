@@ -7,13 +7,13 @@ const api = axios.create({
 
 api.interceptors.request.use(
 	async config => {
-		const token = window.localStorage.getItem('accessToken')
+		const token = window.localStorage.getItem('token')
 		config.headers = config.headers ?? {}
 
 		if (token) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			//@ts-ignore
-			config.headers.Authorization = token
+			config.headers.Authorization = JSON.parse(token)
 		}
 
 		return config

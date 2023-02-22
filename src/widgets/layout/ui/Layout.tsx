@@ -22,7 +22,7 @@ const Layout: React.FC<Props> = props => {
 				w='full'
 				overflow={'auto'}>
 				{props.header}
-				<Box p={4}>{props.content}</Box>
+				<Box p={10}>{props.content}</Box>
 			</Box>
 		</Flex>
 	)

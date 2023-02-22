@@ -23,7 +23,7 @@ const Header: FC<Props> = ({ profile, title, theme }) => {
 	const path = useCurrentPage()
 	return (
 		<Flex
-			bg='chakra-body-bg'
+			bg='chakra-subtle-bg'
 			py={3}
 			px={4}
 			align='center'

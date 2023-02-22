@@ -3,9 +3,9 @@ import FileZipOutlined from '@ant-design/icons/FileZipOutlined'
 import  GroupOutlined from '@ant-design/icons/GroupOutlined'
 import TeamOutlined from '@ant-design/icons/TeamOutlined'
 import UserOutlined from '@ant-design/icons/UserOutlined'
-import  DashboardOutlined  from '@ant-design/icons/DashboardFilled'
+import  DashboardOutlined  from '@ant-design/icons/DashboardOutlined'
 import BranchesOutlined from '@ant-design/icons/BranchesOutlined'
-import { DataSource } from '../Menu'
+import { DataSource } from '../ui/Menu'
 
 const adminMenuItems: DataSource[] = [
 	{
@@ -36,7 +36,7 @@ const adminMenuItems: DataSource[] = [
 		key: 'students',
 		title: 'Students',
 		icon: <TeamOutlined style={{ fontSize: 'inherit' }} />,
-		href: 'teachers'
+		href: 'students'
 	},
 	{
 		key: 'groups',
