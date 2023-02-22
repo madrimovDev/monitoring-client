@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { Dashboard, Login, RequiredAuth, RequiredPermission, RootPage } from '@/pages'
+import { Admins, Dashboard, Login, RequiredAuth, RequiredPermission, RootPage } from '@/pages'
 
 const rootRouter = createBrowserRouter([
 	{
@@ -20,8 +20,8 @@ const rootRouter = createBrowserRouter([
 						element: <Dashboard />
 					},
 					{
-						path: ':page',
-						element: <>Children</>
+						path: 'admins',
+						element: <Admins />
 					}
 				]
 			}
