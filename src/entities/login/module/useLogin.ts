@@ -1,4 +1,4 @@
-import { api } from '@/shared'
+import { api, sessionStorage } from '@/shared'
 import { useToast } from '@chakra-ui/react'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useMutation } from 'react-query'
@@ -15,7 +15,7 @@ const useLogin = () => {
 			},
 			onSuccess(data) {
 				Object.keys(data.data).forEach(d => {
-					window.localStorage.setItem(d, JSON.stringify(data.data[d as keyof User.User]))
+					sessionStorage.set(d, JSON.stringify(data.data[d as keyof User.User]))
 				})
 				navigate('/', {
 					replace: true

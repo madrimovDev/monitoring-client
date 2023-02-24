@@ -1,4 +1,5 @@
 import axios from 'axios'
+import sessionStorage from '../helpers/sessionStorage'
 
 const api = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
@@ -7,12 +8,12 @@ const api = axios.create({
 
 api.interceptors.request.use(
 	async config => {
-		const token = window.localStorage.getItem('token')
+		const token = sessionStorage.get('token')
 		config.headers = config.headers ?? {}
 
 		if (token) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			//@ts-ignore
+			// @ts-expect-error
 			config.headers.Authorization = JSON.parse(token)
 		}
 

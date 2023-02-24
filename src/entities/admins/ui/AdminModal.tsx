@@ -1,5 +1,14 @@
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from '@chakra-ui/react'
+import {
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay
+} from '@chakra-ui/react'
 import React, { FC } from 'react'
+import AdminForm from './AdminForm'
 
 interface Props {
 	open: boolean
@@ -8,7 +17,6 @@ interface Props {
 }
 
 const AdminModal: FC<Props> = ({ open, closeModal, data }) => {
-	
 	return (
 		<Modal
 			isOpen={open}
@@ -18,8 +26,9 @@ const AdminModal: FC<Props> = ({ open, closeModal, data }) => {
 				<ModalHeader>Admin</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
-					{data ? 'data bor' : 'data yoq'}
+					<AdminForm data={data} />
 				</ModalBody>
+				<ModalFooter />
 			</ModalContent>
 		</Modal>
 	)

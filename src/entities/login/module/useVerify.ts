@@ -1,9 +1,10 @@
+import { sessionStorage } from '@/shared'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const useVerify = () => {
-	const user = window.localStorage.getItem('username')
-	const permissions = window.localStorage.getItem('permissions')
+	const user = sessionStorage.get('username')
+	const permissions = sessionStorage.get('permissions')
 	const navigate = useNavigate()
 
 	useEffect(() => {

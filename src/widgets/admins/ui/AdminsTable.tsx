@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
 import { Table, TableCaption, TableContainer, Tbody, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
-import useGetAdmins from '../module/useGetAdmins'
 import TableRow from './TableRow'
 
 interface Props {
+	data: Admins.AdminsResponse | undefined
 	edit: (data: Admins.Admin) => void
 }
 
-const AdminsTable: FC<Props> = ({ edit }) => {
-	const { data } = useGetAdmins()
+const AdminsTable: FC<Props> = ({ edit, data }) => {
 	const bg = useColorModeValue('blackAlpha.50', 'whiteAlpha.50')
+	
 	return (
 		<TableContainer
 			p={4}
