@@ -15,7 +15,9 @@ const useLogin = () => {
 			},
 			onSuccess(data) {
 				Object.keys(data.data).forEach(d => {
-					sessionStorage.set(d, JSON.stringify(data.data[d as keyof User.User]))
+					console.log(data.data)
+					
+					sessionStorage.set(d, data.data[d as keyof User.User])
 				})
 				navigate('/', {
 					replace: true

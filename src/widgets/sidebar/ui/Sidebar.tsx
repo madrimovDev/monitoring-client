@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Menu from './Menu'
-import useMenuItems from '../module/menuItems'
+import useMenuItems from '../model/menuItems'
 
 const Sidebar = () => {
 	const color = useColorModeValue('cyan.900', 'chakra-subtle-bg')

@@ -1,23 +1,21 @@
+import React from 'react'
 import { Box, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react'
-import React, { FC } from 'react'
+import useAdminsModal from '../model/useAdminsModal'
 
-interface Props {
-	data: Admins.Admin | null
-}
-
-const AdminForm: FC<Props> = ({ data }) => {
+const AdminForm = () => {
+	const { modalData } = useAdminsModal()
 	return (
 		<Box as='form'>
 			<Stack spacing={4}>
 				<FormControl isRequired>
 					<FormLabel>Name</FormLabel>
-					<Input defaultValue={data?.name} />
+					<Input defaultValue={modalData?.name} />
 				</FormControl>
 				<FormControl isRequired>
 					<FormLabel>Username</FormLabel>
-					<Input defaultValue={data?.username} />
+					<Input defaultValue={modalData?.username} />
 				</FormControl>
-				<FormControl isRequired={!data}>
+				<FormControl isRequired={!modalData}>
 					<FormLabel>Password</FormLabel>
 					<Input />
 				</FormControl>

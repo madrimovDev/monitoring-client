@@ -13,7 +13,7 @@ api.interceptors.request.use(
 
 		if (token) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-expect-error
+			// @ts-ignore
 			config.headers.Authorization = JSON.parse(token)
 		}
 

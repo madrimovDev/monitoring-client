@@ -1,2 +1,2 @@
 export { Form as LoginForm } from './login'
-export { AdminModal } from './admins'
+export { AdminModal, useAdmins, AdminTable, useAdminsModal } from './admins'

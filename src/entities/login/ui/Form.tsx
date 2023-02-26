@@ -11,9 +11,9 @@ import {
 	Input,
 	Stack
 } from '@chakra-ui/react'
-import useLogin from '../module/useLogin'
+import useLogin from '../model/useLogin'
 import FormPassord from './FormPassord'
-import useVerify from '../module/useVerify'
+import useVerify from '../model/useVerify'
 
 const Form = () => {
 	const { mutate, isLoading } = useLogin()
