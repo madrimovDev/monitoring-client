@@ -13,6 +13,10 @@ const api = {
 	async updateAdmin(admin: Admins.NewAdmin, id: number) {
 		const response = await base.put<{ admin: Admins.Admin; message: string }>(`${this.baseUrl}/${id}`, admin)
 		return response.data
+	},
+	async deleteAdmin(id: number) {
+		const response = await base.delete<{ admin: Admins.Admin; message: string }>(`${this.baseUrl}/${id}`)
+		return response.data
 	}
 }
 

@@ -72,9 +72,33 @@ const adminActions = () => {
 			}
 		})
 
+	const deleteAdmin = () =>
+		useMutation<
+			{
+				admin: Admins.Admin
+				message: string
+			},
+			AxiosError,
+			number,
+			unknown
+		>('admins/delete', {
+			mutationFn: async id => {
+				const response = await api.deleteAdmin(id)
+				return response
+			},
+			onSuccess(data) {
+				admin.deleteAdmin(data.admin)
+				toast({
+					title: data.message,
+					description: data.admin.name
+				})
+			}
+		})
+
 	return {
 		createAdmin,
-		updateAdmin
+		updateAdmin,
+		deleteAdmin
 	}
 }
 
