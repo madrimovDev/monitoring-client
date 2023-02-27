@@ -4,7 +4,7 @@ import useAdminsModal from '../model/useAdminsModal'
 import adminActions from '../model/adminActions'
 
 const AdminForm = () => {
-	const { modalData } = useAdminsModal()
+	const { modalData, closeModal } = useAdminsModal()
 	const { createAdmin, updateAdmin } = adminActions()
 
 	const create = createAdmin()
@@ -20,6 +20,7 @@ const AdminForm = () => {
 			create.mutate(data as unknown as Admins.NewAdmin)
 		} else {
 			update.mutate({ id: modalData.id, ...(data as unknown as Admins.NewAdmin) })
+			closeModal()
 		}
 	}
 

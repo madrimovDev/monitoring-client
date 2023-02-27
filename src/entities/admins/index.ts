@@ -1,5 +1,6 @@
 export { default as AdminModal } from './ui/AdminModal'
 export { default as AdminTable } from './ui/AdminTable'
+export { default as AdminHeader } from './ui/AdminHeader'
 export { default as useAdmins } from './model/useAdmins'
 export { default as useAdminsModal } from './model/useAdminsModal'
 export { default as adminApi } from './model/api'

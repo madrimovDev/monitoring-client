@@ -34,7 +34,6 @@ const AdminTable = () => {
 	const del = deleteAdmin()
 	return (
 		<TableContainer
-			maxW='container.xl'
 			mx='auto'
 			borderWidth='1px'
 			borderColor='chakra-border-color'

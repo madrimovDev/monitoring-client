@@ -14,6 +14,7 @@ const useAdminsModal = create<AdminsModal>(set => {
 		closeModal: () =>
 			set(state => ({
 				...state,
+				modalData: undefined,
 				open: false
 			})),
 		openWithData: admin =>
