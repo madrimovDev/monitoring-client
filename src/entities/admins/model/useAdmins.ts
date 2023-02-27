@@ -6,6 +6,7 @@ type AdminsState = Immutable<{
 	admins: Admins.Admin[]
 	setAllAdmins: (admins: Admins.Admin[]) => void
 	createAdmin: (admin: Admins.Admin) => void
+	updateAdmin: (admin: Admins.Admin) => void
 }>
 
 const useAdmins = create<AdminsState>()(
@@ -18,7 +19,12 @@ const useAdmins = create<AdminsState>()(
 		setAllAdmins: admins =>
 			set(state => {
 				state.admins = admins
+			}),
+		updateAdmin: admin => {
+			set(state => {
+				state.admins = state.admins.map(a => (a.id === admin.id ? admin : a))
 			})
+		}
 	}))
 )
 

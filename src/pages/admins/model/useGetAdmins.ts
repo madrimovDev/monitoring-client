@@ -1,11 +1,9 @@
 import { AxiosError } from 'axios'
 import { useToast } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
-import { useAdmins } from '@/entities'
-import { api, sessionStorage } from '@/shared'
+import { adminApi, useAdmins } from '@/entities'
 
 const useGetAdmins = () => {
-	const orgId = sessionStorage.get('organizationId')
 	const { setAllAdmins } = useAdmins()
 	
 	const toast = useToast({
@@ -14,8 +12,8 @@ const useGetAdmins = () => {
 
 	return useQuery('admins/get', {
 		queryFn: async () => {
-			const response = await api.get<Admins.AdminsResponse>(`/organizations/${orgId}/admins`)
-			return response.data
+			const response = await adminApi.getAllAdmins()
+			return response
 		},
 		onSuccess(data) {
 			setAllAdmins(data.admins)
@@ -30,4 +28,5 @@ const useGetAdmins = () => {
 		}
 	})
 }
+
 export default useGetAdmins

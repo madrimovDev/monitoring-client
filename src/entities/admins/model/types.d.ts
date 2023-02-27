@@ -7,6 +7,12 @@ declare namespace Admins {
 		permissions: string[]
 	}
 
+	export interface NewAdmin {
+		name: string,
+		username: string,
+		password?: string
+	}
+
 	export interface AdminsResponse {
 		message: string
 		admins: Admin[]
