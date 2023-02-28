@@ -10,7 +10,7 @@ type AdminsState = Immutable<{
 	deleteAdmin: (admin: Admins.Admin) => void
 }>
 
-const useAdmins = create<AdminsState>()(
+const useAdminsStore = create<AdminsState>()(
 	immer(set => ({
 		admins: [],
 		createAdmin: admin =>
@@ -32,4 +32,4 @@ const useAdmins = create<AdminsState>()(
 	}))
 )
 
-export default useAdmins
+export default useAdminsStore

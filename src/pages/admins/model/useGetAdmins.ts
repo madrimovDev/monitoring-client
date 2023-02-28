@@ -1,10 +1,10 @@
 import { AxiosError } from 'axios'
 import { useToast } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
-import { adminApi, useAdmins } from '@/entities'
+import { adminApi, useAdminsStore } from '@/entities'
 
 const useGetAdmins = () => {
-	const { setAllAdmins } = useAdmins()
+	const { setAllAdmins } = useAdminsStore()
 	
 	const toast = useToast({
 		position: 'top-right'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table, TableContainer, Thead, Tr, Th, Tbody, Td, TableCaption, Button, HStack } from '@chakra-ui/react'
-import useAdmins from '../model/useAdmins'
+import useAdminsStore from '../model/useAdminsStore'
 import useAdminsModal from '../model/useAdminsModal'
 import adminActions from '../model/adminActions'
 
@@ -28,7 +28,7 @@ const TableHead = () => {
 }
 
 const AdminTable = () => {
-	const { admins } = useAdmins()
+	const { admins } = useAdminsStore()
 	const { openWithData } = useAdminsModal()
 	const { deleteAdmin } = adminActions()
 	const del = deleteAdmin()

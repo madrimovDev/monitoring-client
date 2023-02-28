@@ -2,10 +2,10 @@ import { useToast } from '@chakra-ui/react'
 import { AxiosError } from 'axios'
 import { useMutation } from 'react-query'
 import api from './api'
-import useAdmins from './useAdmins'
+import useAdminsStore from './useAdminsStore'
 
 const adminActions = () => {
-	const admin = useAdmins()
+	const admin = useAdminsStore()
 	const toast = useToast({
 		position: 'top-right'
 	})
