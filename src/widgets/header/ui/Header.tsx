@@ -29,6 +29,7 @@ const Header: FC<Props> = ({ profile, title, theme }) => {
 			align='center'
 			shadow='md'
 			pos='sticky'
+			zIndex={111}
 			top={0}>
 			<Text
 				fontSize='xl'

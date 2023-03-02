@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button, HStack, TableContainer } from '@chakra-ui/react'
-import useDirectionsStore from '../model/useDirectionStore'
+import { Button, HStack, TableContainer, Link } from '@chakra-ui/react'
+import { Link as RLink } from 'react-router-dom'
 import { Table } from '@/shared'
+import useDirectionsStore from '../model/useDirectionStore'
 import useDirectionsModal from '../model/useDirectionsModal'
 import directionsActions from '../model/directionsActions'
 
@@ -27,7 +28,14 @@ const DirectionsList = () => {
 						key: 'name',
 						title: 'Name',
 						render(_, r) {
-							return r.name
+							return (
+								<Link
+									as={RLink}
+									color='blue.500'
+									to={String(r.id)}>
+									{r.name}
+								</Link>
+							)
 						}
 					},
 					{

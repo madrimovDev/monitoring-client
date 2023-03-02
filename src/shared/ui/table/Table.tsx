@@ -4,7 +4,7 @@ import { Table as ChTable, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/rea
 import { ColumnsType } from 'rc-table/lib/interface'
 
 interface TableProp<T> {
-	dataSource: T[]
+	dataSource: T[] | undefined
 	columns: ColumnsType<T>
 	caption: string
 }
@@ -13,8 +13,12 @@ interface TableProp<T> {
 type TableType = <RecordType extends Record<string, any>>(tableProps: TableProp<RecordType>) => JSX.Element
 
 const Theading: FC<PropsWithChildren> = ({ children }) => {
+	const hasNum = (children as Array<unknown>)[1] === '#'
+	const hasEmpty = (children as Array<unknown>)[1] === undefined
+
 	return (
 		<Th
+			width={hasNum && !hasEmpty ? 15 : !hasNum && hasEmpty ? 40 : undefined}
 			borderLeftWidth={1}
 			borderRightWidth={1}
 			borderLeftColor='chakra-border-color'
