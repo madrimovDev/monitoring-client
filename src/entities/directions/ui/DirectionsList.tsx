@@ -1,37 +1,58 @@
 import React from 'react'
-import { Button, Stack, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Button, HStack, TableContainer } from '@chakra-ui/react'
 import useDirectionsStore from '../model/useDirectionStore'
+import { Table } from '@/shared'
 
 const DirectionsList = () => {
 	const directions = useDirectionsStore(state => state.directions)
 	return (
 		<TableContainer>
-			<Table>
-				<TableCaption>Directions List</TableCaption>
-				<Thead>
-					<Tr>
-						<Th>#</Th>
-						<Th>Name</Th>
-						<Th>Status</Th>
-						<Th></Th>
-					</Tr>
-				</Thead>
-				<Tbody>
-					{directions.map((dir, index) => {
-						return (
-							<Tr key={dir.id}>
-								<Td>{index + 1}</Td>
-								<Td>{dir.name}</Td>
-								<Td>{dir.status}</Td>
-								<Stack as={Td}>
-									<Button>Edit</Button>
-									<Button>Delete</Button>
-								</Stack>
-							</Tr>
-						)
-					})}
-				</Tbody>
-			</Table>
+			<Table
+				caption='Directions List'
+				dataSource={directions.slice()}
+				columns={[
+					{
+						key: '#',
+						title: '#',
+						render(_, d, i) {
+							return i + 1
+						}
+					},
+					{
+						key: 'name',
+						title: 'Name',
+						render(_, r) {
+							return r.name
+						}
+					},
+					{
+						key: 'status',
+						title: 'Status',
+						render: (_, r) => {
+							return r.status
+						}
+					},
+					{
+						key: 'actions',
+						render: () => {
+							return (
+								<HStack>
+									<Button
+										size='xs'
+										colorScheme='green'>
+										Edit
+									</Button>
+									<Button
+										size='xs'
+										colorScheme='red'>
+										Delete
+									</Button>
+								</HStack>
+							)
+						}
+					}
+				]}
+			/>
 		</TableContainer>
 	)
 }
