@@ -2,9 +2,14 @@ import React from 'react'
 import { Button, HStack, TableContainer } from '@chakra-ui/react'
 import useDirectionsStore from '../model/useDirectionStore'
 import { Table } from '@/shared'
+import useDirectionsModal from '../model/useDirectionsModal'
+import directionsActions from '../model/directionsActions'
 
 const DirectionsList = () => {
 	const directions = useDirectionsStore(state => state.directions)
+	const openWithData = useDirectionsModal(state => state.openWithData)
+	const { deleteDirection } = directionsActions()
+	const del = deleteDirection()
 	return (
 		<TableContainer>
 			<Table
@@ -34,17 +39,19 @@ const DirectionsList = () => {
 					},
 					{
 						key: 'actions',
-						render: () => {
+						render: (_, r) => {
 							return (
 								<HStack>
 									<Button
 										size='xs'
-										colorScheme='green'>
+										colorScheme='green'
+										onClick={() => openWithData(r)}>
 										Edit
 									</Button>
 									<Button
 										size='xs'
-										colorScheme='red'>
+										colorScheme='red'
+										onClick={() => del.mutate(r.id)}>
 										Delete
 									</Button>
 								</HStack>

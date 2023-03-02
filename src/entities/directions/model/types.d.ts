@@ -5,6 +5,11 @@ declare namespace Directions {
 		status: string
 	}
 
+	export interface DirectionResponse {
+		direction: Direction
+		message: string
+	}
+	
 	export interface DirectionsResponse {
 		message: string
 		directions: Direction[]
