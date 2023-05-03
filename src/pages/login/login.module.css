@@ -1,0 +1,9 @@
+.form {
+  width: 300px;
+}
+
+.login{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
