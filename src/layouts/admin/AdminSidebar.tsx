@@ -1,7 +1,7 @@
 import {Divider, Layout, Menu, type MenuProps} from 'antd';
 import styles from './admin.module.css';
-import {Link, useLocation, useNavigate, useParams} from 'react-router-dom';
-import {useLayoutEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {useState} from 'react';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {type Role, getMenuItems} from '../lib/getMenuItems';
 
