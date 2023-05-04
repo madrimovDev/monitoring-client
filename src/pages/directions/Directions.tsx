@@ -1,7 +1,7 @@
 import {DirectionsTable} from '@/components/directions';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {getAllDirections} from '@/store/reducers/directions';
-import {Col, Row} from 'antd';
+import {Button, Col, Row, Space} from 'antd';
 import {useEffect} from 'react';
 
 export default function Directions(): JSX.Element {
@@ -10,8 +10,11 @@ export default function Directions(): JSX.Element {
     void dispatch(getAllDirections());
   }, []);
   return (
-    <Row>
+    <Row className='p-4'>
       <Col offset={6} span={12}>
+        <Space className='justify-end w-full my-10'>
+          <Button type='primary'>Create Direction</Button>
+        </Space>
         <DirectionsTable />
       </Col>
     </Row>
