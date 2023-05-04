@@ -12,7 +12,8 @@ import {
 import storage from 'redux-persist/lib/storage';
 import {authReducer} from './reducers/auth/authReducer';
 import {adminsReducers} from './reducers/admins/adminsReducer';
-import { adminsDrawerReducer } from './reducers/admins/adminsDrawerReducer';
+import {adminsDrawerReducer} from './reducers/admins/adminsDrawerReducer';
+import {directionsReducer} from './reducers/directions/directionsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -24,7 +25,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   admins: adminsReducers,
-  adminsDrawer: adminsDrawerReducer
+  adminsDrawer: adminsDrawerReducer,
+  directions: directionsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
