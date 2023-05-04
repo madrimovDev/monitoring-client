@@ -1,16 +1,16 @@
 import {Layout} from 'antd';
-import styles from './admin.module.css';
 import AdminSidebar from './AdminSidebar';
 import {Outlet} from 'react-router-dom';
+import AdminHeader from './AdminHeader';
 
-const {Header, Content} = Layout;
+const {Content} = Layout;
 
 export default function AdminLayout(): JSX.Element {
   return (
-    <Layout className={styles.layout}>
+    <Layout className="h-screen">
       <AdminSidebar />
       <Layout>
-        <Header className={styles.header} />
+        <AdminHeader />
         <Content>
           <Outlet />
         </Content>

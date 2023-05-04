@@ -1,4 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
+import { getAllAdmins } from './adminsActions';
 
 interface InitialState {
   loading: boolean;
@@ -11,10 +12,16 @@ const initialState: InitialState = {
 };
 
 export const adminsReducers = createReducer(initialState, (builder) => {
-  builder.addMatcher(isPending(), (state) => {
+  builder.addCase(getAllAdmins.fulfilled, (_, action) => {
+    return {
+      loading: false,
+      admins: action.payload.admins
+    }
+  })
+  builder.addMatcher(isPending(getAllAdmins), (state) => {
     state.loading = true;
   });
-  builder.addMatcher(isRejected(), (state) => {
+  builder.addMatcher(isRejected(getAllAdmins), (state) => {
     state.loading = false;
   });
 });

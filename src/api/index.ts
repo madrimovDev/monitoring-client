@@ -1,5 +1,17 @@
 import axios from 'axios';
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });
+
+api.interceptors.request.use((config) => {
+  const user = window.localStorage.getItem('user')
+  const data = user !== null ? (JSON.parse(user) as Auth.User) : null; 
+
+   if (data !== null) {
+     config.headers.Authorization = `${data.token}`;
+   }
+  return config
+})
+
+export {api}

@@ -13,6 +13,8 @@ const RedirectPermissions = lazy(
   async () => await import('../layouts/redirect/RedirectPermissions'),
 );
 
+const Admins = lazy(async () => await import('../pages/admin/Admins'));
+
 export const routes = createBrowserRouter([
   {
     path: '',
@@ -29,6 +31,10 @@ export const routes = createBrowserRouter([
           {
             path: 'dashboard',
             element: <>Element</>,
+          },
+          {
+            path: 'admins',
+            element: <Suspense component={<Admins />} />,
           },
           {
             path: '*',
