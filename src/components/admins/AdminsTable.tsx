@@ -1,9 +1,15 @@
 import {useAppSelector} from '@/store/hooks/useAppSelector';
+import {openAdminDrawerWithData} from '@/store/reducers/admins';
 import {DeleteFilled, EyeFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
+import {useDispatch} from 'react-redux';
 
 export default function AdminsTable(): JSX.Element {
   const {loading, admins} = useAppSelector((state) => state.admins);
+  const dispatch = useDispatch();
+  const onEdit = (value: Admins.Admin): void => {
+    void dispatch(openAdminDrawerWithData({data: value}));
+  };
   return (
     <Table
       loading={loading}
@@ -42,10 +48,16 @@ export default function AdminsTable(): JSX.Element {
         {
           key: 'actions',
           title: '',
-          render(_) {
+          render(_, value) {
             return (
               <Space>
-                <Button size='middle' icon={<EyeFilled />} />
+                <Button
+                  onClick={() => {
+                    onEdit(value);
+                  }}
+                  size='middle'
+                  icon={<EyeFilled />}
+                />
                 <Button danger size='middle' icon={<DeleteFilled />} />
               </Space>
             );

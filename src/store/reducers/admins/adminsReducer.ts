@@ -1,5 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {createAdmin, getAllAdmins} from './adminsActions';
+import {createAdmin, getAllAdmins, updateAdmin} from './adminsActions';
 
 interface InitialState {
   loading: boolean;
@@ -22,10 +22,23 @@ export const adminsReducers = createReducer(initialState, (builder) => {
     state.loading = false;
     state.admins?.push(action.payload.admin);
   });
-  builder.addMatcher(isPending(getAllAdmins, createAdmin), (state) => {
-    state.loading = true;
-  });
-  builder.addMatcher(isRejected(getAllAdmins, createAdmin), (state) => {
+  builder.addCase(updateAdmin.fulfilled, (state, action) => {
     state.loading = false;
+    state.admins =
+      state.admins?.map((admin) =>
+        admin.id === action.payload.admin.id ? action.payload.admin : admin,
+      ) ?? [];
   });
+  builder.addMatcher(
+    isPending(getAllAdmins, createAdmin, updateAdmin),
+    (state) => {
+      state.loading = true;
+    },
+  );
+  builder.addMatcher(
+    isRejected(getAllAdmins, createAdmin, updateAdmin),
+    (state) => {
+      state.loading = false;
+    },
+  );
 });

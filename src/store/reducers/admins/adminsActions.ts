@@ -40,3 +40,25 @@ export const createAdmin = createAsyncThunk(
     }
   },
 );
+
+export const updateAdmin = createAsyncThunk(
+  'admins/update',
+  async (
+    {admin, id}: {admin: Admins.CreateAdmin; id: number},
+    {rejectWithValue},
+  ) => {
+    try {
+      const orgID = await getUserDataFromLocalStorage('organizationId');
+      if (orgID === null) throw new Error('organization id not found');
+
+      const response = await api.put<Admins.AdminResponse>(
+        `organizations/${orgID}/admins/${id}`,
+        admin,
+      );
+      return response.data;
+    } catch (e) {
+      const error = e as AxiosError<{message: string}>;
+      return rejectWithValue(error.response?.data);
+    }
+  },
+);
