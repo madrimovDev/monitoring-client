@@ -1,4 +1,5 @@
 import {AdminsTable} from '@/components/admins';
+import AdminsDrawer from '@/components/admins/AdminsDrawer';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {getAllAdmins} from '@/store/reducers/admins';
 import {Col, Row} from 'antd';
@@ -16,6 +17,7 @@ export default function Admins(): JSX.Element {
       <Col offset={6} span={12}>
         <AdminsTable />
       </Col>
+      <AdminsDrawer />
     </Row>
   );
 }

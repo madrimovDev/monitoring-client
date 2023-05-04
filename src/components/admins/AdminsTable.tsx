@@ -6,7 +6,6 @@ export default function AdminsTable(): JSX.Element {
   const {loading, admins} = useAppSelector((state) => state.admins);
   return (
     <Table
-      className=''
       loading={loading}
       bordered
       dataSource={admins ?? []}
