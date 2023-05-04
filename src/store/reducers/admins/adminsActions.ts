@@ -62,3 +62,21 @@ export const updateAdmin = createAsyncThunk(
     }
   },
 );
+
+export const deleteAdmin = createAsyncThunk(
+  'admins/delete',
+  async (id: number, {rejectWithValue}) => {
+    try {
+      const orgID = await getUserDataFromLocalStorage('organizationId');
+      if (orgID === null) throw new Error('organization id not found');
+
+      const response = await api.delete<Admins.AdminResponse>(
+        `organizations/${orgID}/admins/${id}`,
+      );
+      return response.data;
+    } catch (e) {
+      const error = e as AxiosError<{message: string}>;
+      return rejectWithValue(error.response?.data);
+    }
+  },
+);

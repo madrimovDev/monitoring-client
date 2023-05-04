@@ -1,14 +1,17 @@
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {openAdminDrawerWithData} from '@/store/reducers/admins';
+import {deleteAdmin, openAdminDrawerWithData} from '@/store/reducers/admins';
 import {DeleteFilled, EyeFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
-import {useDispatch} from 'react-redux';
 
 export default function AdminsTable(): JSX.Element {
   const {loading, admins} = useAppSelector((state) => state.admins);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const onEdit = (value: Admins.Admin): void => {
     void dispatch(openAdminDrawerWithData({data: value}));
+  };
+  const onDelete = (value: Admins.Admin): void => {
+    void dispatch(deleteAdmin(value.id));
   };
   return (
     <Table
@@ -16,6 +19,7 @@ export default function AdminsTable(): JSX.Element {
       bordered
       dataSource={admins ?? []}
       pagination={false}
+      rowKey={(item) => item.id}
       columns={[
         {
           key: 'index',
@@ -58,7 +62,14 @@ export default function AdminsTable(): JSX.Element {
                   size='middle'
                   icon={<EyeFilled />}
                 />
-                <Button danger size='middle' icon={<DeleteFilled />} />
+                <Button
+                  onClick={() => {
+                    onDelete(value);
+                  }}
+                  danger
+                  size='middle'
+                  icon={<DeleteFilled />}
+                />
               </Space>
             );
           },
