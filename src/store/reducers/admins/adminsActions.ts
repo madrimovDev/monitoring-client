@@ -2,6 +2,8 @@ import {api} from '@/api';
 import {getUserDataFromLocalStorage} from '@/lib';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import type {AxiosError} from 'axios';
+import {closeAdminDrawer} from '.';
+import { showNotification } from '@/lib/showNotification';
 
 export const getAllAdmins = createAsyncThunk(
   'admins/getAll',
@@ -24,7 +26,7 @@ export const getAllAdmins = createAsyncThunk(
 
 export const createAdmin = createAsyncThunk(
   'admins/create',
-  async (admin: Admins.CreateAdmin, {rejectWithValue}) => {
+  async (admin: Admins.CreateAdmin, {rejectWithValue, dispatch}) => {
     try {
       const orgID = await getUserDataFromLocalStorage('organizationId');
       if (orgID === null) throw new Error('organization id not found');
@@ -33,9 +35,12 @@ export const createAdmin = createAsyncThunk(
         `organizations/${orgID}/admins`,
         admin,
       );
+      showNotification('info', response.data.message);
+      dispatch(closeAdminDrawer());
       return response.data;
     } catch (e) {
       const error = e as AxiosError<{message: string}>;
+      showNotification('error', error.response?.data.message ?? '');
       return rejectWithValue(error.response?.data);
     }
   },
@@ -45,7 +50,7 @@ export const updateAdmin = createAsyncThunk(
   'admins/update',
   async (
     {admin, id}: {admin: Admins.CreateAdmin; id: number},
-    {rejectWithValue},
+    {rejectWithValue, dispatch},
   ) => {
     try {
       const orgID = await getUserDataFromLocalStorage('organizationId');
@@ -55,9 +60,12 @@ export const updateAdmin = createAsyncThunk(
         `organizations/${orgID}/admins/${id}`,
         admin,
       );
+      showNotification('info', response.data.message);
+      dispatch(closeAdminDrawer());
       return response.data;
     } catch (e) {
       const error = e as AxiosError<{message: string}>;
+      showNotification('error', error.response?.data.message ?? '');
       return rejectWithValue(error.response?.data);
     }
   },
@@ -65,7 +73,7 @@ export const updateAdmin = createAsyncThunk(
 
 export const deleteAdmin = createAsyncThunk(
   'admins/delete',
-  async (id: number, {rejectWithValue}) => {
+  async (id: number, {rejectWithValue, dispatch}) => {
     try {
       const orgID = await getUserDataFromLocalStorage('organizationId');
       if (orgID === null) throw new Error('organization id not found');
@@ -73,9 +81,12 @@ export const deleteAdmin = createAsyncThunk(
       const response = await api.delete<Admins.AdminResponse>(
         `organizations/${orgID}/admins/${id}`,
       );
+      showNotification('info', response.data.message);
+      dispatch(closeAdminDrawer());
       return response.data;
     } catch (e) {
       const error = e as AxiosError<{message: string}>;
+      showNotification('error', error.response?.data.message ?? '');
       return rejectWithValue(error.response?.data);
     }
   },
