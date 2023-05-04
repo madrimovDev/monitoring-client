@@ -14,6 +14,9 @@ const RedirectPermissions = lazy(
 );
 
 const Admins = lazy(async () => await import('../pages/admin/Admins'));
+const Directions = lazy(
+  async () => await import('../pages/directions/Directions'),
+);
 
 export const routes = createBrowserRouter([
   {
@@ -35,6 +38,10 @@ export const routes = createBrowserRouter([
           {
             path: 'admins',
             element: <Suspense component={<Admins />} />,
+          },
+          {
+            path: 'directions',
+            element: <Suspense component={<Directions />} />,
           },
           {
             path: '*',

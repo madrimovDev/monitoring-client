@@ -4,6 +4,7 @@ import {useState} from 'react';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {type Role, getMenuItems} from '../lib/getMenuItems';
 import {getPathItem} from '../lib/getPathItem';
+import {capitalizeFirstLetter} from '@/lib';
 
 const Logo = ({collapsed}: {collapsed: boolean}): JSX.Element => {
   return (
@@ -43,7 +44,9 @@ export default function AdminSidebar(): JSX.Element {
         items={menuItems.map((item) => {
           const mItem: MenuItem = {
             key: item.value,
-            label: <Link to={item.value}>{item.value}</Link>,
+            label: (
+              <Link to={item.value}>{capitalizeFirstLetter(item.value)}</Link>
+            ),
             icon: item.icon,
           };
           return mItem;

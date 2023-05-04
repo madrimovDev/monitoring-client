@@ -1,4 +1,12 @@
-import {ApartmentOutlined, DashboardOutlined, FileZipOutlined, GroupOutlined, SafetyOutlined, TeamOutlined} from '@ant-design/icons';
+import {
+  ApartmentOutlined,
+  DashboardOutlined,
+  FileZipOutlined,
+  FlagOutlined,
+  GroupOutlined,
+  SafetyOutlined,
+  TeamOutlined,
+} from '@ant-design/icons';
 import type {ReactNode} from 'react';
 export type Role = 'admin' | 'teacher' | 'students' | 'supervisor';
 
@@ -18,6 +26,11 @@ const menuItems: MenuItem[] = [
     role: ['admin', 'supervisor'],
     value: 'admins',
     icon: <SafetyOutlined />,
+  },
+  {
+    role: ['admin', 'supervisor'],
+    value: 'directions',
+    icon: <FlagOutlined />,
   },
   {
     role: ['admin', 'supervisor', 'teacher'],
