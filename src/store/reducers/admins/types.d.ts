@@ -6,6 +6,11 @@ declare namespace Admins {
 
   }
 
+  export interface AdminResponse {
+    message: string;
+    admin: Admin;
+  }
+
   export interface Admin {
     id: number;
     userId: number;

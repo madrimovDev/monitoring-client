@@ -1,4 +1,5 @@
 import {api} from '@/api';
+import {getUserDataFromLocalStorage} from '@/lib';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import type {AxiosError} from 'axios';
 
@@ -6,10 +7,31 @@ export const getAllAdmins = createAsyncThunk(
   'admins/getAll',
   async (_, {rejectWithValue}) => {
     try {
-      const user = window.localStorage.getItem('user');
-      const data = (await JSON.parse(user ?? '')) as Auth.User;
+      const orgID = await getUserDataFromLocalStorage('organizationId');
+
+      if (orgID === null) throw new Error('organization id not found');
+
       const response = await api.get<Admins.AdminsResponse>(
-        `organizations/${data.organizationId}/admins`,
+        `organizations/${orgID}/admins`,
+      );
+      return response.data;
+    } catch (e) {
+      const error = e as AxiosError<{message: string}>;
+      return rejectWithValue(error.response?.data);
+    }
+  },
+);
+
+export const createAdmin = createAsyncThunk(
+  'admins/create',
+  async (admin: Admins.CreateAdmin, {rejectWithValue}) => {
+    try {
+      const orgID = await getUserDataFromLocalStorage('organizationId');
+      if (orgID === null) throw new Error('organization id not found');
+
+      const response = await api.post<Admins.AdminResponse>(
+        `organizations/${orgID}/admins`,
+        admin,
       );
       return response.data;
     } catch (e) {
