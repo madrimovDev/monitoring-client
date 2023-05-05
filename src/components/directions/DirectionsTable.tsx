@@ -1,9 +1,24 @@
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
+import {
+  deleteDirection,
+  openDirectionModalWithData,
+} from '@/store/reducers/directions';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
 
 export default function DirectionsTable(): JSX.Element {
   const {directions, loading} = useAppSelector((state) => state.directions);
+  const dispatch = useAppDispatch();
+
+  const onEdit = (record: Directions.Direction): void => {
+    void dispatch(openDirectionModalWithData({data: record}));
+  };
+
+  const onDelete = (record: Directions.Direction): void => {
+    void dispatch(deleteDirection(record.id));
+  };
+
   return (
     <Table
       loading={loading}
@@ -39,11 +54,22 @@ export default function DirectionsTable(): JSX.Element {
         {
           key: 'actions',
           title: '',
-          render() {
+          render(_, record) {
             return (
               <Space>
-                <Button icon={<EditFilled />} />
-                <Button danger icon={<DeleteFilled />} />
+                <Button
+                  onClick={() => {
+                    onEdit(record);
+                  }}
+                  icon={<EditFilled />}
+                />
+                <Button
+                  onClick={() => {
+                    onDelete(record);
+                  }}
+                  danger
+                  icon={<DeleteFilled />}
+                />
               </Space>
             );
           },

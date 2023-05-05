@@ -1,5 +1,10 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {getAllDirections} from './directionsActions';
+import {
+  createDirection,
+  deleteDirection,
+  getAllDirections,
+  updateDirection,
+} from './directionsActions';
 
 interface InitialState {
   loading: boolean;
@@ -18,11 +23,50 @@ export const directionsReducer = createReducer(initialState, (builder) => {
       directions: action.payload.directions,
     };
   });
-  builder.addMatcher(isPending(getAllDirections), (state) => {
-    state.loading = true;
+  builder.addCase(updateDirection.fulfilled, (state, action) => {
+    return {
+      loading: false,
+      directions:
+        state.directions?.map((dir) =>
+          dir.id === action.payload.direction.id
+            ? action.payload.direction
+            : dir,
+        ) ?? [],
+    };
   });
-  builder.addMatcher(isRejected(getAllDirections), (state) => {
+  builder.addCase(createDirection.fulfilled, (state, action) => {
     state.loading = false;
-    state.directions = null;
+    state.directions?.push(action.payload.direction);
   });
+  builder.addCase(deleteDirection.fulfilled, (state, action) => {
+    return {
+      loading: false,
+      directions:
+        state.directions?.filter(
+          (dir) => dir.id !== action.payload.direction.id,
+        ) ?? [],
+    };
+  });
+  builder.addMatcher(
+    isPending(
+      getAllDirections,
+      createDirection,
+      updateDirection,
+      deleteDirection,
+    ),
+    (state) => {
+      state.loading = true;
+    },
+  );
+  builder.addMatcher(
+    isRejected(
+      getAllDirections,
+      createDirection,
+      updateDirection,
+      deleteDirection,
+    ),
+    (state) => {
+      state.loading = false;
+    },
+  );
 });
