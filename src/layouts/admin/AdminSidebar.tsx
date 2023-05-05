@@ -41,6 +41,7 @@ export default function AdminSidebar(): JSX.Element {
         theme='dark'
         mode='vertical'
         defaultSelectedKeys={[path]}
+        selectedKeys={[path]}
         items={menuItems.map((item) => {
           const mItem: MenuItem = {
             key: item.value,
