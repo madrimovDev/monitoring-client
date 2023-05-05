@@ -15,6 +15,7 @@ import {adminsReducers} from './reducers/admins/adminsReducer';
 import {adminsDrawerReducer} from './reducers/admins/adminsDrawerReducer';
 import {directionsReducer} from './reducers/directions/directionsReducer';
 import {directionsModalReducer} from './reducers/directions/directionsModalRedicer';
+import { groupsReducer } from './reducers/groups/groupsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   adminsDrawer: adminsDrawerReducer,
   directions: directionsReducer,
   directionsModal: directionsModalReducer,
+  groups: groupsReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
