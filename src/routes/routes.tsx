@@ -18,6 +18,8 @@ const Directions = lazy(
   async () => await import('../pages/directions/Directions'),
 );
 
+const Groups = lazy(async () => await import('../pages/groups/Groups'));
+
 export const routes = createBrowserRouter([
   {
     path: '',
@@ -42,6 +44,10 @@ export const routes = createBrowserRouter([
           {
             path: 'directions',
             element: <Suspense component={<Directions />} />,
+          },
+          {
+            path: 'groups',
+            element: <Suspense component={<Groups />} />,
           },
           {
             path: '*',
