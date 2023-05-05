@@ -1,6 +1,6 @@
-import {Divider, Layout, Menu, type MenuProps} from 'antd';
-import {Link, useLocation} from 'react-router-dom';
 import {useState} from 'react';
+import {Link, useLocation} from 'react-router-dom';
+import {Divider, Layout, Menu, type MenuProps} from 'antd';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {type Role, getMenuItems} from '../lib/getMenuItems';
 import {getPathItem} from '../lib/getPathItem';

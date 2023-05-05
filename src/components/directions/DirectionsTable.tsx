@@ -6,6 +6,7 @@ import {
 } from '@/store/reducers/directions';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
+import {Link} from 'react-router-dom';
 
 export default function DirectionsTable(): JSX.Element {
   const {directions, loading} = useAppSelector((state) => state.directions);
@@ -37,7 +38,7 @@ export default function DirectionsTable(): JSX.Element {
           key: 'Name',
           title: 'Name',
           render(_, record) {
-            return record.name;
+            return <Link to={record.id.toString()}>{record.name}</Link>;
           },
         },
         {

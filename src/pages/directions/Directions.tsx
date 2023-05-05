@@ -7,6 +7,7 @@ import {
 } from '@/store/reducers/directions';
 import {Button, Col, Row, Space} from 'antd';
 import {useEffect} from 'react';
+import {Outlet} from 'react-router-dom';
 
 export default function Directions(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ export default function Directions(): JSX.Element {
         </Space>
         <DirectionsTable />
       </Col>
+      <Outlet />
       <DirectionsModal />
     </Row>
   );

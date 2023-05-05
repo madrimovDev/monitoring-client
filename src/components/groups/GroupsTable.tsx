@@ -1,8 +1,8 @@
+import {Button, Space, Table} from 'antd';
+import {Link, useLocation} from 'react-router-dom';
 import {getPathItem} from '@/layouts/lib/getPathItem';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
-import {Button, Space, Table} from 'antd';
-import {Link, useLocation} from 'react-router-dom';
 
 export default function GroupsTable(): JSX.Element {
   const {loading, group} = useAppSelector((state) => state.groups);

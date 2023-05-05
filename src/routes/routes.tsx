@@ -14,8 +14,14 @@ const RedirectPermissions = lazy(
 );
 
 const Admins = lazy(async () => await import('../pages/admin/Admins'));
+const DirectionLayout = lazy(
+  async () => await import('../pages/directions/DirectionLayout'),
+);
 const Directions = lazy(
   async () => await import('../pages/directions/Directions'),
+);
+const Direction = lazy(
+  async () => await import('../pages/directions/Direction'),
 );
 
 const Groups = lazy(async () => await import('../pages/groups/Groups'));
@@ -43,7 +49,17 @@ export const routes = createBrowserRouter([
           },
           {
             path: 'directions',
-            element: <Suspense component={<Directions />} />,
+            element: <Suspense component={<DirectionLayout />} />,
+            children: [
+              {
+                path: '',
+                element: <Suspense component={<Directions />} />,
+              },
+              {
+                path: ':directionID',
+                element: <Suspense component={<Direction />} />,
+              },
+            ],
           },
           {
             path: 'groups',
