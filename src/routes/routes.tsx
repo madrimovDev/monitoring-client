@@ -2,27 +2,15 @@ import {lazy} from 'react';
 import {createBrowserRouter} from 'react-router-dom';
 import Suspense from './Suspense';
 
-const RootLayout = lazy(
-  async () => await import('../layouts/rootLayout/RootLayout'),
-);
+const RootLayout = lazy(async () => await import('../layouts/rootLayout/RootLayout'));
 const Login = lazy(async () => await import('../pages/login/Login'));
-const AdminLayout = lazy(
-  async () => await import('../layouts/admin/AdminLayout'),
-);
-const RedirectPermissions = lazy(
-  async () => await import('../layouts/redirect/RedirectPermissions'),
-);
-
+const AdminLayout = lazy(async () => await import('../layouts/admin/AdminLayout'));
+const RedirectPermissions = lazy(async () => await import('../layouts/redirect/RedirectPermissions'));
 const Admins = lazy(async () => await import('../pages/admin/Admins'));
-const DirectionLayout = lazy(
-  async () => await import('../pages/directions/DirectionLayout'),
-);
-const Directions = lazy(
-  async () => await import('../pages/directions/Directions'),
-);
-const Direction = lazy(
-  async () => await import('../pages/directions/Direction'),
-);
+const DirectionLayout = lazy(async () => await import('../pages/directions/DirectionLayout'));
+const Directions = lazy(async () => await import('../pages/directions/Directions'));
+const Direction = lazy(async () => await import('../pages/directions/Direction'));
+const Teachers = lazy(async () => await import('../pages/teachers/Teachers'));
 
 const Groups = lazy(async () => await import('../pages/groups/Groups'));
 
@@ -64,6 +52,10 @@ export const routes = createBrowserRouter([
           {
             path: 'groups',
             element: <Suspense component={<Groups />} />,
+          },
+          {
+            path: 'teachers',
+            element: <Suspense component={<Teachers />} />,
           },
           {
             path: '*',
