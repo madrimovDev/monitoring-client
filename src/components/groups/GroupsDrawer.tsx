@@ -6,7 +6,7 @@ import {closeGroupsDrawer, createGroup} from '@/store/reducers/groups';
 
 export default function GroupsDrawer(): JSX.Element {
   const {open, type} = useAppSelector((state) => state.groupsDrawer);
-  const {directions, loading} = useAppSelector((state) => state.directions);
+  const {directions} = useAppSelector((state) => state.directions);
 
   const dispatch = useAppDispatch();
 

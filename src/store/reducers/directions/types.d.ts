@@ -12,4 +12,39 @@ declare namespace Directions {
     name: string;
     status: string;
   }
+  export interface DirectionDetailsResponse {
+    message: string;
+    direction: DirectionDetails;
+  }
+
+  export interface DirectionDetails {
+    id: number;
+    name: string;
+    organizationId: number;
+    status: string;
+    groups: Group[];
+    teachers: Teacher[];
+  }
+
+  export interface Group {
+    id: number;
+    name: string;
+    months: number;
+    teacher?: Teacher;
+    _count: Count;
+  }
+
+  export interface Teacher {
+    id: number;
+    userId: number;
+    name: string;
+    surname: string;
+    phone: string;
+    status: string;
+  }
+
+  export interface Count {
+    students: number;
+  }
+
 }
