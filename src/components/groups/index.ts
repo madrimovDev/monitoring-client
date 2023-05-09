@@ -1,2 +1,3 @@
-import GroupsTable from './GroupsTable'
-export { GroupsTable }
+import GroupsTable from './GroupsTable';
+import GroupsDrawer from './GroupsDrawer';
+export { GroupsTable, GroupsDrawer }
