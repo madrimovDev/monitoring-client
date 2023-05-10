@@ -39,6 +39,7 @@ export const createStudent = createAsyncThunk<
       ...student,
       birthday: '1999-12-12',
     });
+    showNotification('info', response.data.message);
     return response.data;
   } catch (e) {
     const error = e as AxiosErrorWithMessage;

@@ -3,10 +3,16 @@ import {Link} from 'react-router-dom';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {usePathItem} from '@/hooks/usePathItem';
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
+import {openStudentsDrawerWithData} from '@/store/reducers/students';
 
 export default function StudentsTable(): JSX.Element {
   const {loading, students} = useAppSelector((state) => state.students);
   const path = usePathItem(1);
+  const dispatch = useAppDispatch();
+  const onEdit = (data: Students.Student): void => {
+    dispatch(openStudentsDrawerWithData(data));
+  };
   return (
     <Table
       loading={loading}
@@ -58,10 +64,15 @@ export default function StudentsTable(): JSX.Element {
         {
           key: 'actions',
           title: '',
-          render() {
+          render(_, record) {
             return (
               <Space>
-                <Button icon={<EditFilled />} />
+                <Button
+                  onClick={() => {
+                    onEdit(record);
+                  }}
+                  icon={<EditFilled />}
+                />
                 <Button danger icon={<DeleteFilled />} />
               </Space>
             );

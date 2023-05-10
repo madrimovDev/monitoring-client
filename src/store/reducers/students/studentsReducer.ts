@@ -1,5 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {getAllStudents} from './studentsActions';
+import {createStudent, getAllStudents} from './studentsActions';
 
 interface InitialState {
   loading: boolean;
@@ -16,10 +16,14 @@ export const studentsReducer = createReducer(initialState, (builder) => {
     state.loading = false;
     state.students = action.payload.students;
   });
-  builder.addMatcher(isPending(getAllStudents), (state) => {
+  builder.addCase(createStudent.fulfilled, (state, action) => {
+    state.loading = false;
+    state.students?.push(action.payload.student);
+  });
+  builder.addMatcher(isPending(getAllStudents, createStudent), (state) => {
     state.loading = true;
   });
-  builder.addMatcher(isRejected(getAllStudents), (state) => {
+  builder.addMatcher(isRejected(getAllStudents, createStudent), (state) => {
     state.loading = false;
   });
 });
