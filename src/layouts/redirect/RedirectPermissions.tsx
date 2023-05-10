@@ -8,6 +8,9 @@ export default function RedirectPermissions(): JSX.Element {
     case 'admin': {
       return <Navigate to='/admin/dashboard' />;
     }
+    case 'teacher': {
+      return <Navigate to='/teacher/dashboard' />;
+    }
     default: {
       return <Navigate to='/admin' />;
     }

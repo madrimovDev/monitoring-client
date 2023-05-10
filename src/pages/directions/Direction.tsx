@@ -1,14 +1,13 @@
 import {api} from '@/api';
-import {getPathItem} from '@/layouts/lib/getPathItem';
+import { usePathItem } from '@/hooks/usePathItem';
 import {capitalizeFirstLetter, getUserDataFromLocalStorage} from '@/lib';
 import {Col, Divider, List, Row, Space, Spin, Table, Tag, Typography} from 'antd';
 import {useQuery} from 'react-query';
-import {Link, useLocation, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 export default function Direction(): JSX.Element | null {
   const {directionID} = useParams();
-  const {pathname} = useLocation();
-  const path = getPathItem(pathname, 1);
+  const path = usePathItem( 1);
 
   const {data, isFetching} = useQuery({
     queryKey: 'direction',

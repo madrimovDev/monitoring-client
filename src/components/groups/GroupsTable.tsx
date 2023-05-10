@@ -1,13 +1,12 @@
 import {Button, Space, Table} from 'antd';
-import {Link, useLocation} from 'react-router-dom';
-import {getPathItem} from '@/layouts/lib/getPathItem';
+import {Link} from 'react-router-dom';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
+import {usePathItem} from '@/hooks/usePathItem';
 
 export default function GroupsTable(): JSX.Element {
   const {loading, group} = useAppSelector((state) => state.groups);
-  const {pathname} = useLocation();
-  const path = getPathItem(pathname, 1);
+  const path = usePathItem(1);
   return (
     <Table
       bordered
@@ -33,11 +32,7 @@ export default function GroupsTable(): JSX.Element {
           key: 'direction',
           title: 'Direction',
           render(_, record) {
-            return (
-              <Link to={`/${path}/directions/${record.direction.id}`}>
-                {record.direction.name}
-              </Link>
-            );
+            return <Link to={`/${path}/directions/${record.direction.id}`}>{record.direction.name}</Link>;
           },
         },
         {

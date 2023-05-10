@@ -1,13 +1,12 @@
-import {getPathItem} from '@/layouts/lib/getPathItem';
+import {usePathItem} from '@/hooks/usePathItem';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table} from 'antd';
-import {Link, useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export default function TeachersTable(): JSX.Element {
   const {loading, teachers} = useAppSelector((state) => state.teachers);
-  const {pathname} = useLocation();
-  const path = getPathItem(pathname, 1);
+  const path = usePathItem(1);
   return (
     <Table
       loading={loading && teachers === null}
