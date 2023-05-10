@@ -1,9 +1,6 @@
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {
-  deleteDirection,
-  openDirectionModalWithData,
-} from '@/store/reducers/directions';
+import {deleteDirection, openDirectionModalWithData} from '@/store/reducers/directions';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
 import {Link} from 'react-router-dom';
@@ -26,6 +23,7 @@ export default function DirectionsTable(): JSX.Element {
       dataSource={directions ?? []}
       pagination={false}
       bordered
+      rowKey={(item) => item.id}
       columns={[
         {
           key: 'index',
@@ -45,11 +43,7 @@ export default function DirectionsTable(): JSX.Element {
           key: 'Status',
           title: 'Status',
           render(_, record) {
-            return (
-              <Tag color={record.status === 'active' ? 'green' : 'error'}>
-                {record.status}
-              </Tag>
-            );
+            return <Tag color={record.status === 'active' ? 'green' : 'error'}>{record.status}</Tag>;
           },
         },
         {
