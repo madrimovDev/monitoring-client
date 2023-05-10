@@ -4,19 +4,19 @@ import {showNotification} from '@/lib/showNotification';
 import {type AxiosErrorWithMessage} from '@/store/types';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
-const URL = 'teachers';
+const URL = 'students';
 
-export const getAllTeachers = createAsyncThunk<
-  Teachers.TeachersResponse,
+export const getAllStudents = createAsyncThunk<
+  Students.StudentsResponse,
   void,
   {
     rejectValue: string;
   }
->('teachers/getAll', async (_, {rejectWithValue}) => {
+>('students/getAll', async (_, {rejectWithValue}) => {
   try {
-    const orgID = await getUserDataFromLocalStorage('organizationId');
-    if (orgID === null) throw new Error('Organization id not found');
-    const response = await api.get<Teachers.TeachersResponse>(`organizations/${orgID}/${URL}`);
+    const orgId = await getUserDataFromLocalStorage('organizationId');
+    if (orgId === null) throw new Error('Organization id not found');
+    const response = await api.get<Students.StudentsResponse>(`organizations/${orgId}/${URL}`);
     return response.data;
   } catch (e) {
     const error = e as AxiosErrorWithMessage;

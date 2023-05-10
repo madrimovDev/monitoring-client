@@ -9,6 +9,7 @@ import {directionsModalReducer} from './reducers/directions/directionsModalRedic
 import {groupsReducer} from './reducers/groups/groupsReducer';
 import {teachersReducer} from './reducers/teachers/teachersReducer';
 import {groupsDrawerReducer} from './reducers/groups/groupsDrawerReducer';
+import {studentsReducer} from './reducers/students/studentsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   groups: groupsReducer,
   groupsDrawer: groupsDrawerReducer,
   teachers: teachersReducer,
+  students: studentsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
