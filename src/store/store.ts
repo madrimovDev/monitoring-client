@@ -10,6 +10,7 @@ import {groupsReducer} from './reducers/groups/groupsReducer';
 import {teachersReducer} from './reducers/teachers/teachersReducer';
 import {groupsDrawerReducer} from './reducers/groups/groupsDrawerReducer';
 import {studentsReducer} from './reducers/students/studentsReducer';
+import {studentsDrawerReducer} from './reducers/students/studentsDrawerReducer';
 
 const persistConfig = {
   key: 'root',
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   groupsDrawer: groupsDrawerReducer,
   teachers: teachersReducer,
   students: studentsReducer,
+  studentsDrawer: studentsDrawerReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

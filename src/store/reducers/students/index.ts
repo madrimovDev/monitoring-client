@@ -1,1 +1,2 @@
-export * from './studentsActions'
+export * from './studentsActions';
+export * from './studentsDrawerActions';
