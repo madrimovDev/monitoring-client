@@ -51,6 +51,7 @@ export default function TeachersTable(): JSX.Element {
           key: 'Groups',
           title: 'Groups',
           render(_, record) {
+            if (record.groups.length === 0) return 'Has not joined groups';
             return record.groups.map((group) => {
               return (
                 <Link key={group.id} to={`/${path}/groups/${group.id}`}>

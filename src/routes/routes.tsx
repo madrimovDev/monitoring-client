@@ -11,6 +11,7 @@ const Directions = lazy(async () => await import('../pages/directions/Directions
 const Direction = lazy(async () => await import('../pages/directions/Direction'));
 const Teachers = lazy(async () => await import('../pages/teachers/Teachers'));
 const Groups = lazy(async () => await import('../pages/groups/Groups'));
+const Group = lazy(async () => await import('../pages/groups/Group'));
 const Students = lazy(async () => await import('../pages/students/Students'));
 
 const TeacherLayout = lazy(async () => await import('../layouts/teacher/TeacherLayout'));
@@ -38,7 +39,7 @@ export const routes = createBrowserRouter([
           },
           {
             path: 'directions',
-            element: <Suspense component={<Outlet />} />,
+            element: <Outlet />,
             children: [
               {
                 path: '',
@@ -52,7 +53,17 @@ export const routes = createBrowserRouter([
           },
           {
             path: 'groups',
-            element: <Suspense component={<Groups />} />,
+            element: <Outlet />,
+            children: [
+              {
+                index: true,
+                element: <Suspense component={<Groups />} />,
+              },
+              {
+                path: ':groupID',
+                element: <Suspense component={<Group />} />,
+              },
+            ],
           },
           {
             path: 'teachers',
@@ -74,9 +85,9 @@ export const routes = createBrowserRouter([
         children: [
           {
             path: 'dashboard',
-            element: <>Element</>
-          }
-        ]
+            element: <>Element</>,
+          },
+        ],
       },
     ],
   },

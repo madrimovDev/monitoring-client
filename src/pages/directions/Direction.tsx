@@ -70,7 +70,7 @@ export default function Direction(): JSX.Element | null {
                   key: 'name',
                   title: 'Name',
                   render(_, record) {
-                    return <Link to={`${path}/groups/${record.id}`}>{record.name}</Link>;
+                    return <Link to={`/${path}/groups/${record.id}`}>{record.name}</Link>;
                   },
                 },
                 {

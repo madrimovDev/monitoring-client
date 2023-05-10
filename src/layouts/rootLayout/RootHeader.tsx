@@ -32,10 +32,10 @@ export default function RootHeader(): JSX.Element {
   return (
     <Layout.Header className='flex items-center'>
       <div className='flex-grow  flex items-center'>
-        <Typography.Title level={5} className='!text-white !mb-0 capitalize'>
+        <Typography.Title level={5} className='!text-white w-36 pl-3 !mb-0 capitalize'>
           {path}
         </Typography.Title>
-        <Button.Group size='large' className='ml-20'>
+        <Button.Group size='large'>
           <Button
             onClick={goBack}
             type='link'
