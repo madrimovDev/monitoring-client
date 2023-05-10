@@ -30,7 +30,7 @@ declare namespace Directions {
     id: number;
     name: string;
     months: number;
-    teacher?: Teacher;
+    teacher: Teacher | null;
     _count: Count;
   }
 

@@ -1,12 +1,16 @@
 import {api} from '@/api';
+import {getPathItem} from '@/layouts/lib/getPathItem';
 import {capitalizeFirstLetter, getUserDataFromLocalStorage} from '@/lib';
-import {Col, Divider, List, Row, Space, Table, Tag, Typography} from 'antd';
+import {Col, Divider, List, Row, Space, Spin, Table, Tag, Typography} from 'antd';
 import {useQuery} from 'react-query';
-import {useParams} from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 
-export default function Direction(): JSX.Element {
+export default function Direction(): JSX.Element | null {
   const {directionID} = useParams();
-  const {data, isLoading} = useQuery({
+  const {pathname} = useLocation();
+  const path = getPathItem(pathname, 1);
+
+  const {data, isFetching} = useQuery({
     queryKey: 'direction',
     queryFn: async () => {
       const orgId = await getUserDataFromLocalStorage('organizationId');
@@ -17,23 +21,44 @@ export default function Direction(): JSX.Element {
       return response.data;
     },
   });
+
+  if (isFetching)
+    return (
+      <div className='w-full h-full grid place-items-center'>
+        <Spin size='large' spinning />
+      </div>
+    );
+
+  if (data === undefined) {
+    return null;
+  }
+
   return (
-    <Row className='p-4'>
+    <Row className='px-4 pt-10'>
       <Col offset={1} span={22}>
         <Space>
           <Typography.Title className='flex items-center gap-2'>
-            {capitalizeFirstLetter(data?.direction.name ?? '')} Yo&apos;nalishi{' '}
-            <Tag color='blue'>{data?.direction.status}</Tag>
+            {capitalizeFirstLetter(data.direction.name)} Yo&apos;nalishi
+            <Tag color='blue'>{data.direction.status}</Tag>
           </Typography.Title>
         </Space>
-        <Divider/>
+        <List className='w-1/6'>
+          <List.Item actions={[data.direction.groups.length]}>
+            <List.Item.Meta title='Groups' />
+          </List.Item>
+          <List.Item actions={[data.direction.teachers.length]}>
+            <List.Item.Meta title='Teachers' />
+          </List.Item>
+        </List>
+        <Divider />
         <Row gutter={24}>
           <Col span={12}>
             <Typography.Title level={4}>Groups</Typography.Title>
             <Table
-              dataSource={data?.direction.groups}
+              dataSource={data.direction.groups}
               pagination={false}
               bordered
+              rowKey={(item) => item.id}
               columns={[
                 {
                   key: 'index',
@@ -46,7 +71,7 @@ export default function Direction(): JSX.Element {
                   key: 'name',
                   title: 'Name',
                   render(_, record) {
-                    return record.name;
+                    return <Link to={`${path}/groups/${record.id}`}>{record.name}</Link>;
                   },
                 },
                 {
@@ -60,7 +85,8 @@ export default function Direction(): JSX.Element {
                   key: 'teacher',
                   title: 'Teacher',
                   render(_, record) {
-                    return record.teacher?.name ?? 'Teacher not found';
+                    if (record.teacher === null) return 'Teacher not found';
+                    return <Link to={`/${path}/teachers/${record.teacher?.id ?? ''}`}>{record.teacher?.name}</Link>;
                   },
                 },
                 {
@@ -76,6 +102,7 @@ export default function Direction(): JSX.Element {
           <Col span={12}>
             <Typography.Title level={4}>Teachers</Typography.Title>
             <Table
+              rowKey={(item) => item.id}
               pagination={false}
               bordered
               dataSource={data?.direction.teachers}
@@ -91,7 +118,7 @@ export default function Direction(): JSX.Element {
                   key: 'Name',
                   title: 'name',
                   render(_, record) {
-                    return record.name;
+                    return <Link to={`/${path}/teachers/${record.id}`}>{record.name}</Link>;
                   },
                 },
                 {
