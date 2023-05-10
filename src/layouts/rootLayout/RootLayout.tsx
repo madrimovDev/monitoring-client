@@ -9,9 +9,7 @@ export default function RootLayout(): JSX.Element {
   return (
     <Layout className='h-screen'>
       <AdminHeader />
-      <Layout.Content>
-        <Outlet />
-      </Layout.Content>
+      <Outlet />
     </Layout>
   );
 }

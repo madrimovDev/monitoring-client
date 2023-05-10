@@ -24,3 +24,25 @@ export const getAllStudents = createAsyncThunk<
     return rejectWithValue(error.response?.data.message ?? '');
   }
 });
+
+export const createStudent = createAsyncThunk<
+  Students.StudentResponse,
+  Omit<Students.NewStudent, 'birthday'>,
+  {
+    rejectValue: string;
+  }
+>('students/create', async (student, {rejectWithValue}) => {
+  try {
+    const orgId = await getUserDataFromLocalStorage('organizationId');
+    if (orgId === null) throw new Error('Organization id not found');
+    const response = await api.post<Students.StudentResponse>(`organizations/${orgId}/${URL}`, {
+      ...student,
+      birthday: '1999-12-12',
+    });
+    return response.data;
+  } catch (e) {
+    const error = e as AxiosErrorWithMessage;
+    showNotification('error', error.response?.data.message ?? '');
+    return rejectWithValue(error.response?.data.message ?? '');
+  }
+});

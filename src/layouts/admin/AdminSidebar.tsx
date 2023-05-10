@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {Divider, Layout, Menu, type MenuProps} from 'antd';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {type Role, getMenuItems} from '../lib/getMenuItems';
+import {type Role, getMenuItems} from './lib/getMenuItems';
 import {capitalizeFirstLetter} from '@/lib';
 import {usePathItem} from '@/hooks/usePathItem';
 
