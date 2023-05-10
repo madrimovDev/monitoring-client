@@ -8,7 +8,8 @@ const URL = 'teachers';
 
 export const getAllTeachers = createAsyncThunk<
   Teachers.TeachersResponse,
-  never,
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  void,
   {
     rejectValue: string;
   }
