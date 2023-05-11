@@ -6,7 +6,14 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {StyleProvider} from '@ant-design/cssinjs';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-const query = new QueryClient();
+const query = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    },
+  },
+});
 
 export default function RootProvider(): JSX.Element {
   return (
