@@ -46,15 +46,18 @@ export const createTeacher = createAsyncThunk<
 
 export const updateTeacher = createAsyncThunk<
   Teachers.TeacherResponse,
-  Teachers.NewTeacher,
+  {
+    teacher: Teachers.NewTeacher;
+    id: number;
+  },
   {
     rejectValue: string;
   }
->('teachers/update', async (teacher, {rejectWithValue}) => {
+>('teachers/update', async ({teacher, id}, {rejectWithValue}) => {
   try {
     const orgID = await getUserDataFromLocalStorage('organizationId');
     if (orgID === null) throw new Error('Organization id not found');
-    const response = await api.put<Teachers.TeacherResponse>(`organizations/${orgID}/${URL}`, teacher);
+    const response = await api.put<Teachers.TeacherResponse>(`organizations/${orgID}/${URL}/${id}`, teacher);
     return response.data;
   } catch (e) {
     const error = e as AxiosErrorWithMessage;

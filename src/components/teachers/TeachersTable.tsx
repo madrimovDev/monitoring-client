@@ -1,5 +1,7 @@
 import {usePathItem} from '@/hooks/usePathItem';
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
+import {openTeacherDrawerWithData} from '@/store/reducers/teachers';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table} from 'antd';
 import {Link} from 'react-router-dom';
@@ -7,6 +9,10 @@ import {Link} from 'react-router-dom';
 export default function TeachersTable(): JSX.Element {
   const {loading, teachers} = useAppSelector((state) => state.teachers);
   const path = usePathItem(1);
+  const dispatch = useAppDispatch();
+  const openWithData = (record: Teachers.Teacher): void => {
+    dispatch(openTeacherDrawerWithData(record));
+  };
   return (
     <Table
       loading={loading && teachers === null}
@@ -28,8 +34,7 @@ export default function TeachersTable(): JSX.Element {
           render(_, record) {
             return (
               <Link to={record.id.toString()}>
-                {record.name}
-                {record.surname}
+                {record.name} {record.surname}
               </Link>
             );
           },
@@ -38,13 +43,17 @@ export default function TeachersTable(): JSX.Element {
           key: 'Direction',
           title: 'Direction',
           render(_, record) {
-            return record.directions.map((dir) => {
-              return (
-                <Link key={dir.id} to={`/${path}/directions/${dir.id}`}>
-                  {dir.name}
-                </Link>
-              );
-            });
+            return (
+              <Space>
+                {record.directions.map((dir) => {
+                  return (
+                    <Link key={dir.id} to={`/${path}/directions/${dir.id}`}>
+                      {dir.name}
+                    </Link>
+                  );
+                })}
+              </Space>
+            );
           },
         },
         {
@@ -71,10 +80,15 @@ export default function TeachersTable(): JSX.Element {
         {
           key: 'actions',
           title: '',
-          render() {
+          render(_, record) {
             return (
               <Space>
-                <Button icon={<EditFilled />} />
+                <Button
+                  onClick={() => {
+                    openWithData(record);
+                  }}
+                  icon={<EditFilled />}
+                />
                 <Button danger icon={<DeleteFilled />} />
               </Space>
             );
