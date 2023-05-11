@@ -18,7 +18,6 @@ export default function TeachersTable(): JSX.Element {
   };
   return (
     <Table
-      
       loading={loading && teachers === null}
       dataSource={teachers ?? []}
       rowKey={(item) => item.id}
@@ -65,13 +64,17 @@ export default function TeachersTable(): JSX.Element {
           title: 'Groups',
           render(_, record) {
             if (record.groups.length === 0) return 'Has not joined groups';
-            return record.groups.map((group) => {
-              return (
-                <Link key={group.id} to={`/${path}/groups/${group.id}`}>
-                  {group.name}
-                </Link>
-              );
-            });
+            return (
+              <Space >
+                {record.groups.map((group) => {
+                  return (
+                    <Link key={group.id} to={`/${path}/groups/${group.id}`}>
+                      {group.name}
+                    </Link>
+                  );
+                })}
+              </Space>
+            );
           },
         },
         {

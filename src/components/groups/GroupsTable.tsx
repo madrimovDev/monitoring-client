@@ -12,6 +12,7 @@ export default function GroupsTable(): JSX.Element {
       bordered
       loading={loading}
       pagination={false}
+      rowKey={(item) => item.id}
       dataSource={group ?? []}
       columns={[
         {
