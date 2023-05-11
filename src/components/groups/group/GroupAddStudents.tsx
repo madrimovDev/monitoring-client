@@ -30,7 +30,7 @@ function GroupAddStudents(props: Props): JSX.Element {
       const response = await api.post(`organizations/${orgId}/groups/${groupID ?? ''}/students`, data);
       return response.data;
     },
-    onSuccess(data, variables, context) {
+    onSuccess(data) {
       showNotification('info', data.message);
       props.onClose();
       form.resetFields();
