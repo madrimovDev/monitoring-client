@@ -1,7 +1,7 @@
 import {api} from '@/api';
 import {usePathItem} from '@/hooks/usePathItem';
 import {getUserDataFromLocalStorage} from '@/lib';
-import {Table, Tag} from 'antd';
+import {Table} from 'antd';
 import {useQuery} from 'react-query';
 import {Link, useParams} from 'react-router-dom';
 
