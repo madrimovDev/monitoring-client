@@ -18,6 +18,7 @@ export default function TeachersTable(): JSX.Element {
   };
   return (
     <Table
+      
       loading={loading && teachers === null}
       dataSource={teachers ?? []}
       rowKey={(item) => item.id}
