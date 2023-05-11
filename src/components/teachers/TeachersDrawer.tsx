@@ -19,7 +19,11 @@ export default function TeachersDrawer(): JSX.Element {
 
   const onFinish = ($data: Teachers.NewTeacher): void => {
     if (type === 'create') {
-      void dispatch(createTeacher($data));
+      void dispatch(createTeacher($data)).then((value) => {
+        if (value.meta.requestStatus === 'fulfilled') {
+          onClose();
+        }
+      });
     } else if (type === 'update' && data !== undefined) {
       void dispatch(
         updateTeacher({
@@ -28,7 +32,6 @@ export default function TeachersDrawer(): JSX.Element {
         }),
       );
     }
-    onClose();
   };
 
   useEffect(() => {

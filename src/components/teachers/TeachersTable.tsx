@@ -1,7 +1,7 @@
 import {usePathItem} from '@/hooks/usePathItem';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {openTeacherDrawerWithData} from '@/store/reducers/teachers';
+import {deleteTeacher, openTeacherDrawerWithData} from '@/store/reducers/teachers';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table} from 'antd';
 import {Link} from 'react-router-dom';
@@ -12,6 +12,9 @@ export default function TeachersTable(): JSX.Element {
   const dispatch = useAppDispatch();
   const openWithData = (record: Teachers.Teacher): void => {
     dispatch(openTeacherDrawerWithData(record));
+  };
+  const onDelete = (record: Teachers.Teacher): void => {
+    void dispatch(deleteTeacher(record.id));
   };
   return (
     <Table
@@ -89,7 +92,13 @@ export default function TeachersTable(): JSX.Element {
                   }}
                   icon={<EditFilled />}
                 />
-                <Button danger icon={<DeleteFilled />} />
+                <Button
+                  danger
+                  onClick={() => {
+                    onDelete(record);
+                  }}
+                  icon={<DeleteFilled />}
+                />
               </Space>
             );
           },

@@ -36,6 +36,7 @@ export const createTeacher = createAsyncThunk<
     const orgID = await getUserDataFromLocalStorage('organizationId');
     if (orgID === null) throw new Error('Organization id not found');
     const response = await api.post<Teachers.TeacherResponse>(`organizations/${orgID}/${URL}`, teacher);
+    showNotification('info', response.data.message);
     return response.data;
   } catch (e) {
     const error = e as AxiosErrorWithMessage;
@@ -58,6 +59,7 @@ export const updateTeacher = createAsyncThunk<
     const orgID = await getUserDataFromLocalStorage('organizationId');
     if (orgID === null) throw new Error('Organization id not found');
     const response = await api.put<Teachers.TeacherResponse>(`organizations/${orgID}/${URL}/${id}`, teacher);
+    showNotification('info', response.data.message);
     return response.data;
   } catch (e) {
     const error = e as AxiosErrorWithMessage;
@@ -77,6 +79,7 @@ export const deleteTeacher = createAsyncThunk<
     const orgID = await getUserDataFromLocalStorage('organizationId');
     if (orgID === null) throw new Error('Organization id not found');
     const response = await api.delete<Teachers.TeacherResponse>(`organizations/${orgID}/${URL}/${id}`);
+    showNotification('info', response.data.message);
     return response.data;
   } catch (e) {
     const error = e as AxiosErrorWithMessage;
