@@ -27,30 +27,18 @@ declare namespace Teachers {
     id: number;
     name: string;
   }
-}
 
-/** 
-  export interface Root {
+  export interface NewTeacher {
+    username: string;
+    password: string;
+    name: string;
+    surname: string;
+    phone: string;
+    directions: number[];
+  }
+
+  export interface TeacherResponse {
     message: string
     teacher: Teacher
   }
-
-  export interface Teacher {
-    id: number
-    userId: number
-    username: string
-    name: string
-    surname: string
-    phone: string
-    groups: any[]
-    directions: Direction[]
-    permissions: string[]
-  }
-
-  export interface Direction {
-    id: number
-    name: string
-    organizationId: number
-    status: string
-  }
- */
+}
