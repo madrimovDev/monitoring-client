@@ -1,5 +1,5 @@
-import {GroupHeader, GroupTable} from '@/components/groups';
 import {Col, Row} from 'antd';
+import {GroupHeader, GroupTable} from '@/components/groups';
 
 export default function Group(): JSX.Element | null {
   return (

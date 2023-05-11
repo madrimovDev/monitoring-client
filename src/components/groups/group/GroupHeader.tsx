@@ -5,11 +5,12 @@ import {getUserDataFromLocalStorage} from '@/lib';
 import {UserAddOutlined, UsergroupAddOutlined} from '@ant-design/icons';
 import {useQuery} from 'react-query';
 import {Link, useParams} from 'react-router-dom';
-import {useState} from 'react';
 import GroupAddTeacher from './GroupAddTeacher';
+import {useDisclosure} from '@/hooks/useDisclosure';
 
 export default function GroupHeader(): JSX.Element | null {
-  const [open, setOpen] = useState<boolean>(false);
+  const [isOpenAddTeacher, openAddTeacher, closeAddTeacher] = useDisclosure();
+  const [, openAddStudents] = useDisclosure();
   const {groupID} = useParams();
   const path = usePathItem(1);
   const {data, isFetching, refetch} = useQuery({
@@ -21,14 +22,6 @@ export default function GroupHeader(): JSX.Element | null {
       return response.data;
     },
   });
-
-  const onClose = (): void => {
-    setOpen(false);
-  };
-
-  const onOpen = (): void => {
-    setOpen(true);
-  };
 
   if (data === undefined) {
     return null;
@@ -58,8 +51,7 @@ export default function GroupHeader(): JSX.Element | null {
               <>
                 {group.teacher !== null ? (
                   <Link to={`/${path}/teachers/${group.teacher?.id ?? ''}`} key='teacher'>
-                    {group.teacher?.name}{' '}
-                    {group.teacher?.surname}
+                    {group.teacher?.name} {group.teacher?.surname}
                   </Link>
                 ) : (
                   'No Teacher'
@@ -73,6 +65,7 @@ export default function GroupHeader(): JSX.Element | null {
             actions={[
               <Tooltip key='add-student' title='Add Student'>
                 <Button
+                  onClick={openAddStudents}
                   size='small'
                   className='!inline-flex items-center justify-center !text-teal-500 !border-teal-500 !bg-teal-500/5'
                   type='default'
@@ -81,7 +74,7 @@ export default function GroupHeader(): JSX.Element | null {
               </Tooltip>,
               <Tooltip key='add-teacher' title='Change Teacher'>
                 <Button
-                  onClick={onOpen}
+                  onClick={openAddTeacher}
                   size='small'
                   className='!inline-flex items-center justify-center !text-sky-500 !border-sky-500 !bg-sky-500/5'
                   type='default'
@@ -94,7 +87,12 @@ export default function GroupHeader(): JSX.Element | null {
           </List.Item>
         </List>
       </Card>
-      <GroupAddTeacher open={open} refetch={refetch} onClose={onClose} teacher={data.group.teacher} />
+      <GroupAddTeacher
+        open={isOpenAddTeacher}
+        refetch={refetch}
+        onClose={closeAddTeacher}
+        teacher={data.group.teacher}
+      />
     </>
   );
 }
