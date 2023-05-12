@@ -7,12 +7,14 @@ import {useQuery} from 'react-query';
 import {Link, useParams} from 'react-router-dom';
 import GroupAddTeacher from './GroupAddTeacher';
 import {useDisclosure} from '@/hooks/useDisclosure';
+import {useState} from 'react';
 
 export default function GroupHeader(): JSX.Element | null {
   const [isOpenAddTeacher, openAddTeacher, closeAddTeacher] = useDisclosure();
   const {groupID} = useParams();
   const path = usePathItem(1);
-  const {data, isFetching, refetch} = useQuery({
+  const [data, setData] = useState<Groups.GroupResponse | undefined>();
+  const {isFetching} = useQuery({
     queryKey: 'group',
     queryFn: async () => {
       const orgId = await getUserDataFromLocalStorage('organizationId');
@@ -20,15 +22,39 @@ export default function GroupHeader(): JSX.Element | null {
       const response = await api.get<Groups.GroupResponse>(`organizations/${orgId}/groups/${groupID ?? ''}`);
       return response.data;
     },
+    onSuccess(data) {
+      setData(data);
+    },
   });
+
+  const changeData = (data: Groups.GroupResponse): void => {
+    setData(data);
+  };
 
   if (data === undefined) {
     return null;
   }
   const {group} = data;
+  console.warn(data, 'header');
+
   return (
     <>
-      <Card bordered loading={isFetching} title='Group Info'>
+      <Card
+        bordered
+        loading={isFetching}
+        title='Group Info'
+        extra={[
+          <Tooltip key='add-teacher' title='Edit Group'>
+            <Button
+              onClick={openAddTeacher}
+              size='small'
+              className='!inline-flex items-center justify-center !text-sky-500 !border-sky-500 !bg-sky-500/5'
+              type='default'
+              icon={<EditFilled />}
+            />
+          </Tooltip>,
+        ]}
+      >
         <List>
           <List.Item actions={[group.name]}>
             <List.Item.Meta title={'Name'} />
@@ -55,15 +81,6 @@ export default function GroupHeader(): JSX.Element | null {
                 ) : (
                   'No Teacher'
                 )}
-                <Tooltip key='add-teacher' title='Change Teacher'>
-                  <Button
-                    onClick={openAddTeacher}
-                    size='small'
-                    className='!inline-flex items-center justify-center !text-sky-500 !border-sky-500 !bg-sky-500/5'
-                    type='default'
-                    icon={<EditFilled />}
-                  />
-                </Tooltip>
               </Space>,
             ]}
           >
@@ -71,12 +88,7 @@ export default function GroupHeader(): JSX.Element | null {
           </List.Item>
         </List>
       </Card>
-      <GroupAddTeacher
-        open={isOpenAddTeacher}
-        refetch={refetch}
-        onClose={closeAddTeacher}
-        teacher={data.group.teacher}
-      />
+      <GroupAddTeacher open={isOpenAddTeacher} changeData={changeData} onClose={closeAddTeacher} group={data.group} />
     </>
   );
 }
