@@ -7,7 +7,7 @@ export default function RootLayout(): JSX.Element {
   const {user} = useAppSelector((state) => state.auth);
   if (user === null) return <Navigate to='/login' replace />;
   return (
-    <Layout className='h-screen'>
+    <Layout className='!min-h-screen ml-[200px]'>
       <AdminHeader />
       <Outlet />
     </Layout>

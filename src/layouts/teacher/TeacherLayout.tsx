@@ -5,7 +5,7 @@ import TeacherSidebar from './TeacherSidebar';
 
 export default function TeacherLayout(): JSX.Element {
   return (
-    <Layout className='h-full'>
+    <Layout className='h-full overflow-auto'>
       <TeacherSidebar />
       <Content>
         <Outlet />

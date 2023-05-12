@@ -7,7 +7,7 @@ import {Button, Drawer, Form, Input, Select} from 'antd';
 import {useEffect} from 'react';
 
 export default function TeachersDrawer(): JSX.Element {
-  const {open, type, data} = useAppSelector((state) => state.teacherDrawer);
+  const { open, type, data } = useAppSelector((state) => state.teacherDrawer);
   const {directions, loading} = useAppSelector((state) => state.directions);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm<Omit<Teachers.NewTeacher, 'id'>>();
@@ -103,6 +103,7 @@ export default function TeachersDrawer(): JSX.Element {
             })}
           />
         </Form.Item>
+
         <Form.Item>
           <Button block type='primary' htmlType='submit'>
             {capitalizeFirstLetter(type)}

@@ -4,13 +4,21 @@ import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {closeGroupsDrawer, createGroup} from '@/store/reducers/groups';
 
+interface FormData {
+  directionId: number;
+  months: number;
+  name: string;
+  teacherId: number;
+}
+
 export default function GroupsDrawer(): JSX.Element {
   const {open, type} = useAppSelector((state) => state.groupsDrawer);
   const {directions} = useAppSelector((state) => state.directions);
+  const {teachers, loading} = useAppSelector((state) => state.teachers);
 
   const dispatch = useAppDispatch();
 
-  const onFinish = (d: Groups.NewGroup): void => {
+  const onFinish = (d: FormData): void => {
     void dispatch(createGroup(d));
   };
 
@@ -44,6 +52,19 @@ export default function GroupsDrawer(): JSX.Element {
             </Form.Item>
           </Col>
         </Row>
+        <Form.Item label='Teacher' name='teacherId'>
+          <Select
+            allowClear
+            loading={loading}
+            placeholder='Select Teacher'
+            options={teachers?.map((teacher) => {
+              return {
+                label: `${teacher.name} ${teacher.surname}`,
+                value: teacher.id,
+              };
+            })}
+          />
+        </Form.Item>
         <Form.Item>
           <Button htmlType='submit' block type='primary'>
             {capitalizeFirstLetter(type)}

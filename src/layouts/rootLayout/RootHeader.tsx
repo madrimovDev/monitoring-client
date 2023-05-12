@@ -30,9 +30,9 @@ export default function RootHeader(): JSX.Element {
   };
 
   return (
-    <Layout.Header className='flex items-center'>
+    <Layout.Header className='flex items-center sticky top-0 z-10 !pl-2'>
       <div className='flex-grow  flex items-center'>
-        <Typography.Title level={5} className='!text-white w-36 pl-3 !mb-0 capitalize'>
+        <Typography.Title level={5} className='!text-white pl-3 !mb-0 capitalize'>
           {path}
         </Typography.Title>
         <Button.Group size='large'>

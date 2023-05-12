@@ -1,5 +1,5 @@
 import {api} from '@/api';
-import { usePathItem } from '@/hooks/usePathItem';
+import {usePathItem} from '@/hooks/usePathItem';
 import {capitalizeFirstLetter, getUserDataFromLocalStorage} from '@/lib';
 import {Col, Divider, List, Row, Space, Spin, Table, Tag, Typography} from 'antd';
 import {useQuery} from 'react-query';
@@ -7,7 +7,7 @@ import {Link, useParams} from 'react-router-dom';
 
 export default function Direction(): JSX.Element | null {
   const {directionID} = useParams();
-  const path = usePathItem( 1);
+  const path = usePathItem(1);
 
   const {data, isFetching} = useQuery({
     queryKey: 'direction',
@@ -115,9 +115,20 @@ export default function Direction(): JSX.Element | null {
                 },
                 {
                   key: 'Name',
-                  title: 'name',
+                  title: 'Name',
                   render(_, record) {
-                    return <Link to={`/${path}/teachers/${record.id}`}>{record.name}</Link>;
+                    return (
+                      <Link to={`/${path}/teachers/${record.id}`}>
+                        {record.name} {record.surname}
+                      </Link>
+                    );
+                  },
+                },
+                {
+                  key: 'status',
+                  title: 'Status',
+                  render(_, record) {
+                    return <Tag color={record.status === 'active' ? 'blue' : 'red'}>{record.status}</Tag>;
                   },
                 },
                 {
