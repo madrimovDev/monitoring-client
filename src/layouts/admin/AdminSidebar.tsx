@@ -14,11 +14,16 @@ export default function AdminSidebar(): JSX.Element {
 
   return (
     <Layout.Sider className='!fixed !overflow-auto !left-0 !top-0 !bottom-0'>
-      <Typography.Title className='flex flex-row flex-wrap px-4 py-4 gap-x-1 !mb-0 !text-2xl !text-white' level={5}>
-        <span>L</span>
-        <span>M</span>
-        <span>S</span>
-      </Typography.Title>
+      <div className='px-4 py-3'>
+        <Typography.Title
+          className='flex justify-center active:bg-blue-500 active:scale-75 transition-all bg-gray-500/30 py-2 rounded-md !mb-0 !text-2xl !text-white'
+          level={5}
+        >
+          <span className='text-blue-300'>L</span>
+          <span className='text-blue-400'>M</span>
+          <span className='text-blue-500'>S</span>
+        </Typography.Title>
+      </div>
       <Menu
         className=''
         theme='dark'
