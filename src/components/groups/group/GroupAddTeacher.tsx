@@ -3,7 +3,7 @@ import {getUserDataFromLocalStorage} from '@/lib';
 import {showNotification} from '@/lib/showNotification';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {getAllDirections} from '@/store/reducers/directions';
+import {getAllDirections} from '@/store/reducers/admin/directions';
 import {getAllTeachers} from '@/store/reducers/teachers';
 import {Button, Col, Form, Input, InputNumber, Modal, Row, Select} from 'antd';
 import {useEffect} from 'react';

@@ -1,11 +1,7 @@
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {
-  closeDirectionModal,
-  createDirection,
-  updateDirection,
-} from '@/store/reducers/directions';
+import {closeDirectionModal, createDirection, updateDirection} from '@/store/reducers/admin/directions';
 import {Button, Form, Input, Modal} from 'antd';
 import {useEffect} from 'react';
 
@@ -40,12 +36,7 @@ export default function DirectionsModal(): JSX.Element {
   }, [data]);
 
   return (
-    <Modal
-      open={open}
-      onCancel={onClose}
-      footer={null}
-      title={`${capitalizeFirstLetter(type)} Direction`}
-    >
+    <Modal open={open} onCancel={onClose} footer={null} title={`${capitalizeFirstLetter(type)} Direction`}>
       <Form form={form} onFinish={onFinish}>
         <Form.Item name='name' label='Name' required>
           <Input />

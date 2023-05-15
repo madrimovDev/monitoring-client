@@ -5,8 +5,6 @@ import AdminHeader from './RootHeader';
 
 export default function RootLayout(): JSX.Element {
   const {user} = useAppSelector((state) => state.auth);
-  // eslint-disable-next-line no-console
-  console.log(import.meta.env.PROD);
   if (user === null) return <Navigate to='/login' replace />;
   return (
     <Layout className='!min-h-screen ml-[200px]'>

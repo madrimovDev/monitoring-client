@@ -2,16 +2,16 @@ import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {authReducer} from './reducers/auth/authReducer';
-import {adminsReducers} from './reducers/admins/adminsReducer';
-import {adminsDrawerReducer} from './reducers/admins/adminsDrawerReducer';
-import {directionsReducer} from './reducers/directions/directionsReducer';
-import {directionsModalReducer} from './reducers/directions/directionsModalRedicer';
-import {groupsReducer} from './reducers/groups/groupsReducer';
-import {teachersReducer} from './reducers/teachers/teachersReducer';
-import {groupsDrawerReducer} from './reducers/groups/groupsDrawerReducer';
-import {studentsReducer} from './reducers/students/studentsReducer';
-import {studentsDrawerReducer} from './reducers/students/studentsDrawerReducer';
-import {teacherDrawerReducer} from './reducers/teachers/teacherDrawerReducer';
+import {adminsReducers} from './reducers/admin/admins/adminsReducer';
+import {adminsDrawerReducer} from './reducers/admin/admins/adminsDrawerReducer';
+import {directionsReducer} from './reducers/admin/directions/directionsReducer';
+import {directionsModalReducer} from './reducers/admin/directions/directionsModalReducer';
+import {groupsReducer} from './reducers/admin/groups/groupsReducer';
+import {groupsDrawerReducer} from './reducers/admin/groups/groupsDrawerReducer';
+import {teachersReducer} from './reducers/admin/teachers/teachersReducer';
+import {teacherDrawerReducer} from './reducers/admin/teachers/teacherDrawerReducer';
+import {studentsReducer} from './reducers/admin/students/studentsReducer';
+import {studentsDrawerReducer} from './reducers/admin/students/studentsDrawerReducer';
 
 const persistConfig = {
   key: 'root',
@@ -38,6 +38,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
+  devTools: import.meta.env.DEV,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

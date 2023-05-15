@@ -1,6 +1,6 @@
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {deleteDirection, openDirectionModalWithData} from '@/store/reducers/directions';
+import {deleteDirection, openDirectionModalWithData} from '@/store/reducers/admin/directions';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
 import {Link} from 'react-router-dom';

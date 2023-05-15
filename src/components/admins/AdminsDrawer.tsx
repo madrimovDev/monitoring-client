@@ -1,11 +1,7 @@
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {
-  closeAdminDrawer,
-  createAdmin,
-  updateAdmin,
-} from '@/store/reducers/admins';
+import {closeAdminDrawer, createAdmin, updateAdmin} from '@/store/reducers/admin/admins';
 import {Button, Drawer, Form, Input} from 'antd';
 import {useEffect} from 'react';
 
@@ -19,7 +15,6 @@ export default function AdminsDrawer(): JSX.Element {
     void dispatch(closeAdminDrawer());
   };
 
-  
   const onFinish = ($data: Admins.CreateAdmin): void => {
     if (type === 'create') {
       void dispatch(createAdmin($data));
@@ -49,18 +44,8 @@ export default function AdminsDrawer(): JSX.Element {
   }, [data]);
 
   return (
-    <Drawer
-      open={open}
-      onClose={onClose}
-      title={`${capitalizeFirstLetter(type)} Admin`}
-    >
-      <Form
-        form={form}
-        onFinish={onFinish}
-        layout='vertical'
-        autoComplete='off'
-        autoCorrect='off'
-      >
+    <Drawer open={open} onClose={onClose} title={`${capitalizeFirstLetter(type)} Admin`}>
+      <Form form={form} onFinish={onFinish} layout='vertical' autoComplete='off' autoCorrect='off'>
         <Form.Item name='name' label='Name'>
           <Input />
         </Form.Item>

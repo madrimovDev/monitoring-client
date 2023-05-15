@@ -1,6 +1,6 @@
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {deleteAdmin, openAdminDrawerWithData} from '@/store/reducers/admins';
+import {deleteAdmin, openAdminDrawerWithData} from '@/store/reducers/admin/admins';
 import {DeleteFilled, EyeFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
 
