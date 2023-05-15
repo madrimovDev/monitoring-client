@@ -1,5 +1,10 @@
-import {Layout} from 'antd';
+import RootSider from '../rootLayout/RootSider';
+import { useGetGroups } from './lib/useGetGroups';
 
 export default function TeacherSidebar(): JSX.Element {
-  return <Layout.Sider collapsible>Sidebar</Layout.Sider>;
+  const { data } = useGetGroups()
+  
+  return <RootSider >
+    Teacher
+  </RootSider>;
 }

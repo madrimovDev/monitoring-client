@@ -35,7 +35,6 @@ export default function GroupHeader(): JSX.Element | null {
     return null;
   }
   const {group} = data;
-  console.warn(data, 'header');
 
   return (
     <>

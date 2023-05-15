@@ -57,9 +57,7 @@ export default function GroupAddTeacher(props: GroupAddTeacherProp): JSX.Element
     onSuccess(data): void {
       showNotification('info', data.message);
       onClose();
-      props.changeData(data.group);
-      console.log(data);
-      
+      props.changeData(data);
     },
   });
 
@@ -75,7 +73,6 @@ export default function GroupAddTeacher(props: GroupAddTeacherProp): JSX.Element
         teacherId: data.teacherId,
       });
     }
-    console.log(data);
   };
 
   useEffect(() => {
