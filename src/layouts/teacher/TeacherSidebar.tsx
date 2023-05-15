@@ -1,8 +1,8 @@
 import RootSider from '../rootLayout/RootSider';
-import { useGetGroups } from './lib/useGetGroups';
+// import { useGetGroups } from './lib/useGetGroups';
 
 export default function TeacherSidebar(): JSX.Element {
-  const { data } = useGetGroups()
+  // const { data } = useGetGroups()
   
   return <RootSider >
     Teacher
