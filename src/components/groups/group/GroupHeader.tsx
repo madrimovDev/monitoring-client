@@ -9,6 +9,7 @@ import GroupAddTeacher from './GroupAddTeacher';
 import {useDisclosure} from '@/hooks/useDisclosure';
 import {useState} from 'react';
 
+
 export default function GroupHeader(): JSX.Element | null {
   const [isOpenAddTeacher, openAddTeacher, closeAddTeacher] = useDisclosure();
   const {groupID} = useParams();
@@ -24,7 +25,7 @@ export default function GroupHeader(): JSX.Element | null {
     },
     onSuccess(data) {
       setData(data);
-    },
+    }
   });
 
   const changeData = (data: Groups.GroupResponse): void => {

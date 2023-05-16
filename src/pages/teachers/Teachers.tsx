@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {TeachersDrawer, TeachersTable} from '@/components/teachers';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {Button, Col, Row, Space} from 'antd';
-import { getAllTeachers, openTeacherDrawer } from '@/store/reducers/admin/teachers';
+import {getAllTeachers, openTeacherDrawer} from '@/store/reducers/admin/teachers';
 
 export default function Teachers(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -10,7 +10,6 @@ declare namespace Students {
     username: string;
     name: string;
     surname: string;
-    birthday: string;
     phone: string;
     groups: Group[];
     permissions: string[];

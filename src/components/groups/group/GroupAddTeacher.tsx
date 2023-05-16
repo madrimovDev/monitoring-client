@@ -4,7 +4,8 @@ import {showNotification} from '@/lib/showNotification';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {getAllDirections, selectDirections} from '@/store/reducers/admin/directions';
-import { getAllTeachers, selectTeachers } from '@/store/reducers/admin/teachers';
+import {getAllTeachers, selectTeachers} from '@/store/reducers/admin/teachers';
+import type {AxiosErrorWithMessage} from '@/store/types';
 import {Button, Col, Form, Input, InputNumber, Modal, Row, Select} from 'antd';
 import {useEffect} from 'react';
 import {useMutation} from 'react-query';
@@ -59,6 +60,10 @@ export default function GroupAddTeacher(props: GroupAddTeacherProp): JSX.Element
       onClose();
       props.changeData(data);
     },
+    onError(err) {
+      const e = err as AxiosErrorWithMessage;
+      showNotification('error', e.response?.data.message ?? '');
+    },
   });
 
   const onFinish = (data: Groups.NewGroup & {teacherId: number | {label: string; value: number}}): void => {
@@ -76,9 +81,11 @@ export default function GroupAddTeacher(props: GroupAddTeacherProp): JSX.Element
   };
 
   useEffect(() => {
-    void dispatch(getAllTeachers());
-    void dispatch(getAllDirections());
-  }, []);
+    if (props.open) {
+      void dispatch(getAllTeachers());
+      void dispatch(getAllDirections());
+    }
+  }, [props.open]);
 
   useEffect(() => {
     if (!props.open) return;
