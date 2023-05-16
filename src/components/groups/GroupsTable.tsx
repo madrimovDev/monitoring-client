@@ -4,10 +4,10 @@ import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {usePathItem} from '@/hooks/usePathItem';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
-import {deleteGroup, openGroupsDrawerWithData} from '@/store/reducers/groups';
+import { deleteGroup, openGroupsDrawerWithData, selectGroups } from '@/store/reducers/admin/groups';
 
 export default function GroupsTable(): JSX.Element {
-  const {loading, group} = useAppSelector((state) => state.groups);
+  const {loading, group} = useAppSelector(selectGroups);
   const path = usePathItem(1);
   const dispatch = useAppDispatch();
 

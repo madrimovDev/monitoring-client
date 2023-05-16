@@ -1,11 +1,11 @@
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {deleteAdmin, openAdminDrawerWithData} from '@/store/reducers/admin/admins';
+import {deleteAdmin, openAdminDrawerWithData, selectAdmins} from '@/store/reducers/admin/admins';
 import {DeleteFilled, EyeFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
 
 export default function AdminsTable(): JSX.Element {
-  const {loading, admins} = useAppSelector((state) => state.admins);
+  const {loading, admins } = useAppSelector(selectAdmins);
   const dispatch = useAppDispatch();
   const onEdit = (value: Admins.Admin): void => {
     void dispatch(openAdminDrawerWithData({data: value}));

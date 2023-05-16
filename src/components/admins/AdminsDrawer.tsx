@@ -1,12 +1,12 @@
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {closeAdminDrawer, createAdmin, updateAdmin} from '@/store/reducers/admin/admins';
+import {closeAdminDrawer, createAdmin, selectAdminsDrawer, updateAdmin} from '@/store/reducers/admin/admins';
 import {Button, Drawer, Form, Input} from 'antd';
 import {useEffect} from 'react';
 
 export default function AdminsDrawer(): JSX.Element {
-  const {open, type, data} = useAppSelector((state) => state.adminsDrawer);
+  const {open, type, data} = useAppSelector(selectAdminsDrawer);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm<Admins.CreateAdmin>();
 

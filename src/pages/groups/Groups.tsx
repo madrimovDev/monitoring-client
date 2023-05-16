@@ -1,8 +1,8 @@
+import {useEffect} from 'react';
+import {Button, Col, Row, Space} from 'antd';
 import {GroupsDrawer, GroupsTable} from '@/components/groups';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
-import {getAllGroups, openGroupsDrawer} from '@/store/reducers/groups';
-import {Button, Col, Row, Space} from 'antd';
-import {useEffect} from 'react';
+import { getAllGroups, openGroupsDrawer } from '@/store/reducers/admin/groups';
 
 export default function Groups(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ export default function Groups(): JSX.Element {
   }, []);
   return (
     <Row className='p-4'>
-      <Col offset={4} span={16}>
+      <Col offset={1} span={22}>
         <Space className='justify-end w-full my-10'>
           <Button type='primary' onClick={openDrawer}>
             Create Group

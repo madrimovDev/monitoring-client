@@ -4,10 +4,10 @@ import {useAppSelector} from '@/store/hooks/useAppSelector';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {usePathItem} from '@/hooks/usePathItem';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
-import {openStudentsDrawerWithData} from '@/store/reducers/students';
+import { openStudentsDrawerWithData, selectStudents } from '@/store/reducers/admin/students';
 
 export default function StudentsTable(): JSX.Element {
-  const {loading, students} = useAppSelector((state) => state.students);
+  const {loading, students} = useAppSelector(selectStudents);
   const path = usePathItem(1);
   const dispatch = useAppDispatch();
   const onEdit = (data: Students.Student): void => {

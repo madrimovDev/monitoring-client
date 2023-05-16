@@ -1,10 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {
-  createDirection,
-  deleteDirection,
-  getAllDirections,
-  updateDirection,
-} from './directionsActions';
+import {createDirection, deleteDirection, getAllDirections, updateDirection} from './directions.action';
 
 interface InitialState {
   loading: boolean;
@@ -27,11 +22,7 @@ export const directionsReducer = createReducer(initialState, (builder) => {
     return {
       loading: false,
       directions:
-        state.directions?.map((dir) =>
-          dir.id === action.payload.direction.id
-            ? action.payload.direction
-            : dir,
-        ) ?? [],
+        state.directions?.map((dir) => (dir.id === action.payload.direction.id ? action.payload.direction : dir)) ?? [],
     };
   });
   builder.addCase(createDirection.fulfilled, (state, action) => {
@@ -41,32 +32,13 @@ export const directionsReducer = createReducer(initialState, (builder) => {
   builder.addCase(deleteDirection.fulfilled, (state, action) => {
     return {
       loading: false,
-      directions:
-        state.directions?.filter(
-          (dir) => dir.id !== action.payload.direction.id,
-        ) ?? [],
+      directions: state.directions?.filter((dir) => dir.id !== action.payload.direction.id) ?? [],
     };
   });
-  builder.addMatcher(
-    isPending(
-      getAllDirections,
-      createDirection,
-      updateDirection,
-      deleteDirection,
-    ),
-    (state) => {
-      state.loading = true;
-    },
-  );
-  builder.addMatcher(
-    isRejected(
-      getAllDirections,
-      createDirection,
-      updateDirection,
-      deleteDirection,
-    ),
-    (state) => {
-      state.loading = false;
-    },
-  );
+  builder.addMatcher(isPending(getAllDirections, createDirection, updateDirection, deleteDirection), (state) => {
+    state.loading = true;
+  });
+  builder.addMatcher(isRejected(getAllDirections, createDirection, updateDirection, deleteDirection), (state) => {
+    state.loading = false;
+  });
 });

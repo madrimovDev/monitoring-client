@@ -1,9 +1,11 @@
+import {useEffect} from 'react';
 import {Button, Col, Drawer, Form, Input, InputNumber, Row, Select} from 'antd';
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {closeGroupsDrawer, createGroup, updateGroup} from '@/store/reducers/groups';
-import {useEffect} from 'react';
+import { closeGroupsDrawer, createGroup, selectGroupsDrawer, updateGroup } from '@/store/reducers/admin/groups';
+import { selectDirections } from '@/store/reducers/admin/directions';
+import { selectTeachers } from '@/store/reducers/admin/teachers';
 
 interface FormData {
   directionId: number;
@@ -13,9 +15,9 @@ interface FormData {
 }
 
 export default function GroupsDrawer(): JSX.Element {
-  const {open, type, data} = useAppSelector((state) => state.groupsDrawer);
-  const {directions} = useAppSelector((state) => state.directions);
-  const {teachers, loading} = useAppSelector((state) => state.teachers);
+  const {open, type, data} = useAppSelector(selectGroupsDrawer);
+  const {directions} = useAppSelector(selectDirections);
+  const {teachers, loading} = useAppSelector(selectTeachers);
   const [form] = Form.useForm();
 
   const dispatch = useAppDispatch();

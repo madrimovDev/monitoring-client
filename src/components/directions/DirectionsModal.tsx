@@ -1,12 +1,12 @@
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {closeDirectionModal, createDirection, updateDirection} from '@/store/reducers/admin/directions';
+import {closeDirectionModal, createDirection, selectDirectionsDrawer, updateDirection} from '@/store/reducers/admin/directions';
 import {Button, Form, Input, Modal} from 'antd';
 import {useEffect} from 'react';
 
 export default function DirectionsModal(): JSX.Element {
-  const {open, type, data} = useAppSelector((state) => state.directionsModal);
+  const {open, type, data} = useAppSelector(selectDirectionsDrawer);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 

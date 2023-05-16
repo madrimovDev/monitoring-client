@@ -1,17 +1,8 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {authReducer} from './reducers/auth/authReducer';
-import {adminsReducers} from './reducers/admin/admins/adminsReducer';
-import {adminsDrawerReducer} from './reducers/admin/admins/adminsDrawerReducer';
-import {directionsReducer} from './reducers/admin/directions/directionsReducer';
-import {directionsModalReducer} from './reducers/admin/directions/directionsModalReducer';
-import {groupsReducer} from './reducers/admin/groups/groupsReducer';
-import {groupsDrawerReducer} from './reducers/admin/groups/groupsDrawerReducer';
-import {teachersReducer} from './reducers/admin/teachers/teachersReducer';
-import {teacherDrawerReducer} from './reducers/admin/teachers/teacherDrawerReducer';
-import {studentsReducer} from './reducers/admin/students/studentsReducer';
-import {studentsDrawerReducer} from './reducers/admin/students/studentsDrawerReducer';
+import {authReducer} from './reducers/auth/auth.reducer';
+import {adminReducers} from './reducers/admin';
 
 const persistConfig = {
   key: 'root',
@@ -22,16 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  admins: adminsReducers,
-  adminsDrawer: adminsDrawerReducer,
-  directions: directionsReducer,
-  directionsModal: directionsModalReducer,
-  groups: groupsReducer,
-  groupsDrawer: groupsDrawerReducer,
-  teachers: teachersReducer,
-  teacherDrawer: teacherDrawerReducer,
-  students: studentsReducer,
-  studentsDrawer: studentsDrawerReducer,
+  adminStore: adminReducers,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

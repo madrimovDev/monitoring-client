@@ -3,8 +3,7 @@ import {getUserDataFromLocalStorage} from '@/lib';
 import {showNotification} from '@/lib/showNotification';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {getAllStudents} from '@/store/reducers/students';
-import {selectFilteredStudents} from '@/store/reducers/students/studentsSelectors';
+import {getAllStudents, selectFilteredStudents} from '@/store/reducers/admin/students';
 import {Button, Form, Modal, Select} from 'antd';
 import {memo, useEffect} from 'react';
 import {useMutation, type QueryObserverResult, type RefetchOptions, type RefetchQueryFilters} from 'react-query';
@@ -17,6 +16,7 @@ interface Props<TData = unknown, TError = unknown> {
     options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<QueryObserverResult<TData, TError>>;
 }
+
 function GroupAddStudents(props: Props): JSX.Element {
   const {groupID} = useParams();
   const students = useAppSelector((state) => selectFilteredStudents(state, groupID));
@@ -55,17 +55,24 @@ function GroupAddStudents(props: Props): JSX.Element {
           <Select
             placeholder='Select Students'
             showSearch
-            filterOption={(input, option) => (option?.label.toLowerCase() ?? '').includes(input)}
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-            }
+            filterOption={(input, option) => {
+              const label = option?.label ?? '';
+              return label.toLocaleString().toLowerCase().includes(input);
+            }}
+            filterSort={(optionA, optionB) => {
+              const labelA = optionA?.label ?? '';
+              const labelB = optionB?.label ?? '';
+              return labelA.toLocaleString().localeCompare(labelB.toLocaleString());
+            }}
             mode='multiple'
-            options={students.map((student) => {
-              return {
-                label: `${student.name} ${student.surname}`,
-                value: student.id,
-              };
-            })}
+            options={
+              Array.isArray(students)
+                ? students.map((student) => ({
+                    label: student.name,
+                    value: student.id,
+                  }))
+                : []
+            }
           />
         </Form.Item>
         <Form.Item>

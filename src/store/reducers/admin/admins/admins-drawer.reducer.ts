@@ -1,9 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {
-  closeAdminDrawer,
-  openAdminDrawer,
-  openAdminDrawerWithData,
-} from './adminsDrawerActions';
+import {closeAdminDrawer, openAdminDrawer, openAdminDrawerWithData} from './admins-drawer.action';
 
 interface InitialState {
   open: boolean;

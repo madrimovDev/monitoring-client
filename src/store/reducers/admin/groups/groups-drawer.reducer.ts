@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {closeGroupsDrawer, openGroupsDrawer, openGroupsDrawerWithData} from './groupsDrawerActions';
+import {closeGroupsDrawer, openGroupsDrawer, openGroupsDrawerWithData} from './groups-drawer.action';
 
 interface InitialState {
   open: boolean;

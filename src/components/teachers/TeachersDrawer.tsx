@@ -1,14 +1,14 @@
+import {useEffect} from 'react';
+import {Button, Drawer, Form, Input, Select} from 'antd';
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {getAllDirections} from '@/store/reducers/admin/directions';
-import {closeTeacherDrawer, createTeacher, updateTeacher} from '@/store/reducers/teachers';
-import {Button, Drawer, Form, Input, Select} from 'antd';
-import {useEffect} from 'react';
+import {getAllDirections, selectDirections} from '@/store/reducers/admin/directions';
+import {closeTeacherDrawer, createTeacher, selectTeachersDrawer, updateTeacher} from '@/store/reducers/admin/teachers';
 
 export default function TeachersDrawer(): JSX.Element {
-  const {open, type, data} = useAppSelector((state) => state.teacherDrawer);
-  const {directions, loading} = useAppSelector((state) => state.directions);
+  const {open, type, data} = useAppSelector(selectTeachersDrawer);
+  const {directions, loading} = useAppSelector(selectDirections);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm<Omit<Teachers.NewTeacher, 'id'>>();
 

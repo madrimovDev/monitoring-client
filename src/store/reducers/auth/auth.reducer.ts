@@ -1,5 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {login} from './authActions';
+import {login} from './auth.action';
 
 interface InitialState {
   loading: boolean;

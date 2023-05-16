@@ -1,5 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {createGroup, deleteGroup, getAllGroups, updateGroup} from './groupsActions';
+import {createGroup, deleteGroup, getAllGroups, updateGroup} from './groups.action';
 
 interface InitialState {
   loading: boolean;
