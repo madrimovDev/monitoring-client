@@ -43,6 +43,13 @@ export default function TeachersTable(): JSX.Element {
           },
         },
         {
+          key: 'username',
+          title: 'Username',
+          render(_, record) {
+            return record.username;
+          },
+        },
+        {
           key: 'Direction',
           title: 'Direction',
           render(_, record) {
