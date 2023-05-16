@@ -1,6 +1,6 @@
 import {StudentsDrawer, StudentsTable} from '@/components/students';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
-import {getAllStudents, openStudentsDrawer} from '@/store/reducers/students';
+import { getAllStudents, openStudentsDrawer } from '@/store/reducers/admin/students';
 import {Button, Col, Row, Space} from 'antd';
 import {useEffect} from 'react';
 

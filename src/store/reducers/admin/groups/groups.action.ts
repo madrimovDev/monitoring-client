@@ -1,4 +1,4 @@
-import {type AxiosErrorWithMessage} from './../../types.d';
+import {type AxiosErrorWithMessage} from '../../../types';
 import {api} from '@/api';
 import {getUserDataFromLocalStorage} from '@/lib';
 import {showNotification} from '@/lib/showNotification';

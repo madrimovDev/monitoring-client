@@ -3,8 +3,8 @@ import {getUserDataFromLocalStorage} from '@/lib';
 import {showNotification} from '@/lib/showNotification';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {getAllDirections} from '@/store/reducers/admin/directions';
-import {getAllTeachers} from '@/store/reducers/teachers';
+import {getAllDirections, selectDirections} from '@/store/reducers/admin/directions';
+import { getAllTeachers, selectTeachers } from '@/store/reducers/admin/teachers';
 import {Button, Col, Form, Input, InputNumber, Modal, Row, Select} from 'antd';
 import {useEffect} from 'react';
 import {useMutation} from 'react-query';
@@ -18,8 +18,8 @@ interface GroupAddTeacherProp {
 }
 
 export default function GroupAddTeacher(props: GroupAddTeacherProp): JSX.Element | null {
-  const {teachers, loading} = useAppSelector((state) => state.teachers);
-  const {directions} = useAppSelector((state) => state.directions);
+  const {teachers, loading} = useAppSelector(selectTeachers);
+  const {directions} = useAppSelector(selectDirections);
   const dispatch = useAppDispatch();
 
   const [form] = Form.useForm();

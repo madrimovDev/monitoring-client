@@ -1,13 +1,13 @@
 import {usePathItem} from '@/hooks/usePathItem';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {deleteTeacher, openTeacherDrawerWithData} from '@/store/reducers/teachers';
+import { deleteTeacher, openTeacherDrawerWithData, selectTeachers } from '@/store/reducers/admin/teachers';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table} from 'antd';
 import {Link} from 'react-router-dom';
 
 export default function TeachersTable(): JSX.Element {
-  const {loading, teachers} = useAppSelector((state) => state.teachers);
+  const {loading, teachers} = useAppSelector(selectTeachers);
   const path = usePathItem(1);
   const dispatch = useAppDispatch();
   const openWithData = (record: Teachers.Teacher): void => {

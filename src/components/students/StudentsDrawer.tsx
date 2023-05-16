@@ -1,12 +1,12 @@
+import {useEffect} from 'react';
+import {Button, Drawer, Form, Input} from 'antd';
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {closeStudentsDrawer, createStudent} from '@/store/reducers/students';
-import {Button, Drawer, Form, Input} from 'antd';
-import {useEffect} from 'react';
+import { closeStudentsDrawer, createStudent, selectStudentsDrawer } from '@/store/reducers/admin/students';
 
 export default function StudentsDrawer(): JSX.Element {
-  const {open, type, data} = useAppSelector((state) => state.studentsDrawer);
+  const {open, type, data} = useAppSelector(selectStudentsDrawer);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm<Omit<Students.NewStudent, 'birthday'>>();
   const onClose = (): void => {

@@ -3,8 +3,7 @@ import {getUserDataFromLocalStorage} from '@/lib';
 import {showNotification} from '@/lib/showNotification';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {getAllStudents} from '@/store/reducers/students';
-import {selectFilteredStudents} from '@/store/reducers/students/studentsSelectors';
+import { getAllStudents, selectFilteredStudents } from '@/store/reducers/admin/students';
 import {Button, Form, Modal, Select} from 'antd';
 import {memo, useEffect} from 'react';
 import {useMutation, type QueryObserverResult, type RefetchOptions, type RefetchQueryFilters} from 'react-query';
@@ -19,7 +18,7 @@ interface Props<TData = unknown, TError = unknown> {
 }
 function GroupAddStudents(props: Props): JSX.Element {
   const {groupID} = useParams();
-  const students = useAppSelector((state) => selectFilteredStudents(state, groupID));
+  const students = useAppSelector(state => selectFilteredStudents(state, groupID));
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const {mutate} = useMutation({
@@ -55,7 +54,7 @@ function GroupAddStudents(props: Props): JSX.Element {
           <Select
             placeholder='Select Students'
             showSearch
-            filterOption={(input, option) => (option?.label.toLowerCase() ?? '').includes(input)}
+            filterOption={(input, option) => (option?.label.toLowerCase() ).includes(input)}
             filterSort={(optionA, optionB) =>
               (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
             }

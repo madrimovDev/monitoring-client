@@ -1,12 +1,12 @@
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {deleteDirection, openDirectionModalWithData} from '@/store/reducers/admin/directions';
+import {deleteDirection, openDirectionModalWithData, selectDirections} from '@/store/reducers/admin/directions';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Space, Table, Tag} from 'antd';
 import {Link} from 'react-router-dom';
 
 export default function DirectionsTable(): JSX.Element {
-  const {directions, loading} = useAppSelector((state) => state.directions);
+  const {directions, loading} = useAppSelector(selectDirections);
   const dispatch = useAppDispatch();
 
   const onEdit = (record: Directions.Direction): void => {

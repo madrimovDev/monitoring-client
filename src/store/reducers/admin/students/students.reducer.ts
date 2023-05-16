@@ -1,5 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {createStudent, getAllStudents} from './studentsActions';
+import {createStudent, getAllStudents} from './students.action';
 
 interface InitialState {
   loading: boolean;

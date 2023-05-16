@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {closeTeacherDrawer, openTeacherDrawer, openTeacherDrawerWithData} from './teacherDrawerActions';
+import {closeTeacherDrawer, openTeacherDrawer, openTeacherDrawerWithData} from './teachers-drawer.action';
 
 interface InitialState {
   data?: Teachers.Teacher;
@@ -12,7 +12,7 @@ const initialState: InitialState = {
   type: 'def',
 };
 
-export const teacherDrawerReducer = createReducer(initialState, (builder) => {
+export const teachersDrawerReducer = createReducer(initialState, (builder) => {
   builder.addCase(openTeacherDrawer, (state) => {
     state.open = true;
     state.type = 'create';

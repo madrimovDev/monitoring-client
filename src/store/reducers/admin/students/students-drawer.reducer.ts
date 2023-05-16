@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {closeStudentsDrawer, openStudentsDrawer, openStudentsDrawerWithData} from './studentsDrawerActions';
+import {closeStudentsDrawer, openStudentsDrawer, openStudentsDrawerWithData} from './students-drawer.action';
 
 interface InitialState {
   open: boolean;

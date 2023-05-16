@@ -1,8 +1,8 @@
+import {useEffect} from 'react';
+import {Button, Col, Row, Space} from 'antd';
 import {GroupsDrawer, GroupsTable} from '@/components/groups';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
-import {getAllGroups, openGroupsDrawer} from '@/store/reducers/groups';
-import {Button, Col, Row, Space} from 'antd';
-import {useEffect} from 'react';
+import { getAllGroups, openGroupsDrawer } from '@/store/reducers/admin/groups';
 
 export default function Groups(): JSX.Element {
   const dispatch = useAppDispatch();
