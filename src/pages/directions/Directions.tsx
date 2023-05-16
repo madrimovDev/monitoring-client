@@ -18,7 +18,7 @@ export default function Directions(): JSX.Element {
   }, []);
   return (
     <Row className='p-4'>
-      <Col offset={6} span={12}>
+      <Col offset={1} span={22}>
         <Space className='justify-end w-full my-10'>
           <Button type='primary' onClick={openModal}>
             Create Direction

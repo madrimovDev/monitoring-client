@@ -17,7 +17,7 @@ export default function Teachers(): JSX.Element {
 
   return (
     <Row className='p-4'>
-      <Col span={16} offset={4}>
+      <Col span={22} offset={1}>
         <Space className='justify-end w-full my-10'>
           <Button type='primary' onClick={openDrawer}>
             Create Teacher

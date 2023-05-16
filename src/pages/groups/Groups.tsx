@@ -16,7 +16,7 @@ export default function Groups(): JSX.Element {
   }, []);
   return (
     <Row className='p-4'>
-      <Col offset={4} span={16}>
+      <Col offset={1} span={22}>
         <Space className='justify-end w-full my-10'>
           <Button type='primary' onClick={openDrawer}>
             Create Group
