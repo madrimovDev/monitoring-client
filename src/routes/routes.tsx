@@ -2,6 +2,7 @@ import {lazy} from 'react';
 import {createBrowserRouter} from 'react-router-dom';
 import Suspense from './Suspense';
 import {adminRoutes} from './routes/adminRoutes';
+import { teacherRoutes } from './routes/teacherRoutes';
 
 // global
 const Login = lazy(async () => await import('../pages/admin-pages/login/Login'));
@@ -29,12 +30,7 @@ export const routes = createBrowserRouter([
       {
         path: 'teacher',
         element: <Suspense component={<TeacherLayout />} />,
-        children: [
-          {
-            path: 'dashboard',
-            element: <>Element</>,
-          },
-        ],
+        children: teacherRoutes
       },
     ],
   },

@@ -1,34 +1,51 @@
-import {Menu} from 'antd';
+import {Menu, type MenuProps} from 'antd';
 import RootSider from '../rootLayout/RootSider';
 import {useGetGroups} from './lib/useGetGroups';
-import {DashboardOutlined, GroupOutlined} from '@ant-design/icons';
-import {Link} from 'react-router-dom';
-import {usePathItem} from '@/hooks/usePathItem';
+import {DashboardOutlined, FlagOutlined, GroupOutlined} from '@ant-design/icons';
+import {Link, useLocation} from 'react-router-dom';
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+const defaultLinks: MenuItem[] = [
+  {
+    key: 'dashboard',
+    label: <Link to='dashboard'>Dashboard</Link>,
+    icon: <DashboardOutlined />,
+  },
+  {
+    key: 'criteria',
+    label: <Link to='criteria'>Criterias</Link>,
+    icon: <FlagOutlined />,
+  },
+];
+
+const getMenuItems = (data: Group.Group[]): MenuItem[] => {
+  const item: MenuItem = {
+    key: 'group-key',
+    label: 'Groups',
+    type: 'group',
+    children: data.map((d) => {
+      return {
+        key: d.id,
+        label: <Link to={`group/${d.id.toString()}`}>{d.name}</Link>,
+        icon: <GroupOutlined />,
+      };
+    }),
+  };
+  return [...defaultLinks, item];
+};
 
 export default function TeacherSidebar(): JSX.Element {
   const {data} = useGetGroups();
-  const path = usePathItem();
+  const {pathname} = useLocation();
+  const menuItems = getMenuItems(data?.groups ?? []);
   return (
     <RootSider>
       <Menu
         theme='dark'
-        defaultSelectedKeys={[path]}
-        selectedKeys={[path]}
-        items={[
-          {
-            key: 'dashboard',
-            label: <Link to='dashboard'>Dashboard</Link>,
-            icon: <DashboardOutlined />,
-          },
-        ].concat(
-          data?.groups.map((group) => {
-            return {
-              key: group.id.toString(),
-              label: <Link to={`group/${group.id}`}>{group.name}</Link>,
-              icon: <GroupOutlined />,
-            };
-          }) ?? [],
-        )}
+        defaultSelectedKeys={['dashboard']}
+        selectedKeys={[...pathname.split('/')]}
+        items={menuItems}
       />
     </RootSider>
   );
