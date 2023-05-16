@@ -13,6 +13,7 @@ const Teachers = lazy(async () => await import('../pages/teachers/Teachers'));
 const Groups = lazy(async () => await import('../pages/groups/Groups'));
 const Group = lazy(async () => await import('../pages/groups/Group'));
 const Students = lazy(async () => await import('../pages/students/Students'));
+const Student = lazy(async () => await import('../pages/students/Student'));
 
 const TeacherLayout = lazy(async () => await import('../layouts/teacher/TeacherLayout'));
 
@@ -71,7 +72,17 @@ export const routes = createBrowserRouter([
           },
           {
             path: 'students',
-            element: <Suspense component={<Students />} />,
+            element: <Outlet />,
+            children: [
+              {
+                index: true,
+                element: <Suspense component={<Students />} />,
+              },
+              {
+                path: ':studentID',
+                element: <Suspense component={<Student />} />,
+              },
+            ],
           },
           {
             path: '*',

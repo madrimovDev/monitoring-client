@@ -31,7 +31,11 @@ export default function StudentsTable(): JSX.Element {
           key: 'name',
           title: 'Name',
           render(_, record) {
-            return `${record.name} ${record.surname}`;
+            return (
+              <Link to={record.id.toString()}>
+                {record.name} {record.surname}
+              </Link>
+            );
           },
         },
         {
@@ -51,10 +55,8 @@ export default function StudentsTable(): JSX.Element {
                 {record.groups.map((group, index) => {
                   return (
                     <div className='flex gap-2 items-center' key={group.id}>
-                      <Link to={`/${path}/groups/${group.id}`}>
-                        {group.name}
-                      </Link>
-                      {record.groups.length - 1 !== index ? <div className='w-1 h-1 bg-black/80 rounded-full'/> : ''}
+                      <Link to={`/${path}/groups/${group.id}`}>{group.name}</Link>
+                      {record.groups.length - 1 !== index ? <div className='w-1 h-1 bg-black/80 rounded-full' /> : ''}
                     </div>
                   );
                 })}
