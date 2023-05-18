@@ -2,6 +2,7 @@ import {Button, Layout, Space, Tooltip, Typography} from 'antd';
 import {useNavigate} from 'react-router-dom';
 import {FullscreenOutlined, LeftOutlined, LogoutOutlined, RightOutlined} from '@ant-design/icons';
 import {usePathItem} from '@/hooks/usePathItem';
+import {cleanStore} from '@/store';
 
 export default function RootHeader(): JSX.Element {
   const navigate = useNavigate();
@@ -16,8 +17,7 @@ export default function RootHeader(): JSX.Element {
   };
 
   const logout = (): void => {
-    window.location.reload();
-    window.localStorage.clear();
+    cleanStore();
   };
 
   const fullScreen = (): void => {
@@ -32,7 +32,11 @@ export default function RootHeader(): JSX.Element {
   return (
     <Layout.Header className='flex items-center sticky top-0 z-10 !pl-2'>
       <div className='flex-grow  flex items-center'>
-        <Typography.Title title={path} level={5} className='!text-white border-r border-white/20 overflow-hidden whitespace-nowrap text-ellipsis w-28 pl-3 !mb-0 capitalize'>
+        <Typography.Title
+          title={path}
+          level={5}
+          className='!text-white border-r border-white/20 overflow-hidden whitespace-nowrap text-ellipsis w-28 pl-3 !mb-0 capitalize'
+        >
           {path}
         </Typography.Title>
         <Button.Group size='large'>

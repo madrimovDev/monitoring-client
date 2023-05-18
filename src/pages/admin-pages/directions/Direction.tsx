@@ -7,6 +7,7 @@ import {useQuery} from 'react-query';
 import {Link, useParams} from 'react-router-dom';
 
 export default function Direction(): JSX.Element | null {
+
   const {directionID} = useParams();
   const path = usePathItem(1);
 
