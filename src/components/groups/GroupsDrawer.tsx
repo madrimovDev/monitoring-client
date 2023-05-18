@@ -3,15 +3,20 @@ import {Button, Col, Drawer, Form, Input, InputNumber, Row, Select} from 'antd';
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import { closeGroupsDrawer, createGroup, selectGroupsDrawer, updateGroup } from '@/store/reducers/admin/groups';
-import { selectDirections } from '@/store/reducers/admin/directions';
-import { selectTeachers } from '@/store/reducers/admin/teachers';
+import {closeGroupsDrawer, createGroup, selectGroupsDrawer, updateGroup} from '@/store/reducers/admin/groups';
+import {selectDirections} from '@/store/reducers/admin/directions';
+import {selectTeachers} from '@/store/reducers/admin/teachers';
 
 interface FormData {
   directionId: number;
   months: number;
   name: string;
   teacherId: number;
+}
+
+interface OptionType {
+  label: string;
+  value: number;
 }
 
 export default function GroupsDrawer(): JSX.Element {
@@ -25,7 +30,19 @@ export default function GroupsDrawer(): JSX.Element {
     if (type === 'create') {
       void dispatch(createGroup(d));
     } else if (type === 'update' && data !== undefined) {
-      void dispatch(updateGroup({group: d, id: data.id}));
+      const _d = {
+        ...d,
+        teacherId: d.teacherId as unknown as OptionType,
+      };
+      void dispatch(
+        updateGroup({
+          group: {
+            ..._d,
+            teacherId: _d.teacherId.value,
+          },
+          id: data.id,
+        }),
+      );
     }
   };
   const onClose = (): void => {
@@ -50,7 +67,10 @@ export default function GroupsDrawer(): JSX.Element {
         },
         {
           name: 'teacherId',
-          value: data?.teacher?.id,
+          value: {
+            label: `${data.teacher?.name ?? ''} ${data.teacher?.surname ?? ''}`,
+            value: data.teacher?.id,
+          },
         },
       ]);
     }

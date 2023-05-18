@@ -1,47 +1,25 @@
 import {Button, Card, List, Space, Tooltip} from 'antd';
-import {api} from '@/api';
-import {usePathItem} from '@/hooks/usePathItem';
-import {getUserDataFromLocalStorage} from '@/lib';
 import {EditFilled} from '@ant-design/icons';
-import {useQuery} from 'react-query';
 import {Link, useParams} from 'react-router-dom';
-import GroupAddTeacher from './GroupAddTeacher';
-import {useDisclosure} from '@/hooks/useDisclosure';
-import {useState} from 'react';
-
+import {useAppSelector} from '@/store/hooks/useAppSelector';
+import {openGroupsDrawerWithData, selectGroupById} from '@/store/reducers/admin/groups';
+import {usePathItem} from '@/hooks/usePathItem';
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 
 export default function GroupHeader(): JSX.Element | null {
-  const [isOpenAddTeacher, openAddTeacher, closeAddTeacher] = useDisclosure();
   const {groupID} = useParams();
+  const group = useAppSelector((state) => selectGroupById(state, groupID));
   const path = usePathItem(1);
-  const [data, setData] = useState<Groups.GroupResponse | undefined>();
-  const {isFetching} = useQuery({
-    queryKey: 'group',
-    queryFn: async () => {
-      const orgId = await getUserDataFromLocalStorage('organizationId');
-      if (orgId === null) throw new Error('Organization id not found');
-      const response = await api.get<Groups.GroupResponse>(`organizations/${orgId}/groups/${groupID ?? ''}`);
-      return response.data;
-    },
-    onSuccess(data) {
-      setData(data);
+  const dispatch = useAppDispatch();
+  const openAddTeacher = (): void => {
+    if (group !== undefined) {
+      dispatch(openGroupsDrawerWithData(group));
     }
-  });
-
-  const changeData = (data: Groups.GroupResponse): void => {
-    setData(data);
   };
-
-  if (data === undefined) {
-    return null;
-  }
-  const {group} = data;
-
   return (
     <>
       <Card
         bordered
-        loading={isFetching}
         title='Group Info'
         extra={[
           <Tooltip key='add-teacher' title='Edit Group'>
@@ -56,27 +34,27 @@ export default function GroupHeader(): JSX.Element | null {
         ]}
       >
         <List>
-          <List.Item actions={[group.name]}>
+          <List.Item actions={[group?.name]}>
             <List.Item.Meta title={'Name'} />
           </List.Item>
           <List.Item
             actions={[
-              <Link to={`/${path}/directions/${group.id}`} key='dir'>
-                {group.direction.name}
+              <Link to={`/${path}/directions/${group?.id ?? ''}`} key='dir'>
+                {group?.direction.name}
               </Link>,
             ]}
           >
             <List.Item.Meta title={'Direction'} />
           </List.Item>
-          <List.Item actions={[group.months]}>
+          <List.Item actions={[group?.months]}>
             <List.Item.Meta title={'Months'} />
           </List.Item>
           <List.Item
             actions={[
               <Space key='teacher'>
-                {group.teacher !== null ? (
-                  <Link to={`/${path}/teachers/${group.teacher?.id ?? ''}`}>
-                    {group.teacher?.name} {group.teacher?.surname}
+                {group?.teacher !== null ? (
+                  <Link to={`/${path}/teachers/${group?.teacher?.id ?? ''}`}>
+                    {group?.teacher?.name} {group?.teacher?.surname}
                   </Link>
                 ) : (
                   'No Teacher'
@@ -88,7 +66,6 @@ export default function GroupHeader(): JSX.Element | null {
           </List.Item>
         </List>
       </Card>
-      <GroupAddTeacher open={isOpenAddTeacher} changeData={changeData} onClose={closeAddTeacher} group={data.group} />
     </>
   );
 }

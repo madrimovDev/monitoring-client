@@ -14,7 +14,7 @@ const defaultLinks: MenuItem[] = [
   },
   {
     key: 'criteria',
-    label: <Link to='criteria'>Criterias</Link>,
+    label: <Link to='criteria'>Criteria</Link>,
     icon: <FlagOutlined />,
   },
 ];

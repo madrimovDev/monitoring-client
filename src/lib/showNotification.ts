@@ -1,13 +1,12 @@
 import {notification} from 'antd';
 import {capitalizeFirstLetter} from '.';
 
-export function showNotification(
-  type: 'error' | 'info' | 'warn',
-  message: string,
-): void {
-  notification[type as keyof typeof notification]({
+type NotifyKeyType = 'info' | 'success' | 'warning' | 'error';
+
+export function showNotification(type: NotifyKeyType, message: string): void {
+  notification[type]({
     message: capitalizeFirstLetter(message),
-    placement: 'top',
-    duration: 2,
+    placement: 'topRight',
+    duration: 5
   });
 }

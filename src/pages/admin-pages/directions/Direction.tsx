@@ -1,7 +1,8 @@
 import {api} from '@/api';
 import {usePathItem} from '@/hooks/usePathItem';
 import {capitalizeFirstLetter, getUserDataFromLocalStorage} from '@/lib';
-import {Col, Divider, List, Row, Space, Spin, Table, Tag, Typography} from 'antd';
+import {EditFilled} from '@ant-design/icons';
+import {Button, Col, Divider, List, Row, Space, Spin, Table, Tag, Typography} from 'antd';
 import {useQuery} from 'react-query';
 import {Link, useParams} from 'react-router-dom';
 
@@ -35,11 +36,12 @@ export default function Direction(): JSX.Element | null {
   return (
     <Row className='px-4 pt-10'>
       <Col offset={1} span={22}>
-        <Space>
-          <Typography.Title className='flex items-center gap-2'>
+        <Space align='center'>
+          <Typography.Title className='flex items-center gap-2 !mb-0'>
             {capitalizeFirstLetter(data.direction.name)} Yo&apos;nalishi
             <Tag color='blue'>{data.direction.status}</Tag>
           </Typography.Title>
+          <Button icon={<EditFilled />} />
         </Space>
         <List className='w-1/6'>
           <List.Item actions={[data.direction.groups.length]}>

@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom';
 export default function DirectionsTable(): JSX.Element {
   const {directions, loading} = useAppSelector(selectDirections);
   const dispatch = useAppDispatch();
-
   const onEdit = (record: Directions.Direction): void => {
     void dispatch(openDirectionModalWithData({data: record}));
   };
