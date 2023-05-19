@@ -1,3 +1,4 @@
-import CriteriaList from "./CriteriaList";
+import CriteriaDrawer from './CriteriaDrawer';
+import CriteriaList from './CriteriaList';
 
-export {CriteriaList}
+export {CriteriaList, CriteriaDrawer};

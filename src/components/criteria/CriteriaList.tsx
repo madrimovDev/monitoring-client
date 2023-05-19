@@ -4,15 +4,14 @@ import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Card, Col, List, Row, Typography} from 'antd';
 
 export default function CriteriaList(): JSX.Element {
-  const {criterias, loading} = useAppSelector(selectCriteria);
+  const {criterias} = useAppSelector(selectCriteria);
   return (
     <>
-      <Row gutter={16}>
+      <Row gutter={[16, 16]}>
         {criterias?.map((cri) => {
           return (
             <Col span={6} key={cri.id}>
               <Card
-                loading={loading}
                 hoverable
                 bordered
                 title={cri.name.length > 0 ? cri.name : 'No title'}
@@ -24,7 +23,7 @@ export default function CriteriaList(): JSX.Element {
                     icon={<EditFilled />}
                   />,
                   <Button
-                    key='edit'
+                    key='delete'
                     className='!inline-flex justify-center items-center '
                     danger
                     size='small'
@@ -38,7 +37,7 @@ export default function CriteriaList(): JSX.Element {
                   header={<Typography.Text className='font-bold'>Maximum: {cri.maximum}</Typography.Text>}
                   renderItem={(item) => {
                     return (
-                      <List.Item>
+                      <List.Item key={item.id}>
                         <List.Item.Meta title={item.description} description={item.value} />
                       </List.Item>
                     );
