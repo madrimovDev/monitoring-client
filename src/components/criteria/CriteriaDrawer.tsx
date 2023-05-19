@@ -5,9 +5,10 @@ import {closeCriteriaDrawer, createCriteria, selectCriteriaDrawer} from '@/store
 import type {Criteria} from '@/store/reducers/teacher/criteria/types';
 import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 import {Button, Drawer, Form, Input, InputNumber} from 'antd';
+import {useEffect} from 'react';
 
 export default function CriteriaDrawer(): JSX.Element {
-  const {open, type} = useAppSelector(selectCriteriaDrawer);
+  const {open, type, data} = useAppSelector(selectCriteriaDrawer);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm<Criteria.NewCriteria>();
 
@@ -21,6 +22,20 @@ export default function CriteriaDrawer(): JSX.Element {
       closeDrawer();
     });
   };
+
+  useEffect(() => {
+    if (data !== null || data === undefined) {
+      form.setFieldsValue({
+        name: data?.name,
+        description: data?.description,
+        maximum: data?.maximum,
+        scorings: data?.scroings.map((s) => ({
+          value: s.value,
+          description: s.description,
+        })) ?? [],
+      });
+    }
+  }, [data]);
 
   return (
     <Drawer open={open} size='large' onClose={closeDrawer} title={`${capitalizeFirstLetter(type)} Criteria`}>

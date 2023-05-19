@@ -1,10 +1,19 @@
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {selectCriteria} from '@/store/reducers/teacher/criteria';
+import {deleteCriteria, openCriteriaDrawerWithData, selectCriteria} from '@/store/reducers/teacher/criteria';
+import type {Criteria} from '@/store/reducers/teacher/criteria/types';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import {Button, Card, Col, List, Row, Typography} from 'antd';
 
 export default function CriteriaList(): JSX.Element {
   const {criterias} = useAppSelector(selectCriteria);
+  const dispatch = useAppDispatch();
+  const onDelete = (id: number): void => {
+    void dispatch(deleteCriteria(id));
+  };
+  const onEdit = (criteria: Criteria.Criteria): void => {
+    dispatch(openCriteriaDrawerWithData(criteria));
+  };
   return (
     <>
       <Row gutter={[16, 16]}>
@@ -20,6 +29,9 @@ export default function CriteriaList(): JSX.Element {
                     key='edit'
                     className='!border-teal-500 !text-teal-500 !inline-flex justify-center items-center mr-2'
                     size='small'
+                    onClick={() => {
+                      onEdit(cri);
+                    }}
                     icon={<EditFilled />}
                   />,
                   <Button
@@ -27,6 +39,9 @@ export default function CriteriaList(): JSX.Element {
                     className='!inline-flex justify-center items-center '
                     danger
                     size='small'
+                    onClick={() => {
+                      onDelete(cri.id);
+                    }}
                     icon={<DeleteFilled />}
                   />,
                 ]}

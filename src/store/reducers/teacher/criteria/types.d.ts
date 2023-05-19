@@ -37,7 +37,7 @@ declare namespace Criteria {
 
   export interface NewCriteria {
     maximum: number;
-    nama: string;
+    name: string;
     description?: string;
     scorings: RemoveKeys<Scroing, 'criteriaId' | 'id'>;
   }
