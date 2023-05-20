@@ -11,9 +11,11 @@ export default function CriteriaList(): JSX.Element {
   const onDelete = (id: number): void => {
     void dispatch(deleteCriteria(id));
   };
+
   const onEdit = (criteria: Criteria.Criteria): void => {
     dispatch(openCriteriaDrawerWithData(criteria));
   };
+  
   return (
     <>
       <Row gutter={[16, 16]}>

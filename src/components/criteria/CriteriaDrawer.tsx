@@ -1,7 +1,12 @@
 import {capitalizeFirstLetter} from '@/lib';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {closeCriteriaDrawer, createCriteria, selectCriteriaDrawer} from '@/store/reducers/teacher/criteria';
+import {
+  closeCriteriaDrawer,
+  createCriteria,
+  selectCriteriaDrawer,
+  updateCriteria,
+} from '@/store/reducers/teacher/criteria';
 import type {Criteria} from '@/store/reducers/teacher/criteria/types';
 import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 import {Button, Drawer, Form, Input, InputNumber} from 'antd';
@@ -10,17 +15,34 @@ import {useEffect} from 'react';
 export default function CriteriaDrawer(): JSX.Element {
   const {open, type, data} = useAppSelector(selectCriteriaDrawer);
   const dispatch = useAppDispatch();
-  const [form] = Form.useForm<Criteria.NewCriteria>();
+  const [form] = Form.useForm();
 
   const closeDrawer = (): void => {
     dispatch(closeCriteriaDrawer());
     form.resetFields();
   };
 
-  const onFinish = (data: Criteria.NewCriteria): void => {
-    void dispatch(createCriteria(data)).then(() => {
-      closeDrawer();
-    });
+  const onFinish = (formData: Criteria.NewCriteria): void => {
+    if (type === 'create') {
+      void dispatch(createCriteria(formData)).then(() => {
+        closeDrawer();
+      });
+    } else if (data !== undefined && type === 'update') {
+      void dispatch(
+        updateCriteria({
+          id: data.id,
+          newCriteria: {
+            ...formData,
+            scorings: formData.scorings.map((s, i) => {
+              return {
+                id: data.scroings[i].id,
+                ...s,
+              };
+            }),
+          },
+        }),
+      );
+    }
   };
 
   useEffect(() => {
@@ -29,10 +51,11 @@ export default function CriteriaDrawer(): JSX.Element {
         name: data?.name,
         description: data?.description,
         maximum: data?.maximum,
-        scorings: data?.scroings.map((s) => ({
-          value: s.value,
-          description: s.description,
-        })) ?? [],
+        scorings:
+          data?.scroings.map((s) => ({
+            value: s.value,
+            description: s.description,
+          })) ?? [],
       });
     }
   }, [data]);

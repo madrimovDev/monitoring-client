@@ -39,6 +39,6 @@ declare namespace Criteria {
     maximum: number;
     name: string;
     description?: string;
-    scorings: RemoveKeys<Scroing, 'criteriaId' | 'id'>;
+    scorings: Array<RemoveKeys<Scroing, 'criteriaId' | 'id'>>;
   }
 }
