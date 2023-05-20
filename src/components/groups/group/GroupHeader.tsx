@@ -11,11 +11,13 @@ export default function GroupHeader(): JSX.Element | null {
   const group = useAppSelector((state) => selectGroupById(state, groupID));
   const path = usePathItem(1);
   const dispatch = useAppDispatch();
+  
   const openAddTeacher = (): void => {
     if (group !== undefined) {
       dispatch(openGroupsDrawerWithData(group));
     }
   };
+
   return (
     <>
       <Card

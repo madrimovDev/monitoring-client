@@ -1,3 +1,9 @@
+import {GroupInfo} from '@/components/group';
+
 export default function Group(): JSX.Element {
-  return <div>Group</div>;
+  return (
+    <div>
+      <GroupInfo />
+    </div>
+  );
 }
