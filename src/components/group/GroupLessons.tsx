@@ -15,6 +15,7 @@ export default function GroupLessons(): JSX.Element {
   const {lessons} = useAppSelector(getLessons);
   const {groupID} = useParams();
   const dispatch = useAppDispatch();
+  console.log(lessons);
 
   useEffect(() => {
     if (groupID !== undefined) {
@@ -26,7 +27,7 @@ export default function GroupLessons(): JSX.Element {
       <div className='container mx-auto'>
         <Calendar
           validRange={[dayjs('2020').startOf('years'), dayjs('2024').endOf('year')]}
-          cellRender={(date) => <ShortLesson date={date} lessons={lessons} />}
+          cellRender={(date) => <ShortLesson date={date} />}
         />
         <GroupLessonDrawer />
       </div>

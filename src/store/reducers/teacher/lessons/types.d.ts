@@ -3,6 +3,10 @@ declare namespace Lessons {
     message: string;
     lessons: Lesson[];
   }
+  export interface LessonResponse {
+    message: string;
+    lesson: Lesson;
+  }
 
   export interface Lesson {
     id: number;
@@ -20,5 +24,12 @@ declare namespace Lessons {
     organizationId: number;
     teacherId: number;
     status: string;
+  }
+
+  export interface NewLesson {
+    title: string;
+    date: string;
+    criteria: number;
+    type: 'lesson' | 'practice' | 'exam';
   }
 }

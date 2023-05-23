@@ -1,19 +1,30 @@
 import dayjs, {type Dayjs} from 'dayjs';
 import {Button, List} from 'antd';
 import {EditFilled, DeleteFilled} from '@ant-design/icons';
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
+import {getLessonDataByDate, openLessonsDrawer} from '@/store/reducers/teacher/lessons';
+import {useAppSelector} from '@/store/hooks/useAppSelector';
 
-const ShortLesson = ({date, lessons}: {date: Dayjs; lessons: Lessons.Lesson[] | null}): JSX.Element => {
-  const data = lessons?.find((lesson) => {
-    if (dayjs(lesson?.date).month() === date.month() && dayjs(lesson?.date).date() === date.date()) {
-      return lesson;
-    }
-    return false;
-  });
+const ShortLesson = ({date}: {date: Dayjs}): JSX.Element => {
+  const dispatch = useAppDispatch();
 
-  if (data === undefined) {
+  const data = useAppSelector((state) => getLessonDataByDate(state, date));
+
+  const openDrawerForCreate = (date: Dayjs): void => {
+    dispatch(openLessonsDrawer({date: date.toISOString()}));
+  };
+
+  if (data === undefined || data === null) {
     return (
       <div className='group h-full grid place-items-center'>
-        <Button type='ghost' size='large' className='-mt-6 opacity-0 group-hover:opacity-100'>
+        <Button
+          onClick={() => {
+            openDrawerForCreate(date);
+          }}
+          type='ghost'
+          size='large'
+          className='-mt-6 opacity-0 group-hover:opacity-100'
+        >
           +
         </Button>
       </div>
