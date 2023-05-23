@@ -1,10 +1,10 @@
 import {lazy} from 'react';
-import type {RouteObject} from 'react-router-dom';
+import {Outlet, type RouteObject} from 'react-router-dom';
 import Suspense from '../Suspense';
 
 const Group = lazy(async () => await import('../../pages/teacher-pages/group/Group'));
 const Criteria = lazy(async () => await import('../../pages/teacher-pages/criteria/Criteria'));
-
+const Lesson = lazy(async () => await import('../../pages/teacher-pages/lesson/Lesson'));
 export const teacherRoutes: RouteObject[] = [
   {
     path: 'dashboard',
@@ -16,6 +16,16 @@ export const teacherRoutes: RouteObject[] = [
   },
   {
     path: 'group/:groupID',
-    element: <Suspense component={<Group />} />,
+    element: <Outlet />,
+    children: [
+      {
+        index: true,
+        element: <Suspense component={<Group />} />,
+      },
+      {
+        path: 'lesson/:lessonID',
+        element: <Suspense component={<Lesson />} />,
+      },
+    ],
   },
 ];

@@ -13,7 +13,7 @@ type FormData = {
 };
 
 export default function GroupLessonDrawer(): JSX.Element {
-  const {open, type, date} = useAppSelector(lessonsDrawer);
+  const {open, type, date, data} = useAppSelector(lessonsDrawer);
   const {groupID} = useParams();
   const {criterias} = useAppSelector(selectCriteria);
   const dispatch = useAppDispatch();
@@ -37,6 +37,32 @@ export default function GroupLessonDrawer(): JSX.Element {
       );
     }
   };
+
+  useEffect(() => {
+    if (data !== undefined) {
+      form.setFields([
+        {
+          name: 'title',
+          value: data.title,
+        },
+        {
+          name: 'type',
+          value: data.type,
+        },
+        {
+          name: 'date',
+          value: dayjs(data.date),
+        },
+        {
+          name: 'criteria',
+          value: {
+            label: data.criteria.name,
+            value: data.criteria.id,
+          },
+        },
+      ]);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (date !== undefined) {

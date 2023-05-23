@@ -1,8 +1,7 @@
 import {useEffect} from 'react';
 import {Calendar} from 'antd';
 import dayjs from 'dayjs';
-import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {getAllLessons, getLessons} from '@/store/reducers/teacher/lessons';
+import {getAllLessons} from '@/store/reducers/teacher/lessons';
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useParams} from 'react-router-dom';
 import localDate from 'dayjs/plugin/localeData';
@@ -12,10 +11,8 @@ import GroupLessonDrawer from './GroupLessonDrawer';
 dayjs.extend(localDate);
 
 export default function GroupLessons(): JSX.Element {
-  const {lessons} = useAppSelector(getLessons);
   const {groupID} = useParams();
   const dispatch = useAppDispatch();
-  console.log(lessons);
 
   useEffect(() => {
     if (groupID !== undefined) {

@@ -20,3 +20,14 @@ export const getLessonDataByDate = createSelector(
     });
   },
 );
+
+export const getLessonByID = createSelector(
+  getLessons,
+  (_: RootState, lessonID: string | undefined) => lessonID,
+  (lessons, lessonID) => {
+    if (lessons.lessons !== null && lessonID !== undefined) {
+      return lessons.lessons.find((lesson) => lesson.id === +lessonID);
+    }
+    return undefined;
+  },
+);
