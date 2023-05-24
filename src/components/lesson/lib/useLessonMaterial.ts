@@ -2,6 +2,7 @@ import {getUserDataFromLocalStorage} from '@/lib';
 import {type MaterialResponse} from './types';
 import {api} from '@/api';
 import {type UseMutateFunction, type UseMutationResult, type UseQueryResult, useQuery, useMutation} from 'react-query';
+import {useEffect, useState} from 'react';
 
 export const useLessonMaterial = (params: {
   groupID: string;
@@ -9,7 +10,10 @@ export const useLessonMaterial = (params: {
 }): {
   data: MaterialResponse | undefined;
   mutate: UseMutateFunction<MaterialResponse, unknown, string, unknown>;
+  isLoading: boolean;
 } => {
+  const [data, setData] = useState<MaterialResponse>();
+  const [isLoading, setIsLoading] = useState(false);
   const getLessonMaterial = async (): Promise<MaterialResponse> => {
     const orgId = await getUserDataFromLocalStorage('organizationId');
     if (orgId === null) {
@@ -33,22 +37,38 @@ export const useLessonMaterial = (params: {
     return response.data;
   };
 
-  const getLessonMaterialQuery: UseQueryResult<MaterialResponse> = useQuery('lessonMaterial', getLessonMaterial);
+  const getLessonMaterialQuery: UseQueryResult<MaterialResponse> = useQuery('lessonMaterial', getLessonMaterial, {
+    onSuccess(d) {
+      setData(d);
+    },
+  });
   const updateLessonMaterialMutation: UseMutationResult<MaterialResponse, unknown, string> = useMutation(
     'lessonMaterialUpdate',
     updateLessonMaterial,
     {
-      onSuccess() {
-        void getLessonMaterialQuery.refetch();
+      onSuccess(d) {
+        setData(d);
       },
     },
   );
 
-  const {data} = getLessonMaterialQuery;
+  useEffect(() => {
+    if (
+      getLessonMaterialQuery.isLoading ||
+      getLessonMaterialQuery.isFetching ||
+      updateLessonMaterialMutation.isLoading
+    ) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [getLessonMaterialQuery.isLoading, getLessonMaterialQuery.isFetching, updateLessonMaterialMutation.isLoading]);
+
   const mutate = updateLessonMaterialMutation.mutate;
 
   return {
     data,
     mutate,
+    isLoading,
   };
 };

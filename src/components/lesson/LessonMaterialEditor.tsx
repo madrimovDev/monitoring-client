@@ -1,17 +1,14 @@
-import {Button} from 'antd';
-import {useEffect, useState} from 'react';
-import {type UseMutateFunction} from 'react-query';
+import {Button, Skeleton} from 'antd';
+import {useState} from 'react';
 import ReactQuill from 'react-quill';
-import {type MaterialResponse} from './lib/types';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-import {useDebounce} from '@/hooks/useDebounce';
-import {showNotification} from '@/lib/showNotification';
+import {useLessonMaterial} from './lib/useLessonMaterial';
+import {useParams} from 'react-router-dom';
+import {type Params} from './LessonMaterial';
 
 interface Props {
   open: boolean;
-  defaultValue: string | undefined;
-  mutate: UseMutateFunction<MaterialResponse, unknown, string, unknown>;
   onClose: VoidFunction;
 }
 
@@ -28,31 +25,31 @@ const toolbarOptions = [
   ['clean'],
 ];
 
-export default function LessonMaterialEditor({open, defaultValue, mutate, onClose}: Props): JSX.Element | null {
+export default function LessonMaterialEditor({open, onClose}: Props): JSX.Element | null {
   const [html, setHtml] = useState('');
-  const debounced = useDebounce(html, 5000);
   const [saved, setSaved] = useState(true);
+  const params = useParams() as unknown as Params;
+  const {data, mutate, isLoading} = useLessonMaterial(params);
+
   const editEnd = (): void => {
     if (!saved) {
       mutate(html);
-    } else {
       setSaved(true);
+    } else {
       onClose();
     }
   };
 
-  useEffect(() => {
-    mutate(debounced);
-    setSaved(true);
-    showNotification('info', 'Saved value');
-  }, [debounced]);
+  if (isLoading) {
+    return <Skeleton paragraph={{rows: 10}} />;
+  }
 
   return (
     <>
       {open && (
         <div className='mt-4'>
           <Button onClick={editEnd} type='primary' size='small'>
-            {!saved ? <div className='h-2 aspect-square bg-white rounded-full' /> : 'Saved'}
+            {!saved ? <div className='h-2 aspect-square bg-white rounded-full' /> : 'End'}
           </Button>
         </div>
       )}
@@ -63,7 +60,7 @@ export default function LessonMaterialEditor({open, defaultValue, mutate, onClos
         modules={{
           toolbar: toolbarOptions,
         }}
-        defaultValue={defaultValue}
+        defaultValue={data?.material.content}
         onChange={(_value, _delta, _source, editor) => {
           setSaved(false);
           setHtml(editor.getHTML());
