@@ -1,5 +1,5 @@
 import {createReducer, isPending, isRejected} from '@reduxjs/toolkit';
-import {login} from './auth.action';
+import {login, verify} from './auth.action';
 
 interface InitialState {
   loading: boolean;
@@ -18,10 +18,16 @@ export const authReducer = createReducer(initialState, (builder) => {
       user: action.payload,
     };
   });
-  builder.addMatcher(isPending(login), (state) => {
+  builder.addCase(verify.fulfilled, (_, action) => {
+    return {
+      loading: false,
+      user: action.payload,
+    };
+  });
+  builder.addMatcher(isPending(login, verify), (state) => {
     state.loading = true;
   });
-  builder.addMatcher(isRejected(login), (state) => {
+  builder.addMatcher(isRejected(login, verify), (state) => {
     state.loading = false;
     state.user = null;
   });

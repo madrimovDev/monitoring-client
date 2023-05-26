@@ -5,13 +5,14 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const user = window.localStorage.getItem('user')
-  const data = user !== null ? (JSON.parse(user) as Auth.User) : null; 
+  const user = window.localStorage.getItem('user');
+  const data = user !== null ? JSON.parse(user) : null;
 
-   if (data !== null) {
-     config.headers.Authorization = `${data.token}`;
-   }
-  return config
-})
+  if (data !== null) {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    config.headers.Authorization = `${data.token}`;
+  }
+  return config;
+});
 
-export {api}
+export {api};

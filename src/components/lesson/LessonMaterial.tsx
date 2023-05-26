@@ -1,5 +1,5 @@
 import {EditFilled} from '@ant-design/icons';
-import {Button, Typography} from 'antd';
+import {Button} from 'antd';
 
 import 'react-quill/dist/quill.snow.css';
 import LessonMaterialEditor from './LessonMaterialEditor';
@@ -15,20 +15,13 @@ export default function LessonMaterial(): JSX.Element {
 
   return (
     <>
-      <div className='flex items-center gap-3 group'>
-        <Typography.Title level={4} className='!m-0'>
-          Material
-        </Typography.Title>
-        <Button
-          size='small'
-          type='text'
-          onClick={onOpen}
-          className='!inline-grid place-content-center opacity-0 group-hover:opacity-100'
-        >
-          <EditFilled />
-        </Button>
-      </div>
-
+      {!open && (
+        <div className='flex items-center gap-3'>
+          <Button size='small' type='default' onClick={onOpen} className='!inline-flex justify-center items-center'>
+            <EditFilled /> Edit
+          </Button>
+        </div>
+      )}
       <LessonMaterialEditor open={open} onClose={onClose} />
     </>
   );

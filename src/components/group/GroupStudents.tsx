@@ -9,6 +9,7 @@ export default function GroupStudents(): JSX.Element {
     <Card title='Students' bodyStyle={{padding: 0}}>
       <Table
         loading={isLoading}
+        rowKey={(item) => item.id}
         dataSource={data?.students ?? []}
         columns={[
           {

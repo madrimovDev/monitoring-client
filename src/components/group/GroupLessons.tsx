@@ -24,7 +24,7 @@ export default function GroupLessons(): JSX.Element {
       <div className='container mx-auto'>
         <Calendar
           validRange={[dayjs('2020').startOf('years'), dayjs('2024').endOf('year')]}
-          cellRender={(date) => <ShortLesson date={date} />}
+          cellRender={(date) => <ShortLesson key={date.date()} date={date} />}
         />
         <GroupLessonDrawer />
       </div>

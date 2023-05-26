@@ -5,6 +5,7 @@ import {persistor, store} from '@/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {StyleProvider} from '@ant-design/cssinjs';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import {verify} from '@/store/reducers/auth';
 
 const query = new QueryClient({
   defaultOptions: {
@@ -14,6 +15,8 @@ const query = new QueryClient({
     },
   },
 });
+
+void store.dispatch(verify());
 
 export default function RootProvider(): JSX.Element {
   return (
