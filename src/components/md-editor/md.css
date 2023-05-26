@@ -1,0 +1,7 @@
+.md ol{
+  list-style-type: decimal!important;
+}
+
+.md ul{
+  list-style-type: lower-latin!important;
+}

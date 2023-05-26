@@ -29,7 +29,7 @@ export default function LessonMaterial(): JSX.Element {
         </Button>
       </div>
 
-      <LessonMaterialEditor open={open} onClose={onClose}  />
+      <LessonMaterialEditor open={open} onClose={onClose} />
     </>
   );
 }
