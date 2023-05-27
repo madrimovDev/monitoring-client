@@ -1,143 +1,30 @@
+import {useAppDispatch} from '@/store/hooks/useAppDispatch';
+import {useAppSelector} from '@/store/hooks/useAppSelector';
+import {getAllAssessments, selectAssessments} from '@/store/reducers/teacher/assessments';
 import {EditFilled} from '@ant-design/icons';
 import {Button, Table} from 'antd';
+import {useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 
-const data = [
-  {
-    id: 1,
-    name: 'John',
-    surname: 'Doe',
-    assessment: {
-      id: 1,
-      score: -1,
-      comment: '',
-      studentId: 1,
-      lessonId: 101,
-      groupId: 1,
-    },
-  },
-  {
-    id: 2,
-    name: 'Jane',
-    surname: 'Smith',
-    assessment: {
-      id: 2,
-      score: 75,
-      comment: 'Needs improvement in certain areas.',
-      studentId: 2,
-      lessonId: 101,
-      groupId: 1,
-    },
-  },
-  {
-    id: 3,
-    name: 'David',
-    surname: 'Johnson',
-    assessment: {
-      id: 3,
-      score: 95,
-      comment: 'Outstanding performance!',
-      studentId: 3,
-      lessonId: 102,
-      groupId: 2,
-    },
-  },
-  {
-    id: 4,
-    name: 'Emily',
-    surname: 'Wilson',
-    assessment: {
-      id: 4,
-      score: 88,
-      comment: 'Well done!',
-      studentId: 4,
-      lessonId: 102,
-      groupId: 2,
-    },
-  },
-  {
-    id: 5,
-    name: 'Michael',
-    surname: 'Johnson',
-    assessment: {
-      id: 5,
-      score: 92,
-      comment: 'Great effort!',
-      studentId: 5,
-      lessonId: 103,
-      groupId: 3,
-    },
-  },
-  {
-    id: 6,
-    name: 'Sarah',
-    surname: 'Davis',
-    assessment: {
-      id: 6,
-      score: 70,
-      comment: 'Work on understanding the concepts better.',
-      studentId: 6,
-      lessonId: 103,
-      groupId: 3,
-    },
-  },
-  {
-    id: 7,
-    name: 'Daniel',
-    surname: 'Wilson',
-    assessment: {
-      id: 7,
-      score: 69,
-      comment: 'Showing improvement!',
-      studentId: 7,
-      lessonId: 104,
-      groupId: 1,
-    },
-  },
-  {
-    id: 8,
-    name: 'Olivia',
-    surname: 'Anderson',
-    assessment: {
-      id: 8,
-      score: 78,
-      comment: 'Keep up the good work!',
-      studentId: 8,
-      lessonId: 104,
-      groupId: 1,
-    },
-  },
-  {
-    id: 9,
-    name: 'Ethan',
-    surname: 'Brown',
-    assessment: {
-      id: 9,
-      score: 85,
-      comment: 'Consistently performs well.',
-      studentId: 9,
-      lessonId: 105,
-      groupId: 3,
-    },
-  },
-  {
-    id: 10,
-    name: 'Sophia',
-    surname: 'Martinez',
-    assessment: {
-      id: 10,
-      score: 91,
-      comment: 'Excellent job!',
-      studentId: 10,
-      lessonId: 105,
-      groupId: 3,
-    },
-  },
-];
 
 export default function LessonAssessment(): JSX.Element {
+  const {groupID, lessonID} = useParams() as {lessonID: string; groupID: string};
+  const {assessments} = useAppSelector(selectAssessments);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(
+      getAllAssessments({
+        groupId: groupID,
+        lessonId: lessonID,
+      }),
+    );
+  }, []);
+
   return (
     <Table
-      dataSource={data}
+      pagination={false}
+      dataSource={assessments ?? []}
       columns={[
         {
           key: 'index',
@@ -150,7 +37,7 @@ export default function LessonAssessment(): JSX.Element {
           key: 'Name',
           title: 'Name',
           render(_, record) {
-            return `${record.name} ${record.surname}`;
+            return `${record.name}`;
           },
         },
         {

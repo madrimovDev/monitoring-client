@@ -53,11 +53,7 @@ export const useLessonMaterial = (params: {
   );
 
   useEffect(() => {
-    if (
-      getLessonMaterialQuery.isLoading ||
-      getLessonMaterialQuery.isFetching ||
-      updateLessonMaterialMutation.isLoading
-    ) {
+    if (getLessonMaterialQuery.isLoading || updateLessonMaterialMutation.isLoading) {
       setIsLoading(true);
     } else {
       setIsLoading(false);

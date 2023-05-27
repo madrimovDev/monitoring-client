@@ -1,16 +1,25 @@
 import {Card, Table} from 'antd';
 import {useParams} from 'react-router-dom';
-import {useGetGroupStudents} from './lib/useGetGroupStudents';
+import {useAppSelector} from '@/store/hooks/useAppSelector';
+import {getGroupStudents, selectGroupStudents} from '@/store/reducers/teacher/group-students';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@/store/hooks/useAppDispatch';
 
 export default function GroupStudents(): JSX.Element {
   const {groupID} = useParams();
-  const {data, isLoading} = useGetGroupStudents(groupID);
+  const { loading, students } = useAppSelector(selectGroupStudents);
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    void dispatch(getGroupStudents(groupID))
+  }, [])
+
   return (
     <Card title='Students' bodyStyle={{padding: 0}}>
       <Table
-        loading={isLoading}
+        pagination={false}
+        loading={loading}
         rowKey={(item) => item.id}
-        dataSource={data?.students ?? []}
+        dataSource={students ?? []}
         columns={[
           {
             key: 'index',
