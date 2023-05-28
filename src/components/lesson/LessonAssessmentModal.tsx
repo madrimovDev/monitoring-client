@@ -4,7 +4,7 @@ import {closeAssessmentModal, selectAssessmentModal} from '@/store/reducers/teac
 import {Button, Form, Input, InputNumber, Modal} from 'antd';
 
 export default function LessonAssessmentModal(): JSX.Element {
-  const {open, type} = useAppSelector(selectAssessmentModal);
+  const {open} = useAppSelector(selectAssessmentModal);
   const dispatch = useAppDispatch();
 
   const onClose = (): void => {

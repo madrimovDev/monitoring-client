@@ -8,6 +8,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {verify} from '@/store/reducers/auth';
 import {FloatButton} from 'antd';
 import {QuestionOutlined} from '@ant-design/icons';
+import Faq from '@/components/FAQ/Faq';
 
 const query = new QueryClient({
   defaultOptions: {
@@ -30,7 +31,7 @@ export default function RootProvider(): JSX.Element {
           </PersistGate>
         </Provider>
       </QueryClientProvider>
-      <FloatButton icon={<QuestionOutlined />} tooltip={'FAQ'} />
+      <Faq />
     </StyleProvider>
   );
 }

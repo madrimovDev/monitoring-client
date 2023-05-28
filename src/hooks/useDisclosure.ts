@@ -7,8 +7,8 @@ import {useState} from 'react';
  ** A function that sets the disclosure state to open.
  ** A function that sets the disclosure state to closed.
  */
-export const useDisclosure = (): readonly [boolean, () => void, () => void] => {
-  const [open, setOpen] = useState<boolean>(false);
+export const useDisclosure = (initialState?: boolean): readonly [boolean, () => void, () => void] => {
+  const [open, setOpen] = useState<boolean>(initialState ?? false);
   const onOpen = (): void => {
     setOpen(true);
   };
