@@ -6,6 +6,8 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {StyleProvider} from '@ant-design/cssinjs';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {verify} from '@/store/reducers/auth';
+import {FloatButton} from 'antd';
+import {QuestionOutlined} from '@ant-design/icons';
 
 const query = new QueryClient({
   defaultOptions: {
@@ -28,6 +30,7 @@ export default function RootProvider(): JSX.Element {
           </PersistGate>
         </Provider>
       </QueryClientProvider>
+      <FloatButton icon={<QuestionOutlined />} tooltip={'FAQ'} />
     </StyleProvider>
   );
 }
