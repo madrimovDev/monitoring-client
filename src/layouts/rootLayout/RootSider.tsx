@@ -9,7 +9,7 @@ export default function RootSider(props: PropsWithChildren): JSX.Element {
           className='flex justify-center active:bg-blue-500 active:scale-75 transition-all bg-gray-500/30 py-2 rounded-md !mb-0 !text-2xl !text-white'
           level={5}
         >
-          <span className='text-blue-300'>L</span>
+          <span className='mr-2'>DATA</span>
           <span className='text-blue-400'>M</span>
           <span className='text-blue-500'>S</span>
         </Typography.Title>

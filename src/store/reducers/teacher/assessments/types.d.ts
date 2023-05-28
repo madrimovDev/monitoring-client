@@ -7,7 +7,7 @@ declare namespace Assessments {
   export interface StudentAssessment {
     id: number;
     name: string;
-    assessment: Assessment;
+    assessment: Assessment | null;
   }
 
   export interface Assessment {

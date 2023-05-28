@@ -44,8 +44,8 @@ export default function LessonAssessment(): JSX.Element {
           key: 'assessment score',
           title: 'Assessment Score',
           render(_, record) {
-            const score = record.assessment.score;
-            if (record.assessment.score < 1) {
+            const score = record.assessment?.score ?? -1;
+            if (score < 1) {
               return <div className='text-red-500 font-bold'>0</div>;
             }
             if (score < 50 && score > 0) {
@@ -61,7 +61,7 @@ export default function LessonAssessment(): JSX.Element {
           key: 'assessment comment',
           title: 'Assessment Comment',
           render(_, record) {
-            return record.assessment.comment;
+            return record.assessment?.comment;
           },
         },
         {

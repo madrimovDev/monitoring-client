@@ -1,29 +1,16 @@
-import {api} from '@/api';
 import {useDisclosure} from '@/hooks/useDisclosure';
 import {usePathItem} from '@/hooks/usePathItem';
-import {getUserDataFromLocalStorage} from '@/lib';
-import {UsergroupAddOutlined} from '@ant-design/icons';
-import {Button, Card, Table, Tooltip} from 'antd';
-import {useQuery} from 'react-query';
-import {Link, useParams} from 'react-router-dom';
+import {DeleteFilled, EditFilled, UsergroupAddOutlined} from '@ant-design/icons';
+import {Button, Card, Space, Table, Tooltip} from 'antd';
+import {Link} from 'react-router-dom';
 import GroupAddStudents from './GroupAddStudents';
+import {useGroupStudents} from './lib/useGroupStudents';
 
 export default function GroupTable(): JSX.Element {
-  const {groupID} = useParams();
   const path = usePathItem(1);
   const [open, onOpen, onClose] = useDisclosure();
 
-  const {data, isFetching, refetch} = useQuery({
-    queryKey: 'group/students',
-    queryFn: async () => {
-      const orgId = await getUserDataFromLocalStorage('organizationId');
-      if (orgId === null) throw new Error('OrganizationID not found');
-      const response = await api.get<Students.StudentsResponse>(
-        `organizations/${orgId}/groups/${groupID ?? ''}/students`,
-      );
-      return response.data;
-    },
-  });
+  const {loading, students, addStudent, removeStudent} = useGroupStudents();
 
   return (
     <>
@@ -45,9 +32,9 @@ export default function GroupTable(): JSX.Element {
         ]}
       >
         <Table
-          loading={isFetching}
+          loading={loading}
           pagination={false}
-          dataSource={data?.students}
+          dataSource={students}
           columns={[
             {
               key: '№',
@@ -68,16 +55,34 @@ export default function GroupTable(): JSX.Element {
               },
             },
             {
-              key: 'name',
-              title: 'Name',
+              key: 'phone',
+              title: 'Phone',
               render(_, record) {
                 return record.phone;
+              },
+            },
+            {
+              key: 'actions',
+              render(_, record) {
+                return (
+                  <Space>
+                    <Button size='small' icon={<EditFilled />} />
+                    <Button
+                      onClick={() => {
+                        removeStudent(record.id);
+                      }}
+                      size='small'
+                      danger
+                      icon={<DeleteFilled />}
+                    />
+                  </Space>
+                );
               },
             },
           ]}
         />
       </Card>
-      <GroupAddStudents open={open} onClose={onClose} refetch={refetch} />
+      <GroupAddStudents open={open} onClose={onClose} addStudent={addStudent} />
     </>
   );
 }
