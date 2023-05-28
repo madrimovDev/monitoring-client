@@ -6,8 +6,6 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {StyleProvider} from '@ant-design/cssinjs';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {verify} from '@/store/reducers/auth';
-import {FloatButton} from 'antd';
-import {QuestionOutlined} from '@ant-design/icons';
 import Faq from '@/components/FAQ/Faq';
 
 const query = new QueryClient({
