@@ -1,6 +1,6 @@
 import {useAppDispatch} from '@/store/hooks/useAppDispatch';
 import {useAppSelector} from '@/store/hooks/useAppSelector';
-import {getAllAssessments, openAssessmentModal, selectAssessments} from '@/store/reducers/teacher/assessments';
+import {getAllAssessments, openAssessmentModalWithData, selectAssessments} from '@/store/reducers/teacher/assessments';
 import {EditFilled} from '@ant-design/icons';
 import {Button, Table} from 'antd';
 import {useEffect} from 'react';
@@ -12,8 +12,8 @@ export default function LessonAssessment(): JSX.Element {
   const {assessments} = useAppSelector(selectAssessments);
   const dispatch = useAppDispatch();
 
-  const openModal = (): void => {
-    void dispatch(openAssessmentModal());
+  const openModal = (assessment: Assessments.StudentAssessment): void => {
+    void dispatch(openAssessmentModalWithData(assessment));
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function LessonAssessment(): JSX.Element {
             key: 'Name',
             title: 'Name',
             render(_, record) {
-              return `${record.name}`;
+              return `${record.name} ${record.surname}`;
             },
           },
           {
@@ -71,12 +71,14 @@ export default function LessonAssessment(): JSX.Element {
           },
           {
             key: 'edit',
-            render(_) {
+            render(_, record) {
               return (
                 <Button
                   type='primary'
                   size='small'
-                  onClick={openModal}
+                  onClick={() => {
+                    openModal(record);
+                  }}
                   className='!bg-teal-500 !inline-grid place-items-center'
                   icon={<EditFilled />}
                 />

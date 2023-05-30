@@ -27,3 +27,33 @@ export const getAllAssessments = createAsyncThunk<
     return rejectWithValue(error.response?.data.message ?? '');
   }
 });
+
+export const setAssessments = createAsyncThunk<
+  Assessments.AssessmentResponse,
+  {
+    groupId: string | undefined;
+    lessonId: string | undefined;
+    assessmentId: number | undefined;
+    score: number;
+    comment: string;
+  },
+  {
+    rejectValue: string;
+  }
+>('assessments/set', async ({groupId, lessonId, assessmentId, ...rest}, {rejectWithValue}) => {
+  try {
+    const orgId = await getUserDataFromLocalStorage('organizationId');
+    if (orgId === null || groupId === undefined || lessonId === undefined || assessmentId === undefined)
+      throw new Error('Organization id not found');
+
+    const response = await api.patch<Assessments.AssessmentResponse>(
+      `organizations/${orgId}/groups/${groupId}/lessons/${lessonId}/assessments/${assessmentId}`,
+      rest,
+    );
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosErrorWithMessage;
+
+    return rejectWithValue(error.response?.data.message ?? '');
+  }
+});

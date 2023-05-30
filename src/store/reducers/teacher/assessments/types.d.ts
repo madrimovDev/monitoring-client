@@ -4,9 +4,15 @@ declare namespace Assessments {
     assessments: StudentAssessment[];
   }
 
+  export interface AssessmentResponse {
+    message: string;
+    assessment: {id: number; score: number; comment: string};
+  }
+
   export interface StudentAssessment {
     id: number;
     name: string;
+    surname: string;
     assessment: Assessment | null;
   }
 
@@ -18,5 +24,4 @@ declare namespace Assessments {
     lessonId: number;
     groupId: number;
   }
-
 }

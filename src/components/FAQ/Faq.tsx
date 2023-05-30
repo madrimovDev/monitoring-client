@@ -3,7 +3,7 @@ import {QuestionOutlined} from '@ant-design/icons';
 import {Button, FloatButton, Modal} from 'antd';
 
 export default function Faq(): JSX.Element {
-  const [open, onOpen, onClose] = useDisclosure(true);
+  const [open, onOpen, onClose] = useDisclosure(false);
   return (
     <>
       <FloatButton icon={<QuestionOutlined />} onClick={onOpen} />
