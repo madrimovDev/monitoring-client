@@ -3,6 +3,7 @@ import {Outlet, type RouteObject} from 'react-router-dom';
 import Suspense from '../Suspense';
 import GroupsWrapper from '@/pages/admin-pages/groups/GroupsWrapper';
 import DirectionWrapper from '@/pages/admin-pages/directions/DirectionWrapper';
+import Dashboard from '@/pages/Dashboard';
 
 const Admins = lazy(async () => await import('../../pages/admin-pages/admin/Admins'));
 const Directions = lazy(async () => await import('../../pages/admin-pages/directions/Directions'));
@@ -17,7 +18,7 @@ const Student = lazy(async () => await import('../../pages/admin-pages/students/
 export const adminRoutes: RouteObject[] = [
   {
     path: 'dashboard',
-    element: <>Element</>,
+    element: <Dashboard/>,
   },
   {
     path: 'admins',
